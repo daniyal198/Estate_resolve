@@ -1,26 +1,194 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --estate-ivory: #f7f4ef;
+  --estate-surface: #ffffff;
+  --estate-navy: #0f2545;
+  --estate-navy-mid: #1a3a6e;
+  --estate-gold: #b08d4e;
+  --estate-gold-light: #d4af72;
+  --estate-slate: #5c6b7a;
+  --estate-ink: #1a1a2e;
+  --estate-border: #e2ddd5;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--estate-ivory);
+  --color-foreground: var(--estate-ink);
+  --color-brand-ivory: var(--estate-ivory);
+  --color-brand-surface: var(--estate-surface);
+  --color-brand-navy: var(--estate-navy);
+  --color-brand-navy-mid: var(--estate-navy-mid);
+  --color-brand-gold: var(--estate-gold);
+  --color-brand-gold-light: var(--estate-gold-light);
+  --color-brand-slate: var(--estate-slate);
+  --color-brand-ink: var(--estate-ink);
+  --color-brand-border: var(--estate-border);
+  --font-sans: var(--font-source-sans-3);
+  --font-serif: var(--font-playfair-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(212, 175, 114, 0.12), transparent 30%),
+    var(--estate-ivory);
+  color: var(--estate-ink);
+  font-family: var(--font-source-sans-3), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a,
+button {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+::selection {
+  background: rgba(176, 141, 78, 0.28);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  border: 1px solid var(--estate-gold);
+  background: var(--estate-surface);
+  color: var(--estate-navy);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.site-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.5rem;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--estate-gold);
+}
+
+.section-label::before {
+  display: block;
+  height: 1px;
+  width: 1.75rem;
+  background: currentColor;
+  content: "";
+}
+
+.hero-shell {
+  position: relative;
+  overflow: hidden;
+  background: var(--estate-navy);
+}
+
+.hero-shell::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(55%, 48rem);
+  background: linear-gradient(135deg, var(--estate-navy-mid), #0a1c38);
+  clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
+  content: "";
+}
+
+.hero-shell::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(55%, 48rem);
+  opacity: 0.35;
+  clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
+  background-image:
+    linear-gradient(rgba(176, 141, 78, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176, 141, 78, 0.06) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  content: "";
+}
+
+.cta-shell {
+  position: relative;
+  overflow: hidden;
+  background: var(--estate-navy);
+}
+
+.cta-shell::before {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(45deg, rgba(176, 141, 78, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(176, 141, 78, 0.05) 25%, transparent 25%);
+  background-size: 4.5rem 4.5rem;
+  content: "";
+}
+
+.accent-border {
+  position: relative;
+}
+
+.accent-border::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3px;
+  width: 3rem;
+  background: var(--estate-gold);
+  content: "";
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 720ms ease-out both;
+}
+
+@media (max-width: 767px) {
+  .site-container {
+    padding-inline: 1.25rem;
+  }
+
+  .hero-shell::before,
+  .hero-shell::after {
+    width: 100%;
+    clip-path: none;
+    opacity: 0.18;
+  }
 }
