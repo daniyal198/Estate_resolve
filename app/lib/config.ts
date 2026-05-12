@@ -9,7 +9,8 @@ export const config = {
     email:
       process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@estate-resolve.com",
     phone:
-      process.env.NEXT_PUBLIC_CONTACT_PHONE || "+44 (0)20 7946 0820",
+      process.env.NEXT_PUBLIC_CONTACT_PHONE || "+44 20 8154 2371",
+    address: "71-75 Shelton Street, Covent Garden, London, WC2H 9JQ",
     officeHours: "Monday to Friday, 9:00 to 17:30",
     serviceArea: "England & Wales",
   },
