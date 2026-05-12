@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IntakeForm } from "@/app/components/IntakeForm";
 import { MailIcon, PhoneIcon } from "@/app/components/Icons";
 import { PageHero } from "@/app/components/PageHero";
 import { config } from "@/app/lib/config";
@@ -7,15 +8,15 @@ import { buildMetadata } from "@/app/lib/seo";
 export const metadata = buildMetadata({
   title: "Start a Case",
   description:
-    "Prepare the information needed to open an estate financial search case with Estate Resolve.",
+    "Submit your estate enquiry securely, upload supporting documents, and receive confirmation by email.",
   path: "/start-a-case",
 });
 
 const preparationItems = [
-  "The deceased's full legal name, date of death, and last known address",
-  "Your relationship to the estate and any probate or authority documents available",
-  "Any known banks, pensions, insurers, or investment firms already identified",
-  "A clear summary of what the family or adviser needs to confirm before distribution",
+  "A copy of the death certificate or interim coroner's certificate",
+  "A form of authority appointing you as executor or to act on behalf of the estate, including either Grant of Representation, the Will, or a signed engagement letter",
+  "A copy of your passport",
+  "Proof of address, such as a utility bill or bank statement",
 ];
 
 export default function StartCasePage() {
@@ -23,17 +24,33 @@ export default function StartCasePage() {
     <main id="main-content" className="flex-1">
       <PageHero
         eyebrow="Start a Case"
-        title="Prepare the Estate Search Properly Before We Open the Matter"
-        description="A well-prepared instruction makes the search faster, cleaner, and more useful for the estate."
+        title="Submit Your Estate Enquiry Securely"
+        description="Provide the estate details, upload supporting documents if available, and we will confirm receipt by email with a case reference."
       />
 
       <section className="py-20">
-        <div className="site-container grid gap-10 lg:grid-cols-[1fr_0.88fr]">
-          <article className="border border-brand-border bg-white p-8">
+        <div className="site-container grid gap-10 lg:grid-cols-[1.08fr_0.92fr]">
+          <article className="border border-brand-border bg-white p-8 md:p-10">
             <div className="section-label">Case Preparation</div>
             <h2 className="mt-5 font-serif text-[clamp(2rem,4vw,2.7rem)] leading-[1.16] font-semibold text-brand-navy">
-              What We Usually Need Before Search Work Begins
+              Open the matter with the details we need most
             </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-slate">
+              This intake form is designed to gather the core estate facts so
+              we can assess the instruction properly. Please include the key
+              identity and authority documents where available so we can review
+              the matter without delay.
+            </p>
+            <div className="mt-8">
+              <IntakeForm />
+            </div>
+          </article>
+
+          <div className="grid gap-6">
+            <article className="border border-brand-border bg-brand-ivory p-8">
+              <h2 className="font-serif text-2xl font-semibold text-brand-navy">
+                Helpful before you submit
+              </h2>
             <ul className="mt-7 space-y-4">
               {preparationItems.map((item) => (
                 <li
@@ -44,9 +61,8 @@ export default function StartCasePage() {
                 </li>
               ))}
             </ul>
-          </article>
+            </article>
 
-          <div className="grid gap-6">
             <article className="border border-brand-border bg-brand-ivory p-8">
               <h2 className="font-serif text-2xl font-semibold text-brand-navy">
                 Need to talk it through first?
@@ -76,18 +92,18 @@ export default function StartCasePage() {
 
             <article className="border border-brand-border bg-white p-8">
               <h2 className="font-serif text-2xl font-semibold text-brand-navy">
-                Need a tailored briefing first?
+                What happens next?
               </h2>
               <p className="mt-4 text-sm leading-7 text-brand-slate">
-                If the estate position is unusual, we can help clarify what
-                should be gathered before a formal instruction is opened and
-                which issues are likely to matter most.
+                Once submitted, we confirm receipt by email, review the case
+                details, and come back with the appropriate next steps for the
+                estate.
               </p>
               <Link
                 href="/contact"
                 className="mt-6 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
               >
-                Contact Estate Resolve
+                Ask a question first
               </Link>
             </article>
           </div>

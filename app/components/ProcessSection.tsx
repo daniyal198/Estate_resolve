@@ -39,26 +39,26 @@ export function ProcessSection({ detailed = false }: ProcessSectionProps) {
               <p className="mt-3 text-sm leading-7 text-brand-slate">
                 {step.description}
               </p>
-              {detailed ? (
-                <p className="mt-4 text-sm leading-7 text-brand-slate/88">
-                  Each stage is documented clearly so the family or instructing
-                  adviser understands what is happening, what has been requested,
-                  and what the next decision point will be.
-                </p>
-              ) : null}
             </article>
           ))}
         </div>
 
         {detailed ? (
-          <div className="mt-14 flex justify-center">
-            <Link
-              href="/start-a-case"
-              className="inline-flex items-center gap-3 border border-brand-gold bg-brand-gold px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:bg-brand-gold-light hover:text-brand-navy"
-            >
-              Prepare Your Case
-              <ArrowRightIcon className="h-4 w-4" />
-            </Link>
+          <div className="mt-14">
+            <p className="mx-auto max-w-3xl text-center text-sm leading-7 text-brand-slate/88">
+              Each stage is documented clearly so the family or instructing
+              adviser understands what is happening, what has been requested,
+              and what the next decision point will be.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/start-a-case"
+                className="inline-flex items-center gap-3 border border-brand-gold bg-brand-gold px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:bg-brand-gold-light hover:text-brand-navy"
+              >
+                Begin Secure Intake
+                <ArrowRightIcon className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         ) : null}
       </div>
