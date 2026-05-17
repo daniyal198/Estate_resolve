@@ -33,6 +33,10 @@ function getSenderAddress() {
   return sender;
 }
 
+function getSenderName() {
+  return process.env.SENDGRID_FROM_NAME || "Estate Resolve";
+}
+
 export function getAdminAddress() {
   return process.env.ADMIN_EMAIL || getSenderAddress();
 }
@@ -45,7 +49,10 @@ export async function sendEmail({
   ensureSendgridConfigured();
 
   await sgMail.send({
-    from: getSenderAddress(),
+    from: {
+      email: getSenderAddress(),
+      name: getSenderName(),
+    },
     html,
     subject,
     to,
