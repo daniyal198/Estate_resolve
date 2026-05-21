@@ -8,7 +8,7 @@ import { buildMetadata } from "@/app/lib/seo";
 export const metadata = buildMetadata({
   title: "Start a Case",
   description:
-    "Submit your estate enquiry securely, upload supporting documents, and receive confirmation by email.",
+    "Submit your estate enquiry securely, upload supporting documents, and continue to secure Stripe payment.",
   path: "/start-a-case",
 });
 
@@ -25,7 +25,7 @@ export default function StartCasePage() {
       <PageHero
         eyebrow="Start a Case"
         title="Submit Your Estate Enquiry Securely"
-        description="Provide the estate details, upload supporting documents if available, and we will confirm receipt by email with a case reference."
+        description="Provide the estate details, upload supporting documents if available, and continue to secure payment to open the case."
       />
 
       <section className="py-20">
@@ -38,8 +38,9 @@ export default function StartCasePage() {
             <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-slate">
               This intake form is designed to gather the core estate facts so
               we can assess the instruction properly. Please include the key
-              identity and authority documents where available so we can review
-              the matter without delay.
+              identity and authority documents where available. Once the form is
+              complete, you will be redirected to secure payment for the fixed
+              fee of {config.pricing.fixedFee}.
             </p>
             <div className="mt-8">
               <IntakeForm />
@@ -95,9 +96,9 @@ export default function StartCasePage() {
                 What happens next?
               </h2>
               <p className="mt-4 text-sm leading-7 text-brand-slate">
-                Once submitted, we confirm receipt by email, review the case
-                details, and come back with the appropriate next steps for the
-                estate.
+                After payment is confirmed, we issue the case reference by
+                email, begin the financial search process, and keep you updated
+                on the next steps for the estate.
               </p>
               <Link
                 href="/contact"

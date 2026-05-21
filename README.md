@@ -1,9 +1,9 @@
 # Estate Resolve
 
 Estate Resolve is a Next.js 16 application for a professional estate financial
-services platform. Milestone 1 delivers the production-ready foundation:
-homepage implementation, shared design system, responsive navigation, SEO
-setup, and the initial page architecture for the 8-9 page site.
+search service. The current codebase includes the marketing site, secure case
+intake flow, Cloudinary document uploads, SendGrid transactional emails,
+Stripe checkout, and payment confirmation handling via webhook.
 
 ## Pages
 
@@ -16,6 +16,8 @@ setup, and the initial page architecture for the 8-9 page site.
 - `/privacy`
 - `/terms`
 - `/start-a-case`
+- `/success`
+- `/cancel`
 
 ## Stack
 
@@ -23,7 +25,10 @@ setup, and the initial page architecture for the 8-9 page site.
 - React 19
 - Tailwind CSS 4
 - TypeScript
-- ESLint
+- Stripe
+- Cloudinary
+- SendGrid
+- Vercel Analytics
 
 ## Scripts
 
@@ -42,31 +47,49 @@ npm install
 npm run dev
 ```
 
-## Milestone 1 Scope Completed
+Open `http://localhost:3000`.
 
-- Fresh Next.js app initialized inside `estate_resolve`
-- Local git repository initialized inside `estate_resolve`
-- Homepage implemented from the `concept1-refined-authority.html` direction
-- Shared layout, header, footer, and reusable content sections
-- Responsive page set for the initial 9-page structure
-- Metadata, sitemap, and robots foundation
+## Required Environment Variables
 
-## Project Structure
+```env
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_CONTACT_EMAIL=contact@estateresolve.co.uk
+NEXT_PUBLIC_CONTACT_PHONE=+44 20 8154 2371
 
-```text
-app/
-  (pages)/
-  components/
-  lib/
-  globals.css
-  layout.tsx
-  page.tsx
-  robots.ts
-  sitemap.ts
+ADMIN_EMAIL=operations@estateresolve.co.uk
+
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+SENDGRID_API_KEY=SG...
+SENDGRID_FROM_NAME=Estate Resolve
+SENDGRID_FROM_EMAIL=contact@estateresolve.co.uk
+
+CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/<cloud-name>/auto/upload
+CLOUDINARY_UPLOAD_PRESET=<unsigned-upload-preset>
+CLOUDINARY_UPLOAD_FOLDER=estate-resolve-documents
 ```
+
+## Payment Flow
+
+1. User completes the secure intake form on `/start-a-case`
+2. Supporting documents are uploaded to Cloudinary under the case reference
+3. The app creates a Stripe Checkout session
+4. The user completes payment on Stripe
+5. Stripe redirects back to `/success`
+6. Stripe webhook sends confirmation and admin notification emails
+
+## API Routes
+
+- `POST /api/upload`
+- `POST /api/send-contact-form`
+- `POST /api/send-form-confirmation`
+- `POST /api/create-checkout-session`
+- `POST /api/webhook`
 
 ## Notes
 
-- Contact details are placeholder values and should be replaced before launch.
-- The secure intake form, uploads, payments, and transactional email flows are
-  intentionally left for later milestones.
+- Stripe webhook delivery is required for payment confirmation emails.
+- `NEXT_PUBLIC_SITE_URL` should match the live production domain on Vercel.
+- The case intake flow depends on valid Stripe, SendGrid, and Cloudinary
+  configuration.

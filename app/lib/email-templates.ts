@@ -2,6 +2,7 @@ import type {
   ContactFormData,
   IntakeSubmissionData,
 } from "@/app/lib/validation";
+import { config } from "@/app/lib/config";
 
 function escapeHtml(value: string) {
   return value
@@ -92,5 +93,76 @@ export function buildContactAdminEmail(submission: ContactFormData) {
     <p><strong>Name:</strong> ${escapeHtml(submission.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(submission.email)}</p>
     <p><strong>Message:</strong><br />${escapeHtml(submission.message).replaceAll("\n", "<br />")}</p>
+  `;
+}
+
+type PaymentConfirmationEmailInput = {
+  caseReference: string;
+  clientName: string;
+};
+
+type PaymentAdminEmailInput = {
+  caseReference: string;
+  caseSummary: string;
+  clientEmail: string;
+  clientName: string;
+  clientPhone: string;
+  dateOfDeath: string;
+  deceasedName: string;
+  documentsFolder: string;
+  knownInstitutions: string;
+  niNumber: string;
+  paymentAmount: string;
+  relationship: string;
+  sessionId: string;
+  uploadedFileCount: string;
+};
+
+export function buildPaymentConfirmationEmail({
+  caseReference,
+  clientName,
+}: PaymentConfirmationEmailInput) {
+  return `
+    <h2>Payment confirmed</h2>
+    <p>Dear ${escapeHtml(clientName)},</p>
+    <p>We have received your payment and your Estate Resolve case is now open.</p>
+    <p><strong>Case reference:</strong> ${escapeHtml(caseReference)}</p>
+    <p>Our team will begin the financial search process and update you within ${escapeHtml(config.timeline.standardTurnaround)}.</p>
+    <p>Kind regards,<br />Estate Resolve</p>
+  `;
+}
+
+export function buildPaymentAdminEmail({
+  caseReference,
+  caseSummary,
+  clientEmail,
+  clientName,
+  clientPhone,
+  dateOfDeath,
+  deceasedName,
+  documentsFolder,
+  knownInstitutions,
+  niNumber,
+  paymentAmount,
+  relationship,
+  sessionId,
+  uploadedFileCount,
+}: PaymentAdminEmailInput) {
+  return `
+    <h2>Payment received for new estate case</h2>
+    <p><strong>Case reference:</strong> ${escapeHtml(caseReference)}</p>
+    <p><strong>Payment:</strong> ${escapeHtml(paymentAmount)}</p>
+    <p><strong>Stripe session ID:</strong> ${escapeHtml(sessionId)}</p>
+    <p><strong>Deceased:</strong> ${escapeHtml(deceasedName)}</p>
+    <p><strong>Date of death:</strong> ${escapeHtml(formatDate(dateOfDeath))}</p>
+    <p><strong>Client name:</strong> ${escapeHtml(clientName)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(clientEmail)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(clientPhone)}</p>
+    <p><strong>Relationship:</strong> ${escapeHtml(relationship)}</p>
+    <p><strong>National Insurance number:</strong> ${escapeHtml(niNumber)}</p>
+    <p><strong>Known institutions:</strong> ${escapeHtml(knownInstitutions || "Not provided")}</p>
+    <p><strong>Summary:</strong><br />${escapeHtml(caseSummary).replaceAll("\n", "<br />")}</p>
+    <p><strong>Uploaded documents:</strong> ${escapeHtml(uploadedFileCount)}</p>
+    <p><strong>Cloudinary folder:</strong> ${escapeHtml(documentsFolder)}</p>
   `;
 }

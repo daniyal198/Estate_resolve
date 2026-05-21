@@ -1,5 +1,9 @@
 import { uploadConstraints } from "@/app/lib/validation";
 
+function getCloudinaryFolderName() {
+  return process.env.CLOUDINARY_UPLOAD_FOLDER || "estate-resolve-documents";
+}
+
 function getCloudinaryConfig() {
   const uploadUrl =
     process.env.CLOUDINARY_UPLOAD_URL ||
@@ -7,8 +11,7 @@ function getCloudinaryConfig() {
   const uploadPreset =
     process.env.CLOUDINARY_UPLOAD_PRESET ||
     process.env.NEXT_PUBLIC_CLOUDINARY_PRESET;
-  const folder =
-    process.env.CLOUDINARY_UPLOAD_FOLDER || "estate-resolve-documents";
+  const folder = getCloudinaryFolderName();
 
   if (!uploadUrl) {
     throw new Error("Cloudinary upload URL is not configured.");
@@ -57,6 +60,10 @@ function normalizeFolderPath(baseFolder: string, subfolder?: string) {
   }
 
   return `${safeBaseFolder}/${safeSubfolder}`;
+}
+
+export function getCloudinaryCaseFolder(caseReference?: string) {
+  return normalizeFolderPath(getCloudinaryFolderName(), caseReference);
 }
 
 export async function uploadToCloudinary(

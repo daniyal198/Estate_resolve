@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { CookieConsent } from "@/app/components/CookieConsent";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
@@ -68,6 +69,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </div>
+        <CookieConsent />
         <Analytics />
       </body>
     </html>

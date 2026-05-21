@@ -32,10 +32,11 @@ function getTodayDateInputValue() {
   return `${year}-${month}-${day}`;
 }
 
-type CaseSubmissionResponse = {
-  caseReference?: string;
+type CheckoutSessionResponse = {
   message?: string;
+  sessionId?: string;
   success: boolean;
+  url?: string;
 };
 
 export function IntakeForm() {
@@ -44,13 +45,11 @@ export function IntakeForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [caseReference, setCaseReference] = useState<string | null>(null);
 
   const {
     formState: { errors },
     handleSubmit,
     register,
-    reset,
   } = useForm<IntakeFormData>({
     resolver: zodResolver(intakeFormSchema),
   });
@@ -59,7 +58,6 @@ export function IntakeForm() {
     setIsSubmitting(true);
     setSubmitStatus(null);
     setSubmitError(null);
-    setCaseReference(null);
 
     try {
       const pendingCaseReference = createCaseReference();
@@ -102,9 +100,9 @@ export function IntakeForm() {
         }
       }
 
-      setSubmitStatus("Sending case confirmation emails...");
+      setSubmitStatus("Preparing secure payment...");
 
-      const submissionResponse = await fetch("/api/send-form-confirmation", {
+      const checkoutResponse = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -116,22 +114,18 @@ export function IntakeForm() {
         }),
       });
 
-      const submissionPayload =
-        (await submissionResponse.json()) as CaseSubmissionResponse;
+      const checkoutPayload =
+        (await checkoutResponse.json()) as CheckoutSessionResponse;
 
-      if (!submissionResponse.ok || !submissionPayload.success) {
+      if (!checkoutResponse.ok || !checkoutPayload.success || !checkoutPayload.url) {
         throw new Error(
-          submissionPayload.message ||
-            "We could not submit your case. Please try again.",
+          checkoutPayload.message ||
+            "We could not start the secure payment flow. Please try again.",
         );
       }
 
-      reset();
-      setFiles([]);
-      setSubmitStatus(null);
-      setCaseReference(
-        submissionPayload.caseReference || pendingCaseReference || null,
-      );
+      setSubmitStatus("Redirecting to secure payment...");
+      window.location.assign(checkoutPayload.url);
     } catch (error) {
       setSubmitStatus(null);
       setSubmitError(
@@ -419,20 +413,12 @@ export function IntakeForm() {
         </div>
       ) : null}
 
-      {caseReference ? (
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-800">
-          Your case has been submitted successfully. Confirmation emails have
-          been sent.
-          <div className="mt-2 font-semibold">Case reference: {caseReference}</div>
-        </div>
-      ) : null}
-
       <button
         type="submit"
         disabled={isSubmitting}
         className="inline-flex w-full items-center justify-center border border-brand-gold bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {isSubmitting ? "Submitting case..." : "Submit case securely"}
+        {isSubmitting ? "Preparing payment..." : "Continue to secure payment"}
       </button>
     </form>
   );
