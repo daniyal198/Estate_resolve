@@ -73,6 +73,12 @@ export default function StartCasePage() {
                 search, contact us first and we will explain the preparation
                 stage and likely next steps.
               </p>
+              <Link
+                href="/book-a-consultation"
+                className="mt-6 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+              >
+                Book a consultation
+              </Link>
               <div className="mt-6 space-y-4">
                 <a
                   href={`mailto:${config.contact.email}`}

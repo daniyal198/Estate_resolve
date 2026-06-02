@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DocumentUpload } from "@/app/components/DocumentUpload";
@@ -41,6 +41,11 @@ type CheckoutSessionResponse = {
 
 export function IntakeForm() {
   const todayDateInputValue = getTodayDateInputValue();
+  const isHydrated = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
   const [files, setFiles] = useState<File[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<string | null>(null);
@@ -139,7 +144,14 @@ export function IntakeForm() {
   }
 
   return (
-    <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="space-y-8"
+      noValidate
+      onSubmit={(event) => {
+        event.preventDefault();
+        void handleSubmit(onSubmit)(event);
+      }}
+    >
       <section className="border-b border-brand-border pb-8">
         <h2 className="font-serif text-2xl font-semibold text-brand-navy">
           Deceased person details
@@ -359,7 +371,11 @@ export function IntakeForm() {
         </div>
       </section>
 
-      <DocumentUpload disabled={isSubmitting} files={files} setFiles={setFiles} />
+      <DocumentUpload
+        disabled={!isHydrated || isSubmitting}
+        files={files}
+        setFiles={setFiles}
+      />
 
       <section className="rounded-2xl border border-brand-border bg-brand-ivory p-6">
         <h2 className="font-serif text-2xl font-semibold text-brand-navy">
@@ -415,10 +431,14 @@ export function IntakeForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={!isHydrated || isSubmitting}
         className="inline-flex w-full items-center justify-center border border-brand-gold bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {isSubmitting ? "Preparing payment..." : "Continue to secure payment"}
+        {!isHydrated
+          ? "Loading form..."
+          : isSubmitting
+            ? "Preparing payment..."
+            : "Continue to secure payment"}
       </button>
     </form>
   );

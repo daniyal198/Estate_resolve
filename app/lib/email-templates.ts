@@ -1,4 +1,5 @@
 import type {
+  BookingFormData,
   ContactFormData,
   IntakeSubmissionData,
 } from "@/app/lib/validation";
@@ -118,6 +119,23 @@ type PaymentAdminEmailInput = {
   uploadedFileCount: string;
 };
 
+type BookingConfirmationEmailInput = {
+  consultationDateLabel: string;
+  consultationTimeLabel: string;
+  fullName: string;
+  meetLink: string | null;
+  timeZone: string;
+};
+
+type BookingAdminEmailInput = {
+  consultationDateLabel: string;
+  consultationTimeLabel: string;
+  htmlLink: string | null;
+  meetLink: string | null;
+  submission: BookingFormData;
+  timeZone: string;
+};
+
 export function buildPaymentConfirmationEmail({
   caseReference,
   clientName,
@@ -164,5 +182,54 @@ export function buildPaymentAdminEmail({
     <p><strong>Summary:</strong><br />${escapeHtml(caseSummary).replaceAll("\n", "<br />")}</p>
     <p><strong>Uploaded documents:</strong> ${escapeHtml(uploadedFileCount)}</p>
     <p><strong>Cloudinary folder:</strong> ${escapeHtml(documentsFolder)}</p>
+  `;
+}
+
+export function buildBookingConfirmationEmail({
+  consultationDateLabel,
+  consultationTimeLabel,
+  fullName,
+  meetLink,
+  timeZone,
+}: BookingConfirmationEmailInput) {
+  return `
+    <h2>Your consultation is booked</h2>
+    <p>Dear ${escapeHtml(fullName)},</p>
+    <p>Your Estate Resolve consultation has been reserved successfully.</p>
+    <p><strong>Date:</strong> ${escapeHtml(consultationDateLabel)}</p>
+    <p><strong>Time:</strong> ${escapeHtml(consultationTimeLabel)} (${escapeHtml(timeZone)})</p>
+    ${
+      meetLink
+        ? `<p><strong>Join link:</strong> <a href="${escapeHtml(meetLink)}">${escapeHtml(meetLink)}</a></p>`
+        : `<p>We will contact you using the details you provided before the consultation begins.</p>`
+    }
+    <p>If you need to make a change, please reply to this email or contact ${escapeHtml(config.contact.email)}.</p>
+    <p>Kind regards,<br />Estate Resolve</p>
+  `;
+}
+
+export function buildBookingAdminEmail({
+  consultationDateLabel,
+  consultationTimeLabel,
+  htmlLink,
+  meetLink,
+  submission,
+  timeZone,
+}: BookingAdminEmailInput) {
+  return `
+    <h2>New consultation booking</h2>
+    <p><strong>Name:</strong> ${escapeHtml(submission.fullName)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(submission.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(submission.phone)}</p>
+    <p><strong>Relationship:</strong> ${escapeHtml(submission.relationship)}</p>
+    <p><strong>Date:</strong> ${escapeHtml(consultationDateLabel)}</p>
+    <p><strong>Time:</strong> ${escapeHtml(consultationTimeLabel)} (${escapeHtml(timeZone)})</p>
+    <p><strong>Calendar event:</strong> ${htmlLink ? `<a href="${escapeHtml(htmlLink)}">Open event</a>` : "Not available"}</p>
+    <p><strong>Meet link:</strong> ${
+      meetLink
+        ? `<a href="${escapeHtml(meetLink)}">${escapeHtml(meetLink)}</a>`
+        : "Not enabled"
+    }</p>
+    <p><strong>Consultation summary:</strong><br />${escapeHtml(submission.consultationReason).replaceAll("\n", "<br />")}</p>
   `;
 }
