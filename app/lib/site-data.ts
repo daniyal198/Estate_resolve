@@ -1,6 +1,7 @@
 export const navigationLinks = [
   { href: "/services", label: "Services" },
   { href: "/how-it-works", label: "How It Works" },
+  { href: "/book-a-consultation", label: "Consultation" },
   { href: "/about", label: "About Us" },
   { href: "/faqs", label: "FAQs" },
 ] as const;
@@ -11,6 +12,7 @@ export const footerGroups = [
     links: [
       { href: "/services", label: "Our Services" },
       { href: "/how-it-works", label: "How It Works" },
+      { href: "/book-a-consultation", label: "Book a Consultation" },
       { href: "/start-a-case", label: "Start a Case" },
     ],
   },

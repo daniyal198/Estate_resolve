@@ -34,6 +34,12 @@ function isFutureDateInput(value: string) {
   return candidateTime > todayTime;
 }
 
+function isValidIsoDateTime(value: string) {
+  const parsedTime = Date.parse(value);
+
+  return Number.isFinite(parsedTime);
+}
+
 const requiredTrueMessage = "This confirmation is required.";
 
 export const intakeFormSchema = z.object({
@@ -105,6 +111,56 @@ export const contactFormSchema = z.object({
     .max(2000, "Please keep your message under 2000 characters."),
 });
 
+export const bookingAvailabilityQuerySchema = z.object({
+  date: z
+    .string()
+    .refine(isValidDateInput, "Please provide a valid booking date."),
+});
+
+export const bookingFormSchema = z
+  .object({
+    fullName: z.string().trim().min(2, "Please enter your full name."),
+    email: z
+      .string()
+      .trim()
+      .email("Please enter a valid email address."),
+    phone: z
+      .string()
+      .trim()
+      .min(7, "Please enter a valid contact number."),
+    relationship: z
+      .string()
+      .trim()
+      .min(2, "Please describe your role in the estate."),
+    consultationReason: z
+      .string()
+      .trim()
+      .min(20, "Please give us a short outline before booking.")
+      .max(1500, "Please keep this summary under 1500 characters."),
+    selectedDate: z
+      .string()
+      .refine(isValidDateInput, "Please select a valid consultation date."),
+    slotStart: z
+      .string()
+      .trim()
+      .refine(isValidIsoDateTime, "Please select a valid time slot."),
+    slotEnd: z
+      .string()
+      .trim()
+      .refine(isValidIsoDateTime, "Please select a valid time slot."),
+  })
+  .refine(
+    (value) => new Date(value.slotEnd).getTime() > new Date(value.slotStart).getTime(),
+    {
+      message: "Selected slot timing is invalid.",
+      path: ["slotEnd"],
+    },
+  );
+
 export type IntakeFormData = z.infer<typeof intakeFormSchema>;
 export type IntakeSubmissionData = z.infer<typeof intakeSubmissionSchema>;
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+export type BookingAvailabilityQuery = z.infer<
+  typeof bookingAvailabilityQuerySchema
+>;
+export type BookingFormData = z.infer<typeof bookingFormSchema>;

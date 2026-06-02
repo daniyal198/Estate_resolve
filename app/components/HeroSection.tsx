@@ -33,10 +33,10 @@ export function HeroSection() {
               <ArrowRightIcon className="h-4 w-4" />
             </Link>
             <Link
-              href="/how-it-works"
+              href="/book-a-consultation"
               className="inline-flex items-center gap-2 border-b border-white/20 pb-1 text-sm font-semibold tracking-[0.08em] text-white/72 hover:border-brand-gold hover:text-brand-gold-light"
             >
-              How it works
+              Book a consultation
             </Link>
           </div>
 

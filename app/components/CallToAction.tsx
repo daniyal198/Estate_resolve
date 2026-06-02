@@ -17,13 +17,21 @@ export function CallToAction() {
           the enquiry.
         </p>
         <div className="mt-10 flex justify-center">
-          <Link
-            href="/start-a-case"
-            className="inline-flex items-center gap-3 border border-brand-gold bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:bg-brand-gold-light hover:text-brand-navy"
-          >
-            Begin Secure Intake
-            <ArrowRightIcon className="h-4 w-4" />
-          </Link>
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <Link
+              href="/start-a-case"
+              className="inline-flex items-center gap-3 border border-brand-gold bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:bg-brand-gold-light hover:text-brand-navy"
+            >
+              Begin Secure Intake
+              <ArrowRightIcon className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/book-a-consultation"
+              className="inline-flex items-center gap-3 border border-white/30 px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:border-brand-gold-light hover:text-brand-gold-light"
+            >
+              Book a Consultation
+            </Link>
+          </div>
         </div>
         <p className="mt-5 text-xs uppercase tracking-[0.16em] text-white/42">
           Secure upload · Confirmation emails · UK-Based · Fixed Fee

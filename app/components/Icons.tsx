@@ -71,6 +71,17 @@ export function ClockIcon(props: IconProps) {
   );
 }
 
+export function CalendarIcon(props: IconProps) {
+  return (
+    <BaseIcon {...props}>
+      <rect width="18" height="17" x="3" y="4" rx="2" />
+      <path d="M8 2v4" />
+      <path d="M16 2v4" />
+      <path d="M3 10h18" />
+    </BaseIcon>
+  );
+}
+
 export function DocumentIcon(props: IconProps) {
   return (
     <BaseIcon {...props}>
@@ -118,6 +129,15 @@ export function PhoneIcon(props: IconProps) {
   return (
     <BaseIcon {...props}>
       <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.1 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7l.4 2.9a2 2 0 0 1-.6 1.8L7 10a16 16 0 0 0 7 7l1.6-1.8a2 2 0 0 1 1.8-.6l2.9.4A2 2 0 0 1 22 16.9Z" />
+    </BaseIcon>
+  );
+}
+
+export function VideoIcon(props: IconProps) {
+  return (
+    <BaseIcon {...props}>
+      <rect width="13" height="12" x="3" y="6" rx="2" />
+      <path d="m16 10 5-3v10l-5-3" />
     </BaseIcon>
   );
 }

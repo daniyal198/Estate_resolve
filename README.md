@@ -13,6 +13,7 @@ Stripe checkout, and payment confirmation handling via webhook.
 - `/about`
 - `/faqs`
 - `/contact`
+- `/book-a-consultation`
 - `/privacy`
 - `/terms`
 - `/start-a-case`
@@ -28,6 +29,7 @@ Stripe checkout, and payment confirmation handling via webhook.
 - Stripe
 - Cloudinary
 - SendGrid
+- Google Calendar
 - Vercel Analytics
 
 ## Scripts
@@ -55,6 +57,12 @@ Open `http://localhost:3000`.
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_CONTACT_EMAIL=contact@estateresolve.co.uk
 NEXT_PUBLIC_CONTACT_PHONE=+44 20 8154 2371
+NEXT_PUBLIC_BOOKING_TIME_ZONE=Europe/London
+NEXT_PUBLIC_BOOKING_WINDOW_DAYS=21
+NEXT_PUBLIC_BOOKING_SLOT_DURATION_MINUTES=30
+NEXT_PUBLIC_BOOKING_MIN_NOTICE_HOURS=24
+NEXT_PUBLIC_BOOKING_BUSINESS_HOURS_START=09:00
+NEXT_PUBLIC_BOOKING_BUSINESS_HOURS_END=17:30
 
 ADMIN_EMAIL=operations@estateresolve.co.uk
 
@@ -68,6 +76,19 @@ SENDGRID_FROM_EMAIL=contact@estateresolve.co.uk
 CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/<cloud-name>/auto/upload
 CLOUDINARY_UPLOAD_PRESET=<unsigned-upload-preset>
 CLOUDINARY_UPLOAD_FOLDER=estate-resolve-documents
+
+GOOGLE_CALENDAR_ID=<calendar-id>
+GOOGLE_CALENDAR_CLIENT_EMAIL=<service-account-email>
+GOOGLE_CALENDAR_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GOOGLE_CALENDAR_TIME_ZONE=Europe/London
+GOOGLE_CALENDAR_BOOKING_WINDOW_DAYS=21
+GOOGLE_CALENDAR_SLOT_DURATION_MINUTES=30
+GOOGLE_CALENDAR_MIN_NOTICE_HOURS=24
+GOOGLE_CALENDAR_BUSINESS_HOURS_START=09:00
+GOOGLE_CALENDAR_BUSINESS_HOURS_END=17:30
+GOOGLE_CALENDAR_BOOKING_LOCATION=Phone or Google Meet consultation
+GOOGLE_CALENDAR_EVENT_TITLE_PREFIX=Estate Resolve consultation
+GOOGLE_CALENDAR_CREATE_MEET_LINK=false
 ```
 
 ## Payment Flow
@@ -81,11 +102,22 @@ CLOUDINARY_UPLOAD_FOLDER=estate-resolve-documents
 
 ## API Routes
 
+- `GET /api/booking/availability`
+- `POST /api/booking`
 - `POST /api/upload`
 - `POST /api/send-contact-form`
 - `POST /api/send-form-confirmation`
 - `POST /api/create-checkout-session`
 - `POST /api/webhook`
+
+## Google Calendar Booking Setup
+
+1. Create or choose the Google Calendar that should receive consultation bookings.
+2. Enable the Google Calendar API in the Google Cloud project that owns your service account.
+3. Create a service account and generate a JSON key.
+4. Share the target calendar with the service account email and grant it permission to make changes to events.
+5. Copy the calendar ID, service account email, and private key into `.env.local`.
+6. Set `GOOGLE_CALENDAR_CREATE_MEET_LINK=true` if you want the API to generate Google Meet links automatically.
 
 ## Notes
 
@@ -93,3 +125,5 @@ CLOUDINARY_UPLOAD_FOLDER=estate-resolve-documents
 - `NEXT_PUBLIC_SITE_URL` should match the live production domain on Vercel.
 - The case intake flow depends on valid Stripe, SendGrid, and Cloudinary
   configuration.
+- The booking flow depends on a Google Calendar that is shared with the
+  configured service account.
