@@ -88,7 +88,7 @@ export default function StartCasePage() {
                   {config.contact.email}
                 </a>
                 <a
-                  href={`tel:${config.contact.phone.replace(/[^+\d]/g, "")}`}
+                  href={config.contact.phoneHref}
                   className="flex items-center gap-3 text-sm font-semibold text-brand-navy"
                 >
                   <PhoneIcon className="h-5 w-5 text-brand-gold" />

@@ -18,8 +18,8 @@ export function IntroSection() {
             institutions that have never come up in conversation.
           </p>
           <p className="mt-5 max-w-2xl text-[1.05rem] leading-8 text-brand-slate">
-            Estate Resolve provides a structured search process designed to help
-            executors and families build a more complete financial picture of
+            Estate Resolve provides a structured search designed to help solicitors,
+            executors, and families build a more complete financial picture of
             the estate before important decisions are made.
           </p>
           <Link
@@ -35,7 +35,7 @@ export function IntroSection() {
           <div className="grid gap-px bg-brand-border sm:grid-cols-2">
             <div className="bg-white px-8 py-9 text-center">
               <p className="font-serif text-5xl font-semibold text-brand-navy">
-                £<span className="text-brand-gold">37</span>bn
+                £<span className="text-brand-gold">50</span>bn
               </p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-slate">
                 Unclaimed Assets in the UK
@@ -56,9 +56,10 @@ export function IntroSection() {
               <span className="absolute left-0 top-[-0.4rem] font-serif text-6xl leading-none text-brand-gold">
                 &quot;
               </span>
-              We had no idea my father held two accounts we&apos;d never heard
-              of. The report uncovered them within two weeks and gave us real
-              peace of mind that nothing had been left behind.
+              The UK is estimated to have around 1.6 million lost pension pots worth nearly £20 billion.&quot; — Association of British Insurers.
+
+Industry experts believe 1 in 3 UK adults may have lost touch with at least one financial asset.
+
             </blockquote>
             <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-brand-gold-light">
               Client Family, London · 2024

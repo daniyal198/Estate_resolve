@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { getCloudinaryCaseFolder } from "@/app/lib/cloudinary";
 import type { IntakeSubmissionData } from "@/app/lib/validation";
 
-export const PRICE_GBP_PENCE = 30000;
+export const PRICE_GBP_PENCE = 17500;
 
 const STRIPE_API_VERSION = "2026-04-22.dahlia";
 const METADATA_LIMIT = 500;

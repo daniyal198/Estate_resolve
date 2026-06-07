@@ -622,7 +622,7 @@ export function ConsultationBooking({
                   id="booking-phone"
                   type="tel"
                   className={inputClassName}
-                  placeholder="+44 ..."
+                  placeholder="02081542371"
                   {...register("phone")}
                 />
                 {errors.phone ? (

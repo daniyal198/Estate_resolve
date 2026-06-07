@@ -17,12 +17,12 @@ const services = [
   {
     title: "Investment and Policy Tracing",
     description:
-      "Search support aimed at uncovering ISAs, investment accounts, insurance-linked holdings, and similar products that may not be immediately visible.",
+      "Search support aimed at uncovering Pensions, investment accounts, insurance-linked holdings, and similar products that may not be immediately visible.",
   },
   {
     title: "Reporting for Estate Administration",
     description:
-      "A formal summary of findings that can be retained on file and used to support decisions about next actions and probate preparation.",
+      "A formal report of findings, ideal for solicitors and executors, providing a clear audit trail to support probate preparation and next-step decisions.",
   },
 ] as const;
 
@@ -32,7 +32,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="A Focused Service for Estate Asset Discovery"
-        description="Our work is designed to help establish whether there are financial accounts or assets that should be brought into the estate picture before distribution."
+        description="Providing Confidence That Every Estate Asset Has Been Accounted For."
       />
 
       <section className="py-20">

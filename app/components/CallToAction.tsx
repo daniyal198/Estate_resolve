@@ -12,7 +12,7 @@ export function CallToAction() {
           Ready to Begin? Start Secure Intake and Upload Your Documents.
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-[1.05rem] leading-8 text-white/66">
-          Most families can submit the initial estate details in under ten
+          Most estate search requests can be submitted in under ten
           minutes. You can also send supporting documents securely as part of
           the enquiry.
         </p>

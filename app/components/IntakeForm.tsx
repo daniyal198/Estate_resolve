@@ -278,7 +278,7 @@ export function IntakeForm() {
               </label>
               <input
                 id="yourPhone"
-                placeholder="+44 ..."
+                placeholder="02081542371"
                 type="tel"
                 className={inputClassName}
                 {...register("yourPhone")}

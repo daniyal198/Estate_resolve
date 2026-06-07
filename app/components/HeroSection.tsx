@@ -4,6 +4,8 @@ import { config } from "@/app/lib/config";
 import { processSteps } from "@/app/lib/site-data";
 
 export function HeroSection() {
+  const turnaroundValue = config.timeline.standardTurnaround.split(" ")[0];
+
   return (
     <section className="hero-shell min-h-screen pt-[72px] text-white">
       <div className="site-container relative z-10 grid min-h-[calc(100vh-72px)] items-center gap-14 py-16 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-20">
@@ -19,9 +21,7 @@ export function HeroSection() {
             </em>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-white/68 md:text-[1.15rem]">
-            We work quietly and professionally to trace bank accounts,
-            investments, and financial assets on behalf of grieving families
-            and appointed executors, so nothing is left behind.
+          We combine discreet, professional enquiries with advanced technology and data-led analysis to trace bank accounts and investment assets.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -43,8 +43,7 @@ export function HeroSection() {
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-white/14 pt-8">
             <div>
               <p className="font-serif text-3xl font-semibold text-white">
-                {config.timeline.standardTurnaround.split(" ")[0]}-
-                {config.timeline.standardTurnaround.split(" ")[2]}
+                {turnaroundValue}
               </p>
               <p className="mt-2 text-xs uppercase tracking-[0.16em] text-white/46">
                 Day Turnaround

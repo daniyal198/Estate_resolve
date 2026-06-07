@@ -1,6 +1,6 @@
 export const navigationLinks = [
   { href: "/services", label: "Services" },
-  { href: "/how-it-works", label: "How It Works" },
+  { href: "/how-it-works", label: "The Process" },
   { href: "/book-a-consultation", label: "Consultation" },
   { href: "/about", label: "About Us" },
   { href: "/faqs", label: "FAQs" },
@@ -46,12 +46,13 @@ export const trustHighlights = [
   },
   {
     title: "UK-Based Service",
-    description: "Focused on estate searches relating to England and Wales.",
+    description: "Focused on estate searches relating to England, Wales and Scotland.",
     icon: "check",
   },
   {
-    title: "500+ Cases Reviewed",
-    description: "Trusted by families, solicitors, and executors seeking financial clarity.",
+    title: "Trusted",
+    description:
+      "Trusted by families, solicitors, DIY probates and executors seeking financial clarity.",
     icon: "users",
   },
 ] as const;
@@ -93,7 +94,7 @@ export const standards = [
   {
     title: "A Defined Timeline",
     description:
-      "Most matters are delivered within 10 to 15 working days with clear expectations from the outset.",
+      "Most matters are delivered within 30 working days with clear expectations from the outset.",
     icon: "clock",
   },
   {
@@ -105,7 +106,7 @@ export const standards = [
   {
     title: "Probate-Ready Reporting",
     description:
-      "Reports are structured to support conversations with solicitors, HMRC, and the Probate Registry.",
+      "Reports are structured to support conversations with solicitors, families and probate professionals.",
     icon: "document",
   },
   {
@@ -136,7 +137,7 @@ export const faqItems = [
   {
     question: "How long does a case usually take?",
     answer:
-      "Our standard turnaround is 10 to 15 working days. More complex matters can take longer if multiple institutions or supporting documents are involved, but timelines are discussed clearly at the outset.",
+      "Our standard turnaround is 30 working days. More complex matters can take longer if multiple institutions or supporting documents are involved, but timelines are discussed clearly at the outset.",
   },
   {
     question: "Do you guarantee that assets will be found?",

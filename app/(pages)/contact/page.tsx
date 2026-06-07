@@ -69,7 +69,7 @@ export default function ContactPage() {
               service suitability queries.
             </p>
             <a
-              href={`tel:${config.contact.phone.replace(/[^+\d]/g, "")}`}
+              href={config.contact.phoneHref}
               className="mt-5 inline-flex text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4"
             >
               {config.contact.phone}
@@ -86,13 +86,11 @@ export default function ContactPage() {
             <h2 className="mt-6 font-serif text-2xl font-semibold text-brand-navy">
               Address
             </h2>
-            <p className="mt-3 text-sm leading-7 text-brand-slate">
-              London correspondence address for client communications and
-              formal post where required.
-            </p>
-            <p className="mt-5 text-sm font-semibold leading-7 text-brand-navy">
-              {config.contact.address}
-            </p>
+            <address className="mt-5 not-italic text-sm font-semibold leading-7 text-brand-navy">
+              {config.contact.addressLines.map((line) => (
+                <div key={line}>{line}</div>
+              ))}
+            </address>
             </article>
           </div>
         </div>

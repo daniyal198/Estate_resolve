@@ -23,7 +23,7 @@ export function StandardsSection() {
       <div className="site-container">
         <div className="mx-auto max-w-3xl text-center">
           <div className="section-label justify-center">
-            Why Families Choose Us
+          Trusted by Families, Solicitors and Executors Across the UK
           </div>
           <h2 className="mt-5 font-serif text-[clamp(2.1rem,4vw,3rem)] leading-[1.18] font-semibold text-brand-navy">
             Built on Professional Standards and Human Care
