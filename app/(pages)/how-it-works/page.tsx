@@ -12,7 +12,7 @@ export const metadata = buildMetadata({
 });
 
 const checklist = [
-  "Details of the deceased, including full name, address, and date of death",
+  "Details of the deceased, including full name, address, and date of birth",
   "Your role in the estate, such as executor, administrator, or legal representative",
   "Any existing documents that show authority to act or confirm the estate position",
   "Known banks, investment providers, pension providers, or insurance companies",
@@ -24,16 +24,22 @@ export default function HowItWorksPage() {
       <main id="main-content" className="flex-1">
         <PageHero
           eyebrow="The Process"
-          title="A Clear Process From First Instruction to Final Reporting"
-          description="Estate work is already complex enough. Our process is designed to keep the search stage structured, professional, and easy to follow."
+          title="Managing a loved one's estate is never easy. Our aim is to help reduce uncertainty, simplify the search for financial assets, and make the estate administration process as smooth and manageable as possible."
+          description="Our process is designed to bring structure, transparency, and consistency to the search phase through the use of technology-enabled workflows, systematic data analysis, and professionally governed procedures from initial instruction through to final reporting."
+          titleClassName="mt-5 max-w-3xl text-lg leading-8 text-white/66"
+          descriptionClassName="mt-5 max-w-3xl text-lg leading-8 text-white/66"
         />
 
         <section className="py-20">
           <div className="site-container grid gap-14 lg:grid-cols-[1fr_0.82fr] lg:items-start">
             <div>
               <div className="section-label">What to Expect</div>
-              <h2 className="mt-5 font-serif text-[clamp(2rem,4vw,2.8rem)] leading-[1.16] font-semibold text-brand-navy">
-                We Break the Matter Into Four Disciplined Stages
+              <h2 className="mt-5 max-w-3xl text-[1.03rem] leading-8 text-brand-slate">
+                Estate Resolve may only undertake enquiries where authorised by
+                the executor named in the will, the person entitled to
+                administer the estate, or a solicitor acting on their behalf.
+                Please download and sign the Authority to Act form before
+                submitting your instructions.
               </h2>
               <p className="mt-6 max-w-2xl text-[1.03rem] leading-8 text-brand-slate">
                 Each instruction begins with an authority and scope review. Once

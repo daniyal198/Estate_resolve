@@ -13,11 +13,31 @@ export const metadata = buildMetadata({
 });
 
 const preparationItems = [
-  "A copy of the death certificate or interim coroner's certificate",
-  "A form of authority appointing you as executor or to act on behalf of the estate, including either Grant of Representation, the Will, or a signed engagement letter",
-  "A copy of your passport",
-  "Proof of address, such as a utility bill or bank statement",
-];
+  {
+    description: "A clear copy of the deceased's death certificate.",
+    title: "Death Certificate (required)",
+  },
+  {
+    description:
+      "A valid passport, driving licence or other government-issued photo identification for the instructing party.",
+    title: "Proof of Identity (required)",
+  },
+  {
+    description:
+      "A recent proof of address for the instructing party, dated within the last 3 months, such as a utility bill, bank statement, council tax bill or other official correspondence. Financial information may be redacted, provided the name, address and date remain clearly visible.",
+    title: "Proof of Address (required)",
+  },
+  {
+    description:
+      "Download, complete, sign and upload the Estate Secure Authority to Act Form, authorising Estate Secure to make enquiries with banks, building societies, pension providers, insurers, investment managers and other relevant organisations on behalf of the estate.",
+    title: "Completed Estate Secure Authority to Act Form (required)",
+  },
+  {
+    description:
+      "Please provide any probate documentation already obtained or a copy of the will showing the named executor.",
+    title: "Will, Grant of Probate or Letters of Administration (where available)",
+  },
+] as const;
 
 export default function StartCasePage() {
   return (
@@ -50,18 +70,38 @@ export default function StartCasePage() {
           <div className="grid gap-6">
             <article className="border border-brand-border bg-brand-ivory p-8">
               <h2 className="font-serif text-2xl font-semibold text-brand-navy">
-                Helpful before you submit
+                Documents to Upload
               </h2>
-            <ul className="mt-7 space-y-4">
+              <p className="mt-4 text-sm leading-7 text-brand-slate">
+                Please provide copies of the following documents to help us
+                process your enquiry and verify authority to act on behalf of
+                the estate:
+              </p>
+            <ul className="mt-7 space-y-5">
               {preparationItems.map((item) => (
                 <li
-                  key={item}
-                  className="border-b border-brand-border pb-4 text-[1rem] leading-8 text-brand-slate last:border-b-0 last:pb-0"
+                  key={item.title}
+                  className="border-b border-brand-border pb-5 last:border-b-0 last:pb-0"
                 >
-                  {item}
+                  <p className="text-[1rem] font-semibold leading-7 text-brand-navy">
+                    ✓ {item.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-brand-slate">
+                    {item.description}
+                  </p>
                 </li>
               ))}
             </ul>
+              <div className="mt-7 border-t border-brand-border pt-6">
+                <h3 className="text-[1rem] font-semibold text-brand-navy">
+                  Security &amp; Confidentiality
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-brand-slate">
+                  All documents are transmitted via a secure encrypted
+                  connection and handled in accordance with applicable data
+                  protection requirements.
+                </p>
+              </div>
             </article>
 
             <article className="border border-brand-border bg-brand-ivory p-8">
@@ -103,8 +143,7 @@ export default function StartCasePage() {
               </h2>
               <p className="mt-4 text-sm leading-7 text-brand-slate">
                 After payment is confirmed, we issue the case reference by
-                email, begin the financial search process, and keep you updated
-                on the next steps for the estate.
+                email, begin the financial search process
               </p>
               <Link
                 href="/contact"

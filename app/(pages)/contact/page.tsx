@@ -87,9 +87,7 @@ export default function ContactPage() {
               Address
             </h2>
             <address className="mt-5 not-italic text-sm font-semibold leading-7 text-brand-navy">
-              {config.contact.addressLines.map((line) => (
-                <div key={line}>{line}</div>
-              ))}
+              {config.contact.address}
             </address>
             </article>
           </div>

@@ -114,21 +114,6 @@ export function DocumentUpload({
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-brand-border bg-brand-ivory px-6 py-6">
-        <ul className="space-y-3 text-sm leading-7 text-brand-slate">
-          <li>
-            Death certificate or interim coroner&apos;s certificate
-          </li>
-          <li>
-            A form of authority appointing you as executor or allowing you to
-            act on behalf of the estate, including one of: Grant of
-            Representation, the Will, or a signed engagement letter
-          </li>
-          <li>Copy of your passport</li>
-          <li>Proof of address, such as a utility bill or bank statement</li>
-        </ul>
-      </div>
-
       <div
         className={`mt-6 rounded-2xl border-2 border-dashed px-6 py-10 text-center transition ${
           dragActive

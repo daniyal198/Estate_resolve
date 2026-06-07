@@ -94,7 +94,7 @@ export const standards = [
   {
     title: "A Defined Timeline",
     description:
-      "Most matters are delivered within 30 working days with clear expectations from the outset.",
+      "Our target turnaround is 30 days, although some enquiries may take longer depending on response times from financial institutions.",
     icon: "clock",
   },
   {
@@ -106,7 +106,7 @@ export const standards = [
   {
     title: "Probate-Ready Reporting",
     description:
-      "Reports are structured to support conversations with solicitors, families and probate professionals.",
+      "Reports are structured to support conversations with solicitors, and probate requirements.",
     icon: "document",
   },
   {
@@ -118,7 +118,7 @@ export const standards = [
   {
     title: "Fixed Transparent Fee",
     description:
-      "A single clearly stated fee avoids hourly billing uncertainty at an already difficult time.",
+      "The fee may be treated as an estate administration expense and paid from estate funds.",
     icon: "pound",
   },
 ] as const;

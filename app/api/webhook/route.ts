@@ -75,9 +75,11 @@ export async function POST(request: Request) {
           html: buildPaymentAdminEmail({
             caseReference,
             caseSummary: metadata.caseSummary || "Not provided",
+            clientAddress: metadata.clientAddress || "Not provided",
             clientEmail: metadata.clientEmail || clientEmail || "Not provided",
             clientName,
             clientPhone: metadata.clientPhone || "Not provided",
+            clientPostalCode: metadata.clientPostalCode || "Not provided",
             dateOfDeath: metadata.dateOfDeath || new Date().toISOString().slice(0, 10),
             deceasedName: metadata.deceasedName || "Not provided",
             documentsFolder: metadata.documentsFolder || caseReference,

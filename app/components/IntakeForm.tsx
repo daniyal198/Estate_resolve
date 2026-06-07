@@ -13,7 +13,7 @@ import { createCaseReference } from "@/app/lib/email-templates";
 const inputClassName =
   "w-full border border-brand-border bg-white px-4 py-3 text-[1rem] text-brand-ink outline-none transition focus:border-brand-gold";
 const checkboxClassName =
-  "mt-1 h-4 w-4 rounded border-brand-border text-brand-navy focus:ring-brand-gold";
+  "mt-1 h-4 w-4 shrink-0 rounded border-brand-border text-brand-navy focus:ring-brand-gold";
 
 const relationshipOptions = [
   "Executor",
@@ -183,7 +183,7 @@ export function IntakeForm() {
                 className="mb-2 block text-sm font-semibold text-brand-navy"
                 htmlFor="dateOfDeath"
               >
-                Date of death
+                Date of birth
               </label>
               <input
                 id="dateOfDeath"
@@ -247,7 +247,47 @@ export function IntakeForm() {
             ) : null}
           </div>
 
+          <div>
+            <label
+              className="mb-2 block text-sm font-semibold text-brand-navy"
+              htmlFor="yourAddress"
+            >
+              Address
+            </label>
+            <input
+              id="yourAddress"
+              placeholder="Your address"
+              className={inputClassName}
+              {...register("yourAddress")}
+            />
+            {errors.yourAddress ? (
+              <p className="mt-2 text-sm text-red-700">
+                {errors.yourAddress.message}
+              </p>
+            ) : null}
+          </div>
+
           <div className="grid gap-5 md:grid-cols-2">
+            <div>
+              <label
+                className="mb-2 block text-sm font-semibold text-brand-navy"
+                htmlFor="yourPostalCode"
+              >
+                Postal code
+              </label>
+              <input
+                id="yourPostalCode"
+                placeholder="WC2H 9JQ"
+                className={inputClassName}
+                {...register("yourPostalCode")}
+              />
+              {errors.yourPostalCode ? (
+                <p className="mt-2 text-sm text-red-700">
+                  {errors.yourPostalCode.message}
+                </p>
+              ) : null}
+            </div>
+
             <div>
               <label
                 className="mb-2 block text-sm font-semibold text-brand-navy"
@@ -353,7 +393,7 @@ export function IntakeForm() {
               className="mb-2 block text-sm font-semibold text-brand-navy"
               htmlFor="caseSummary"
             >
-              Summary of what you need help with
+              Any additional relevant information
             </label>
             <textarea
               id="caseSummary"

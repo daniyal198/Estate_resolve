@@ -29,6 +29,8 @@ export function buildCheckoutMetadata(submission: IntakeSubmissionData) {
     deceasedName: normalizeMetadataValue(submission.deceasedFullName),
     dateOfDeath: submission.dateOfDeath,
     clientName: normalizeMetadataValue(submission.yourName),
+    clientAddress: normalizeMetadataValue(submission.yourAddress),
+    clientPostalCode: normalizeMetadataValue(submission.yourPostalCode),
     clientEmail: normalizeMetadataValue(submission.yourEmail),
     clientPhone: normalizeMetadataValue(submission.yourPhone),
     relationship: normalizeMetadataValue(submission.relationship),

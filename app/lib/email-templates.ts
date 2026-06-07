@@ -70,6 +70,8 @@ export function buildCaseAdminEmail(
     <p><strong>Deceased:</strong> ${escapeHtml(submission.deceasedFullName)}</p>
     <p><strong>Date of death:</strong> ${escapeHtml(formatDate(submission.dateOfDeath))}</p>
     <p><strong>Client name:</strong> ${escapeHtml(submission.yourName)}</p>
+    <p><strong>Address:</strong> ${escapeHtml(submission.yourAddress)}</p>
+    <p><strong>Postal code:</strong> ${escapeHtml(submission.yourPostalCode)}</p>
     <p><strong>Email:</strong> ${escapeHtml(submission.yourEmail)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(submission.yourPhone)}</p>
     <p><strong>Relationship:</strong> ${escapeHtml(submission.relationship)}</p>
@@ -105,9 +107,11 @@ type PaymentConfirmationEmailInput = {
 type PaymentAdminEmailInput = {
   caseReference: string;
   caseSummary: string;
+  clientAddress: string;
   clientEmail: string;
   clientName: string;
   clientPhone: string;
+  clientPostalCode: string;
   dateOfDeath: string;
   deceasedName: string;
   documentsFolder: string;
@@ -153,9 +157,11 @@ export function buildPaymentConfirmationEmail({
 export function buildPaymentAdminEmail({
   caseReference,
   caseSummary,
+  clientAddress,
   clientEmail,
   clientName,
   clientPhone,
+  clientPostalCode,
   dateOfDeath,
   deceasedName,
   documentsFolder,
@@ -174,6 +180,8 @@ export function buildPaymentAdminEmail({
     <p><strong>Deceased:</strong> ${escapeHtml(deceasedName)}</p>
     <p><strong>Date of death:</strong> ${escapeHtml(formatDate(dateOfDeath))}</p>
     <p><strong>Client name:</strong> ${escapeHtml(clientName)}</p>
+    <p><strong>Address:</strong> ${escapeHtml(clientAddress)}</p>
+    <p><strong>Postal code:</strong> ${escapeHtml(clientPostalCode)}</p>
     <p><strong>Email:</strong> ${escapeHtml(clientEmail)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(clientPhone)}</p>
     <p><strong>Relationship:</strong> ${escapeHtml(relationship)}</p>

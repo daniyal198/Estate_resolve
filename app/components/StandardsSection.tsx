@@ -26,7 +26,7 @@ export function StandardsSection() {
           Trusted by Families, Solicitors and Executors Across the UK
           </div>
           <h2 className="mt-5 font-serif text-[clamp(2.1rem,4vw,3rem)] leading-[1.18] font-semibold text-brand-navy">
-            Built on Professional Standards and Human Care
+            Built on Professional Standards and Comapssion
           </h2>
         </div>
 

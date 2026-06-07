@@ -11,19 +11,19 @@ export const metadata = buildMetadata({
 
 const values = [
   {
-    title: "Clarity",
+    title: "Professional",
     description:
-      "Executors and families should understand exactly what is being searched, why it matters, and what the next step is.",
+      "Structured enquiries, clear reporting and a thorough approach to estate asset research.",
   },
   {
-    title: "Discretion",
+    title: "Discreet",
     description:
-      "Bereavement cases require professional restraint. Sensitive information is handled carefully and only for legitimate estate purposes.",
+      "Sensitive matters handled confidentially, securely and with respect at every stage.",
   },
   {
-    title: "Professionalism",
+    title: "Trusted",
     description:
-      "The service is designed to sit comfortably alongside legal and probate workflows rather than creating confusion around them.",
+      "A dependable service designed to help executors, families and solicitors navigate estate administration with confidence.",
   },
 ] as const;
 
@@ -33,8 +33,8 @@ export default function AboutPage() {
       <main id="main-content" className="flex-1">
         <PageHero
           eyebrow="About Estate Resolve"
-          title="A Professional Estate Search Service Built for Difficult Moments"
-          description="We are focused on one thing: helping estates reach financial clarity through a disciplined search process that families and advisers can trust."
+          title="Inspired by Personal Experience"
+          description="Estate Secure was inspired by the founder's personal experience of administering the estate of a loved one and discovering the challenges involved in tracing lost or forgotten assets. Our service was created to help families, executors and solicitors navigate that process with greater confidence and clarity."
         />
 
         <section className="py-20">
@@ -42,13 +42,12 @@ export default function AboutPage() {
             <div>
               <div className="section-label">Our Approach</div>
               <h2 className="mt-5 font-serif text-[clamp(2rem,4vw,2.8rem)] leading-[1.16] font-semibold text-brand-navy">
-                Designed Around Trust, Not Noise
+                Professional, Discreet and Trusted
               </h2>
               <p className="mt-6 max-w-2xl text-[1.03rem] leading-8 text-brand-slate">
                 Estate Resolve is positioned as a calm, professional service for
                 executors, solicitors, and families who need to confirm whether
-                hidden or forgotten financial assets exist. The work sits in the
-                space between uncertainty and action.
+                hidden or forgotten financial assets exist.
               </p>
               <p className="mt-5 max-w-2xl text-[1.03rem] leading-8 text-brand-slate">
                 We understand that the people arriving here are often dealing

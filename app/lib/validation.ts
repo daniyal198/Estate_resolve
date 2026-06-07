@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const uploadConstraints = {
   acceptedMimeTypes: ["application/pdf", "image/jpeg", "image/png"] as const,
-  maxFileCount: 4,
+  maxFileCount: 6,
   maxFileSizeBytes: 10 * 1024 * 1024,
 } as const;
 
@@ -49,10 +49,10 @@ export const intakeFormSchema = z.object({
     .min(2, "Please enter the deceased person's full name."),
   dateOfDeath: z
     .string()
-    .refine(isValidDateInput, "Please provide a valid date of death.")
+    .refine(isValidDateInput, "Please provide a valid date of birth.")
     .refine(
       (value) => !isFutureDateInput(value),
-      "Date of death cannot be in the future.",
+      "Date of birth cannot be in the future.",
     ),
   niNumber: z
     .string()
@@ -61,6 +61,14 @@ export const intakeFormSchema = z.object({
     .optional()
     .or(z.literal("")),
   yourName: z.string().trim().min(2, "Please enter your full name."),
+  yourAddress: z
+    .string()
+    .trim()
+    .min(5, "Please enter your address."),
+  yourPostalCode: z
+    .string()
+    .trim()
+    .min(3, "Please enter your postal code."),
   yourEmail: z
     .string()
     .trim()

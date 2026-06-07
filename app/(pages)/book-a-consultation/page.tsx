@@ -155,14 +155,7 @@ export default function BookConsultationPage() {
             </article>
 
             <article className="rounded-[2rem] border border-brand-border bg-white p-8">
-              <h2 className="font-serif text-2xl font-semibold text-brand-navy">
-                Prefer to speak first?
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-brand-slate">
-                If the available slots do not work, contact us directly and we
-                can help manually.
-              </p>
-              <div className="mt-6 space-y-4">
+              <div className="space-y-4">
                 <a
                   href={`mailto:${config.contact.email}`}
                   className="flex items-center gap-3 text-sm font-semibold text-brand-navy"
