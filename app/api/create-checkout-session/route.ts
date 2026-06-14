@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {
-  PRICE_GBP_PENCE,
   buildCheckoutMetadata,
+  getServicePackagePricing,
   getStripeClient,
 } from "@/app/lib/stripe";
 import { intakeSubmissionSchema } from "@/app/lib/validation";
@@ -24,6 +24,7 @@ export async function POST(request: Request) {
     }
 
     const submission = parsed.data;
+    const serviceOption = getServicePackagePricing(submission.servicePackage);
     const stripe = getStripeClient();
     const origin = new URL(request.url).origin;
 
@@ -34,10 +35,10 @@ export async function POST(request: Request) {
           price_data: {
             currency: "gbp",
             product_data: {
-              name: "Estate Financial Search Service",
+              name: serviceOption.label,
               description: `Case for ${submission.deceasedFullName}`,
             },
-            unit_amount: PRICE_GBP_PENCE,
+            unit_amount: serviceOption.pricePence,
           },
           quantity: 1,
         },

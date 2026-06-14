@@ -31,6 +31,29 @@ export const config = {
   },
   pricing: {
     fixedFee: "£175",
+    servicePackages: [
+      {
+        description: "Structured search across UK banks, building societies, insurers, pension providers, investment institutions, dormant assets and unclaimed court funds.",
+        label: "Standard Estate Search",
+        price: "£175",
+        pricePence: 17500,
+        value: "standard_estate_search",
+      },
+      {
+        description: "Includes the standard estate search together with liability and due-diligence searches.",
+        label: "Asset & Liability Search",
+        price: "£210",
+        pricePence: 21000,
+        value: "asset_liability_search",
+      },
+      {
+        description: "Includes the asset and liability search together with international enquiries for overseas assets and interests.",
+        label: "International Estate Search",
+        price: "£350",
+        pricePence: 35000,
+        value: "international_estate_search",
+      },
+    ],
   },
   timeline: {
     standardTurnaround: "30 working days",

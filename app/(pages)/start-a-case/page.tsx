@@ -41,7 +41,36 @@ const preparationItems = [
   },
 ] as const;
 
-export default function StartCasePage() {
+type StartCasePageProps = {
+  searchParams?: Promise<{
+    service?: string | string[];
+  }>;
+};
+
+function getInitialServicePackage(service: string | string[] | undefined) {
+  const requestedService = Array.isArray(service) ? service[0] : service;
+  const validServicePackages = config.pricing.servicePackages.map(
+    (servicePackage) => servicePackage.value,
+  ) as readonly string[];
+
+  if (!requestedService || !validServicePackages.includes(requestedService)) {
+    return undefined;
+  }
+
+  return requestedService as
+    | "standard_estate_search"
+    | "asset_liability_search"
+    | "international_estate_search";
+}
+
+export default async function StartCasePage({
+  searchParams,
+}: StartCasePageProps) {
+  const resolvedSearchParams = await searchParams;
+  const initialServicePackage = getInitialServicePackage(
+    resolvedSearchParams?.service,
+  );
+
   return (
     <main id="main-content" className="flex-1">
       <PageHero
@@ -61,11 +90,12 @@ export default function StartCasePage() {
               This intake form is designed to gather the core estate facts so
               we can assess the instruction properly. Please include the key
               identity and authority documents where available. Once the form is
-              complete, you will be redirected to secure payment for the fixed
-              fee of {config.pricing.fixedFee}.
+              complete, you will be redirected to secure payment for the
+              selected service option. Standard searches start from{" "}
+              {config.pricing.fixedFee}.
             </p>
             <div className="mt-8">
-              <IntakeForm />
+              <IntakeForm initialServicePackage={initialServicePackage} />
             </div>
           </article>
 

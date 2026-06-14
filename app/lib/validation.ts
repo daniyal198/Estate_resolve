@@ -41,6 +41,11 @@ function isValidIsoDateTime(value: string) {
 }
 
 const requiredTrueMessage = "This confirmation is required.";
+const servicePackageOptions = [
+  "standard_estate_search",
+  "asset_liability_search",
+  "international_estate_search",
+] as const;
 
 export const intakeFormSchema = z.object({
   deceasedFullName: z
@@ -77,6 +82,9 @@ export const intakeFormSchema = z.object({
     .string()
     .trim()
     .min(7, "Please enter a valid contact number."),
+  servicePackage: z.enum(servicePackageOptions, {
+    message: "Please select a service option.",
+  }),
   relationship: z
     .string()
     .trim()
@@ -117,6 +125,33 @@ export const contactFormSchema = z.object({
     .trim()
     .min(10, "Please include a brief message.")
     .max(2000, "Please keep your message under 2000 characters."),
+});
+
+export const solicitorEnquiryFormSchema = z.object({
+  name: z.string().trim().min(2, "Please enter your name."),
+  company: z.string().trim().min(2, "Please enter your company or firm name."),
+  role: z.string().trim().min(2, "Please enter your position or role."),
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address."),
+  phone: z
+    .string()
+    .trim()
+    .min(7, "Please enter a valid telephone number."),
+  enquiryType: z
+    .string()
+    .trim()
+    .min(2, "Please select the type of enquiry."),
+  estateDetails: z
+    .string()
+    .trim()
+    .min(20, "Please provide brief details of the estate or search required.")
+    .max(2000, "Please keep the estate details under 2000 characters."),
+  preferredContactMethod: z
+    .string()
+    .trim()
+    .min(2, "Please select a preferred contact method."),
 });
 
 export const bookingAvailabilityQuerySchema = z.object({
@@ -168,6 +203,9 @@ export const bookingFormSchema = z
 export type IntakeFormData = z.infer<typeof intakeFormSchema>;
 export type IntakeSubmissionData = z.infer<typeof intakeSubmissionSchema>;
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+export type SolicitorEnquiryFormData = z.infer<
+  typeof solicitorEnquiryFormSchema
+>;
 export type BookingAvailabilityQuery = z.infer<
   typeof bookingAvailabilityQuerySchema
 >;

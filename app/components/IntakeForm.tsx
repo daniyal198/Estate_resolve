@@ -4,6 +4,7 @@ import { useState, useSyncExternalStore } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DocumentUpload } from "@/app/components/DocumentUpload";
+import { config } from "@/app/lib/config";
 import {
   intakeFormSchema,
   type IntakeFormData,
@@ -22,6 +23,7 @@ const relationshipOptions = [
   "Solicitor",
   "Other Representative",
 ] as const;
+const servicePackageOptions = config.pricing.servicePackages;
 
 function getTodayDateInputValue() {
   const today = new Date();
@@ -39,7 +41,11 @@ type CheckoutSessionResponse = {
   url?: string;
 };
 
-export function IntakeForm() {
+type IntakeFormProps = {
+  initialServicePackage?: IntakeFormData["servicePackage"];
+};
+
+export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
   const todayDateInputValue = getTodayDateInputValue();
   const isHydrated = useSyncExternalStore(
     () => () => undefined,
@@ -56,6 +62,11 @@ export function IntakeForm() {
     handleSubmit,
     register,
   } = useForm<IntakeFormData>({
+    defaultValues: initialServicePackage
+      ? {
+          servicePackage: initialServicePackage,
+        }
+      : undefined,
     resolver: zodResolver(intakeFormSchema),
   });
 
@@ -265,6 +276,39 @@ export function IntakeForm() {
                 {errors.yourAddress.message}
               </p>
             ) : null}
+          </div>
+
+          <div>
+            <label
+              className="mb-2 block text-sm font-semibold text-brand-navy"
+              htmlFor="servicePackage"
+            >
+              Service option
+            </label>
+            <select
+              id="servicePackage"
+              className={inputClassName}
+              defaultValue={initialServicePackage ?? ""}
+              {...register("servicePackage")}
+            >
+              <option value="" disabled>
+                Select a service option
+              </option>
+              {servicePackageOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label} ({option.price})
+                </option>
+              ))}
+            </select>
+            {errors.servicePackage ? (
+              <p className="mt-2 text-sm text-red-700">
+                {errors.servicePackage.message}
+              </p>
+            ) : null}
+            <p className="mt-2 text-sm leading-7 text-brand-slate">
+              For high net worth or bespoke international matters, please use
+              the professional enquiry route for an individually scoped quote.
+            </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">

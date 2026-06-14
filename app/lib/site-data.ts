@@ -1,5 +1,6 @@
 export const navigationLinks = [
   { href: "/services", label: "Services" },
+  { href: "/solicitors", label: "Solicitors" },
   { href: "/how-it-works", label: "The Process" },
   { href: "/book-a-consultation", label: "Consultation" },
   { href: "/about", label: "About Us" },
@@ -11,6 +12,7 @@ export const footerGroups = [
     title: "Services",
     links: [
       { href: "/services", label: "Our Services" },
+      { href: "/solicitors", label: "For Solicitors" },
       { href: "/how-it-works", label: "How It Works" },
       { href: "/sample-reports", label: "Sample Reports" },
       { href: "/book-a-consultation", label: "Book a Consultation" },

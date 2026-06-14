@@ -32,8 +32,8 @@ export default function ServicesPage() {
     <main id="main-content" className="flex-1">
       <PageHero
         eyebrow="Services"
-        title="A Focused Service for Estate Asset Discovery"
-        description="Helping executors and advisers take reasonable steps to identify financial assets before an estate is distributed."
+        title="One instruction. Hundreds of institutions. Tens of thousands of financial products."
+        description="The UK financial marketplace contains tens of thousands of banking, savings, pension, insurance and investment products. Estate Resolve helps executors, solicitors and families make extensive searches to identify assets that may otherwise be overlooked."
       />
 
       <section className="py-20">
@@ -64,6 +64,9 @@ export default function ServicesPage() {
           >
             Open sample reports
           </Link>
+          <p className="mt-4 text-xs uppercase tracking-[0.14em] text-brand-slate/72">
+            Source: Moneyfacts Group Plc
+          </p>
         </div>
       </section>
     </main>

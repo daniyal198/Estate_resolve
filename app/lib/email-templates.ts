@@ -2,6 +2,7 @@ import type {
   BookingFormData,
   ContactFormData,
   IntakeSubmissionData,
+  SolicitorEnquiryFormData,
 } from "@/app/lib/validation";
 import { config } from "@/app/lib/config";
 
@@ -99,9 +100,39 @@ export function buildContactAdminEmail(submission: ContactFormData) {
   `;
 }
 
+export function buildSolicitorEnquiryConfirmationEmail(
+  submission: SolicitorEnquiryFormData,
+) {
+  return `
+    <h2>Thank you for your professional enquiry</h2>
+    <p>Dear ${escapeHtml(submission.name)},</p>
+    <p>We have received your enquiry on behalf of ${escapeHtml(submission.company)} and will respond within two working days.</p>
+    <p><strong>Enquiry type:</strong> ${escapeHtml(submission.enquiryType)}</p>
+    <p><strong>Preferred contact method:</strong> ${escapeHtml(submission.preferredContactMethod)}</p>
+    <p>Kind regards,<br />Estate Resolve</p>
+  `;
+}
+
+export function buildSolicitorEnquiryAdminEmail(
+  submission: SolicitorEnquiryFormData,
+) {
+  return `
+    <h2>New solicitor / professional enquiry</h2>
+    <p><strong>Name:</strong> ${escapeHtml(submission.name)}</p>
+    <p><strong>Company / Firm:</strong> ${escapeHtml(submission.company)}</p>
+    <p><strong>Position / Role:</strong> ${escapeHtml(submission.role)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(submission.email)}</p>
+    <p><strong>Telephone:</strong> ${escapeHtml(submission.phone)}</p>
+    <p><strong>Type of Enquiry:</strong> ${escapeHtml(submission.enquiryType)}</p>
+    <p><strong>Preferred Contact Method:</strong> ${escapeHtml(submission.preferredContactMethod)}</p>
+    <p><strong>Estate / Search Details:</strong><br />${escapeHtml(submission.estateDetails).replaceAll("\n", "<br />")}</p>
+  `;
+}
+
 type PaymentConfirmationEmailInput = {
   caseReference: string;
   clientName: string;
+  serviceLabel: string;
 };
 
 type PaymentAdminEmailInput = {
@@ -118,6 +149,7 @@ type PaymentAdminEmailInput = {
   knownInstitutions: string;
   niNumber: string;
   paymentAmount: string;
+  serviceLabel: string;
   relationship: string;
   sessionId: string;
   uploadedFileCount: string;
@@ -143,12 +175,14 @@ type BookingAdminEmailInput = {
 export function buildPaymentConfirmationEmail({
   caseReference,
   clientName,
+  serviceLabel,
 }: PaymentConfirmationEmailInput) {
   return `
     <h2>Payment confirmed</h2>
     <p>Dear ${escapeHtml(clientName)},</p>
     <p>We have received your payment and your Estate Resolve case is now open.</p>
     <p><strong>Case reference:</strong> ${escapeHtml(caseReference)}</p>
+    <p><strong>Service:</strong> ${escapeHtml(serviceLabel)}</p>
     <p>Our team will begin the financial search process and update you within ${escapeHtml(config.timeline.standardTurnaround)}.</p>
     <p>Kind regards,<br />Estate Resolve</p>
   `;
@@ -168,6 +202,7 @@ export function buildPaymentAdminEmail({
   knownInstitutions,
   niNumber,
   paymentAmount,
+  serviceLabel,
   relationship,
   sessionId,
   uploadedFileCount,
@@ -175,6 +210,7 @@ export function buildPaymentAdminEmail({
   return `
     <h2>Payment received for new estate case</h2>
     <p><strong>Case reference:</strong> ${escapeHtml(caseReference)}</p>
+    <p><strong>Service:</strong> ${escapeHtml(serviceLabel)}</p>
     <p><strong>Payment:</strong> ${escapeHtml(paymentAmount)}</p>
     <p><strong>Stripe session ID:</strong> ${escapeHtml(sessionId)}</p>
     <p><strong>Deceased:</strong> ${escapeHtml(deceasedName)}</p>

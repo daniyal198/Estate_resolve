@@ -63,6 +63,7 @@ export async function POST(request: Request) {
             html: buildPaymentConfirmationEmail({
               caseReference,
               clientName,
+              serviceLabel: metadata.servicePackageLabel || "Estate Financial Search Service",
             }),
             subject: `Payment Confirmed - ${caseReference}`,
             to: clientEmail,
@@ -86,6 +87,8 @@ export async function POST(request: Request) {
             knownInstitutions: metadata.knownInstitutions || "Not provided",
             niNumber: metadata.niNumber || "Not provided",
             paymentAmount: formatPaymentAmount(session.amount_total),
+            serviceLabel:
+              metadata.servicePackageLabel || "Estate Financial Search Service",
             relationship: metadata.relationship || "Not provided",
             sessionId: session.id,
             uploadedFileCount: metadata.uploadedFileCount || "0",
