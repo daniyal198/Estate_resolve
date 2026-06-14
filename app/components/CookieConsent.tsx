@@ -34,8 +34,8 @@ export function CookieConsent() {
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-brand-border bg-brand-navy/95 px-4 py-4 text-white shadow-2xl backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <p className="max-w-4xl text-sm leading-7 text-white/72">
-          We use cookies and privacy-safe analytics to improve the website
-          experience. By continuing to use the site, you agree to this use in
+          We use only essential cookies necessary for the operation of this
+          website. By continuing to use the site, you acknowledge this use in
           line with our{" "}
           <Link
             href="/privacy"

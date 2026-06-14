@@ -21,6 +21,9 @@ export function Footer() {
           <p className="mt-5 text-xs uppercase tracking-[0.16em] text-white/38">
             Professional Estate Financial Services
           </p>
+          <p className="mt-5 text-sm leading-7 text-white/56">
+            {config.company.fullLegalName}
+          </p>
         </div>
 
         <div className="grid gap-10 sm:grid-cols-3">

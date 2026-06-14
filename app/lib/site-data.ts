@@ -28,7 +28,7 @@ export const footerGroups = [
     title: "Legal",
     links: [
       { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms of Service" },
+      { href: "/terms", label: "Terms & Conditions" },
     ],
   },
 ] as const;
@@ -86,39 +86,39 @@ export const processSteps = [
 
 export const standards = [
   {
-    title: "Legally Compliant",
+    title: "Cost-Effective",
     description:
-      "Searches are carried out through lawful, auditable processes suitable for probate administration.",
+      "A modest fixed fee for a comprehensive search that may uncover previously unknown assets and potentially more than pay for itself.",
     icon: "scale",
   },
   {
-    title: "A Defined Timeline",
+    title: "Often Payable by the Estate",
     description:
-      "Our target turnaround is 30 days, although some enquiries may take longer depending on response times from financial institutions.",
+      "In most cases, the fee can be treated as an estate administration expense and paid from estate funds.",
     icon: "clock",
   },
   {
-    title: "Handled With Sensitivity",
+    title: "Ideal for DIY Probate",
     description:
-      "Every case is approached with discretion, respect, and awareness of the family context behind the work.",
+      "Helps executors identify estate assets with greater confidence, reducing the need for costly professional searches.",
     icon: "users",
   },
   {
     title: "Probate-Ready Reporting",
     description:
-      "Reports are structured to support conversations with solicitors, and probate requirements.",
+      "Receive a clear, detailed report suitable for probate applications, executors, administrators, and legal professionals.",
     icon: "document",
   },
   {
-    title: "Secure Information Handling",
+    title: "Supports Due Diligence",
     description:
-      "Identity and estate information is processed only for the purpose of the case and retained responsibly.",
+      "Demonstrates that reasonable steps were taken to identify the deceased's assets.",
     icon: "lock",
   },
   {
-    title: "Fixed Transparent Fee",
+    title: "Helps Reduce Risk",
     description:
-      "The fee may be treated as an estate administration expense and paid from estate funds.",
+      "A thorough search helps minimise the chance of assets being overlooked during estate administration.",
     icon: "pound",
   },
 ] as const;
@@ -132,12 +132,22 @@ export const faqItems = [
   {
     question: "What kinds of assets can you help trace?",
     answer:
-      "We focus on financial relationships such as current and savings accounts, ISAs, investment accounts, insurance products, pensions, and similar holdings where a formal institution search may reveal previously unknown assets.",
+      "We focus on financial relationships such as current and savings accounts, investment accounts, insurance products, pensions, NS&I holdings, and similar assets where a formal institution search may reveal previously unknown accounts.",
+  },
+  {
+    question: "Can your asset search fee be recovered from the estate?",
+    answer:
+      "In most cases, reasonable asset-search fees can be reimbursed from estate funds as part of the administration of the estate.",
+  },
+  {
+    question: "What banks and financial institutions do you contact?",
+    answer:
+      "We conduct enquiries with over 140 financial institutions, including banks, building societies, pension providers, insurers, investment managers, share registrars, and court registers covering more than 400 financial brands and trading names across the UK.",
   },
   {
     question: "How long does a case usually take?",
     answer:
-      "Our standard turnaround is 30 working days. More complex matters can take longer if multiple institutions or supporting documents are involved, but timelines are discussed clearly at the outset.",
+      "We aim to complete most searches within 30 days. In some cases, timescales may be extended due to delays or additional requirements from financial institutions. Any significant findings received after the report has been issued will be communicated to you as part of our ongoing enquiries.",
   },
   {
     question: "Do you guarantee that assets will be found?",
@@ -152,16 +162,6 @@ export const faqItems = [
   {
     question: "Do I need probate before starting?",
     answer:
-      "Not always. We can explain the authority typically required for an estate asset search and help clarify what documents are likely to be needed before the search is formally opened.",
-  },
-  {
-    question: "How is personal information protected?",
-    answer:
-      "We work to UK data protection standards, limit the personal data collected to what is necessary for the case, and handle sensitive documents through controlled internal processes.",
-  },
-  {
-    question: "Can solicitors or professional deputies instruct you?",
-    answer:
-      "Yes. The service can support professional representatives acting on behalf of an estate, subject to the appropriate authority and supporting documentation.",
+      "No. We can explain the authority typically required for an estate asset search and help clarify what documents are likely to be needed before the search is formally opened.",
   },
 ] as const;

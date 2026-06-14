@@ -18,9 +18,9 @@ export function IntroSection() {
             institutions that have never come up in conversation.
           </p>
           <p className="mt-5 max-w-2xl text-[1.05rem] leading-8 text-brand-slate">
-            Estate Resolve provides a structured search designed to help solicitors,
-            executors, and families build a more complete financial picture of
-            the estate before important decisions are made.
+            Estate Resolve provides a structured search designed to help
+            solicitors, executors, and families build a more complete financial
+            picture of the estate before important decisions are made.
           </p>
           <Link
             href="/services"
@@ -56,13 +56,13 @@ export function IntroSection() {
               <span className="absolute left-0 top-[-0.4rem] font-serif text-6xl leading-none text-brand-gold">
                 &quot;
               </span>
-              The UK is estimated to have around 1.6 million lost pension pots worth nearly £20 billion.&quot; — Association of British Insurers.
-
-Industry experts believe 1 in 3 UK adults may have lost touch with at least one financial asset.
-
+              Industry estimates suggest that up to 1 in 4 people may have
+              lost track of a financial asset. A structured estate search helps
+              reduce the risk of those relationships being missed during
+              probate.&quot;
             </blockquote>
             <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-brand-gold-light">
-              Client Family, London · 2024
+              Estate Asset Discovery
             </p>
           </div>
         </div>
