@@ -1,5 +1,6 @@
 import { PageHero } from "@/app/components/PageHero";
 import { buildMetadata } from "@/app/lib/seo";
+import Link from "next/link";
 
 export const metadata = buildMetadata({
   title: "Services",
@@ -47,6 +48,22 @@ export default function ServicesPage() {
               </p>
             </article>
           ))}
+        </div>
+        <div className="site-container mt-8 border border-brand-border bg-brand-ivory p-8">
+          <h2 className="font-serif text-2xl font-semibold text-brand-navy">
+            View Sample Reports
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-slate">
+            Review sample Estate Resolve reports to see how asset findings and
+            institution enquiry progress can be presented for executors,
+            families, and professional advisers.
+          </p>
+          <Link
+            href="/sample-reports"
+            className="mt-6 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+          >
+            Open sample reports
+          </Link>
         </div>
       </section>
     </main>

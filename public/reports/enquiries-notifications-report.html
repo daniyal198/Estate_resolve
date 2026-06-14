@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enquiries and Notifications Report</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #f5f6fa;
+        color: #1a1a2e;
+        font-family: "Inter", "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      .shell {
+        margin: 0 auto;
+        max-width: 1440px;
+        min-height: 100vh;
+      }
+
+      .layout {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: minmax(0, 1fr) 280px;
+        padding: 24px;
+      }
+
+      .main,
+      .sidebar-card {
+        background: #fff;
+        border: 1px solid #e8eaf0;
+        border-radius: 18px;
+      }
+
+      .main {
+        padding: 22px;
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .sidebar-card {
+        padding: 18px;
+      }
+
+      .top-row {
+        align-items: flex-start;
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        margin-bottom: 22px;
+      }
+
+      .report-title {
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .report-subtitle {
+        color: #667085;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
+      .report-meta {
+        color: #667085;
+        flex-shrink: 0;
+        font-size: 12px;
+        text-align: right;
+      }
+
+      .stats {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-bottom: 24px;
+      }
+
+      .stat-card {
+        align-items: center;
+        background: #fff;
+        border: 1px solid #e8eaf0;
+        border-radius: 14px;
+        display: flex;
+        gap: 12px;
+        padding: 14px 16px;
+      }
+
+      .stat-icon {
+        align-items: center;
+        background: #eef2ff;
+        border-radius: 12px;
+        color: #3146b8;
+        display: inline-flex;
+        flex-shrink: 0;
+        font-size: 10px;
+        font-weight: 700;
+        height: 38px;
+        justify-content: center;
+        letter-spacing: 0.04em;
+        width: 38px;
+      }
+
+      .stat-label {
+        color: #667085;
+        font-size: 11px;
+      }
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .section-title,
+      .sidebar-title {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .section-title {
+        margin-bottom: 14px;
+      }
+
+      .section + .section {
+        margin-top: 24px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        min-width: 820px;
+        width: 100%;
+      }
+
+      th {
+        border-bottom: 1px solid #e8eaf0;
+        color: #667085;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 10px 8px;
+        text-align: left;
+      }
+
+      td {
+        border-bottom: 1px solid #eef2f6;
+        color: #2d3748;
+        font-size: 12px;
+        padding: 10px 8px;
+        vertical-align: top;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      .total-row td {
+        border-top: 1px solid #dbe2ec;
+        color: #1a1a2e;
+        font-weight: 700;
+      }
+
+      .org-chip {
+        align-items: center;
+        display: inline-flex;
+        gap: 8px;
+      }
+
+      .org-badge {
+        align-items: center;
+        background: #eef2ff;
+        border-radius: 8px;
+        color: #3146b8;
+        display: inline-flex;
+        font-size: 10px;
+        font-weight: 700;
+        height: 20px;
+        justify-content: center;
+        width: 20px;
+      }
+
+      .prog-bar {
+        background: #e8eaf0;
+        border-radius: 999px;
+        display: inline-block;
+        height: 6px;
+        margin-left: 6px;
+        vertical-align: middle;
+        width: 84px;
+      }
+
+      .prog-fill {
+        border-radius: 999px;
+        display: block;
+        height: 6px;
+      }
+
+      .badge {
+        border-radius: 999px;
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 9px;
+        white-space: nowrap;
+      }
+
+      .badge-green {
+        background: #e6f4ea;
+        color: #1a7340;
+      }
+
+      .badge-red {
+        background: #fce8e6;
+        color: #a50e0e;
+      }
+
+      .badge-blue {
+        background: #e8f0fe;
+        color: #1a56db;
+      }
+
+      .sidebar-grid {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .sidebar-label {
+        color: #667085;
+        font-size: 11px;
+      }
+
+      .sidebar-value {
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 2px;
+      }
+
+      .status-badge {
+        background: #e8f0fe;
+        border-radius: 999px;
+        color: #1a56db;
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 4px;
+        padding: 4px 10px;
+      }
+
+      .divider {
+        border-top: 1px solid #e8eaf0;
+        margin: 16px 0;
+      }
+
+      .donut-wrap {
+        align-items: center;
+        display: flex;
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .legend {
+        display: grid;
+        gap: 6px;
+      }
+
+      .legend-item {
+        align-items: center;
+        color: #2d3748;
+        display: flex;
+        font-size: 11px;
+        gap: 8px;
+      }
+
+      .legend-dot {
+        border-radius: 999px;
+        height: 8px;
+        width: 8px;
+      }
+
+      .insights {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .insight-item {
+        color: #2d3748;
+        font-size: 11px;
+        line-height: 1.5;
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .insight-item::before {
+        color: #1a7340;
+        content: "•";
+        font-size: 18px;
+        left: 0;
+        line-height: 1;
+        position: absolute;
+        top: -1px;
+      }
+
+      .footer-row {
+        align-items: center;
+        color: #667085;
+        display: flex;
+        font-size: 11px;
+        gap: 12px;
+        justify-content: space-between;
+        margin-top: 12px;
+      }
+
+      .footer-link {
+        color: #3146b8;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      @media (max-width: 1180px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .sidebar {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .layout {
+          padding: 16px;
+        }
+
+        .main,
+        .sidebar-card {
+          padding: 16px;
+        }
+
+        .top-row {
+          flex-direction: column;
+        }
+
+        .report-meta {
+          text-align: left;
+        }
+
+        .stats,
+        .sidebar {
+          grid-template-columns: 1fr;
+        }
+
+        .table-wrap {
+          overflow-x: visible;
+        }
+
+        table {
+          min-width: 0;
+        }
+
+        thead {
+          display: none;
+        }
+
+        tbody,
+        tr,
+        td {
+          display: block;
+          width: 100%;
+        }
+
+        tr {
+          border: 1px solid #e8eaf0;
+          border-radius: 14px;
+          margin-bottom: 12px;
+          overflow: hidden;
+        }
+
+        td {
+          border-bottom: 1px solid #eef2f6;
+          padding: 10px 12px;
+        }
+
+        td:last-child {
+          border-bottom: none;
+        }
+
+        td::before {
+          color: #667085;
+          content: attr(data-label);
+          display: block;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          margin-bottom: 4px;
+          text-transform: uppercase;
+        }
+
+        .donut-wrap,
+        .footer-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .prog-bar {
+          display: block;
+          margin-left: 0;
+          margin-top: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="layout">
+        <main class="main">
+          <div class="top-row">
+            <div>
+              <h1 class="report-title">Enquiries and Notifications Report</h1>
+              <p class="report-subtitle">
+                Summary of enquiries sent and responses received
+              </p>
+            </div>
+            <div class="report-meta">
+              Report generated<br />
+              5 November 2020, 09:41
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-icon">ES</div>
+              <div>
+                <div class="stat-label">Enquiries Sent</div>
+                <div class="stat-value">24</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">RR</div>
+              <div>
+                <div class="stat-label">Responses Received</div>
+                <div class="stat-value">18</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">OS</div>
+              <div>
+                <div class="stat-label">Outstanding</div>
+                <div class="stat-value">6</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">MF</div>
+              <div>
+                <div class="stat-label">Match Found</div>
+                <div class="stat-value">9</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">NR</div>
+              <div>
+                <div class="stat-label">No Record</div>
+                <div class="stat-value">7</div>
+              </div>
+            </div>
+          </div>
+
+          <section class="section">
+            <div class="section-title">Response Overview</div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Organisation Type</th>
+                    <th>Enquiries Sent</th>
+                    <th>Responses Received</th>
+                    <th>Match Found</th>
+                    <th>No Record</th>
+                    <th>Outstanding</th>
+                    <th>Response Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Organisation Type"><span class="org-chip"><span class="org-badge">BB</span>Banks and Building Societies</span></td>
+                    <td data-label="Enquiries Sent">8</td>
+                    <td data-label="Responses Received">6</td>
+                    <td data-label="Match Found">3</td>
+                    <td data-label="No Record">2</td>
+                    <td data-label="Outstanding">2</td>
+                    <td data-label="Response Rate">75% <span class="prog-bar"><span class="prog-fill" style="width: 75%; background: #1a7340;"></span></span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation Type"><span class="org-chip"><span class="org-badge">IM</span>Investment Managers</span></td>
+                    <td data-label="Enquiries Sent">3</td>
+                    <td data-label="Responses Received">3</td>
+                    <td data-label="Match Found">2</td>
+                    <td data-label="No Record">1</td>
+                    <td data-label="Outstanding">0</td>
+                    <td data-label="Response Rate">100% <span class="prog-bar"><span class="prog-fill" style="width: 100%; background: #1a7340;"></span></span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation Type"><span class="org-chip"><span class="org-badge">IP</span>Insurance Providers</span></td>
+                    <td data-label="Enquiries Sent">4</td>
+                    <td data-label="Responses Received">2</td>
+                    <td data-label="Match Found">1</td>
+                    <td data-label="No Record">1</td>
+                    <td data-label="Outstanding">2</td>
+                    <td data-label="Response Rate">50% <span class="prog-bar"><span class="prog-fill" style="width: 50%; background: #f57c00;"></span></span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation Type"><span class="org-chip"><span class="org-badge">PP</span>Pension Providers</span></td>
+                    <td data-label="Enquiries Sent">3</td>
+                    <td data-label="Responses Received">3</td>
+                    <td data-label="Match Found">2</td>
+                    <td data-label="No Record">0</td>
+                    <td data-label="Outstanding">0</td>
+                    <td data-label="Response Rate">100% <span class="prog-bar"><span class="prog-fill" style="width: 100%; background: #1a7340;"></span></span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation Type"><span class="org-chip"><span class="org-badge">GA</span>Government and Agencies</span></td>
+                    <td data-label="Enquiries Sent">2</td>
+                    <td data-label="Responses Received">1</td>
+                    <td data-label="Match Found">0</td>
+                    <td data-label="No Record">1</td>
+                    <td data-label="Outstanding">1</td>
+                    <td data-label="Response Rate">50% <span class="prog-bar"><span class="prog-fill" style="width: 50%; background: #f57c00;"></span></span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation Type"><span class="org-chip"><span class="org-badge">OF</span>Other Financial Institutions</span></td>
+                    <td data-label="Enquiries Sent">4</td>
+                    <td data-label="Responses Received">3</td>
+                    <td data-label="Match Found">1</td>
+                    <td data-label="No Record">2</td>
+                    <td data-label="Outstanding">1</td>
+                    <td data-label="Response Rate">75% <span class="prog-bar"><span class="prog-fill" style="width: 75%; background: #1a7340;"></span></span></td>
+                  </tr>
+                  <tr class="total-row">
+                    <td data-label="Organisation Type">Total</td>
+                    <td data-label="Enquiries Sent">24</td>
+                    <td data-label="Responses Received">18</td>
+                    <td data-label="Match Found">9</td>
+                    <td data-label="No Record">7</td>
+                    <td data-label="Outstanding">6</td>
+                    <td data-label="Response Rate">75%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="section-title">Recent Enquiries and Responses</div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Organisation</th>
+                    <th>Enquiry Reference</th>
+                    <th>Enquiry Date</th>
+                    <th>Response Date</th>
+                    <th>Response Status</th>
+                    <th>Match Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Organisation">HSBC Bank Plc</td>
+                    <td data-label="Enquiry Reference">ENQ-2020-00024</td>
+                    <td data-label="Enquiry Date">01/10/2020 12:36</td>
+                    <td data-label="Response Date">01/10/2020 14:22</td>
+                    <td data-label="Response Status"><span class="badge badge-green">Responded</span></td>
+                    <td data-label="Match Status"><span class="badge badge-red">No Record</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation">Barclays Bank</td>
+                    <td data-label="Enquiry Reference">ENQ-2020-00023</td>
+                    <td data-label="Enquiry Date">01/10/2020 12:36</td>
+                    <td data-label="Response Date">01/10/2020 15:03</td>
+                    <td data-label="Response Status"><span class="badge badge-green">Responded</span></td>
+                    <td data-label="Match Status"><span class="badge badge-green">Match Found</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation">Aviva Life and Pensions UK</td>
+                    <td data-label="Enquiry Reference">ENQ-2020-00022</td>
+                    <td data-label="Enquiry Date">01/10/2020 12:35</td>
+                    <td data-label="Response Date">01/10/2020 16:45</td>
+                    <td data-label="Response Status"><span class="badge badge-green">Responded</span></td>
+                    <td data-label="Match Status"><span class="badge badge-green">Match Found</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation">Lloyds Banking Group</td>
+                    <td data-label="Enquiry Reference">ENQ-2020-00021</td>
+                    <td data-label="Enquiry Date">01/10/2020 12:35</td>
+                    <td data-label="Response Date">01/10/2020 13:11</td>
+                    <td data-label="Response Status"><span class="badge badge-green">Responded</span></td>
+                    <td data-label="Match Status"><span class="badge badge-green">Match Found</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Organisation">DWP - Pension Service</td>
+                    <td data-label="Enquiry Reference">ENQ-2020-00020</td>
+                    <td data-label="Enquiry Date">01/10/2020 12:34</td>
+                    <td data-label="Response Date">01/10/2020 17:20</td>
+                    <td data-label="Response Status"><span class="badge badge-green">Responded</span></td>
+                    <td data-label="Match Status"><span class="badge badge-red">No Record</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="footer-row">
+              <span>Showing 5 of 18 responses</span>
+              <a class="footer-link" href="#">View all responses</a>
+            </div>
+          </section>
+        </main>
+
+        <aside class="sidebar">
+          <section class="sidebar-card">
+            <div class="sidebar-title">Case Information</div>
+            <div class="sidebar-grid">
+              <div>
+                <div class="sidebar-label">Case Reference</div>
+                <div class="sidebar-value">ES-0001-01</div>
+              </div>
+              <div>
+                <div class="sidebar-label">Client Reference</div>
+                <div class="sidebar-value">ES-Sample-Report</div>
+              </div>
+              <div>
+                <div class="sidebar-label">Date Range</div>
+                <div class="sidebar-value">01/10/2020 - 05/11/2020</div>
+              </div>
+              <div>
+                <div class="sidebar-label">Report Type</div>
+                <div class="sidebar-value">Enquiries and Notifications</div>
+              </div>
+              <div>
+                <div class="sidebar-label">Status</div>
+                <div class="status-badge">In Progress</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="sidebar-card">
+            <div class="sidebar-title">Match Analysis</div>
+            <div class="donut-wrap">
+              <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+                <circle cx="36" cy="36" r="26" fill="none" stroke="#e8eaf0" stroke-width="12"></circle>
+                <circle cx="36" cy="36" r="26" fill="none" stroke="#1a7340" stroke-width="12" stroke-dasharray="81.6 81.6" stroke-dashoffset="0" transform="rotate(-90 36 36)"></circle>
+                <circle cx="36" cy="36" r="26" fill="none" stroke="#d93025" stroke-width="12" stroke-dasharray="63.6 99.6" stroke-dashoffset="-81.6" transform="rotate(-90 36 36)"></circle>
+                <circle cx="36" cy="36" r="26" fill="none" stroke="#f57c00" stroke-width="12" stroke-dasharray="17.9 145.3" stroke-dashoffset="-145.2" transform="rotate(-90 36 36)"></circle>
+              </svg>
+              <div class="legend">
+                <div class="legend-item"><span class="legend-dot" style="background: #1a7340;"></span>Match Found <span style="color: #667085;">9 (50%)</span></div>
+                <div class="legend-item"><span class="legend-dot" style="background: #d93025;"></span>No Record <span style="color: #667085;">7 (39%)</span></div>
+                <div class="legend-item"><span class="legend-dot" style="background: #f57c00;"></span>Outstanding <span style="color: #667085;">6 (11%)</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="sidebar-card">
+            <div class="sidebar-title">Key Insights</div>
+            <div class="insights">
+              <div class="insight-item">75% overall response rate achieved</div>
+              <div class="insight-item">9 potential asset matches identified</div>
+              <div class="insight-item">6 organisations yet to respond</div>
+              <div class="insight-item">Further follow-up may be required</div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

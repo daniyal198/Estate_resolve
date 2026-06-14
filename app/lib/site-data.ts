@@ -12,6 +12,7 @@ export const footerGroups = [
     links: [
       { href: "/services", label: "Our Services" },
       { href: "/how-it-works", label: "How It Works" },
+      { href: "/sample-reports", label: "Sample Reports" },
       { href: "/book-a-consultation", label: "Book a Consultation" },
       { href: "/start-a-case", label: "Start a Case" },
     ],

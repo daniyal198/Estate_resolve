@@ -17,8 +17,8 @@ export const config = {
   contact: {
     email:
       process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@estateresolve.co.uk",
-    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "02081542371",
-    phoneHref: `tel:${(process.env.NEXT_PUBLIC_CONTACT_PHONE || "02081542371").replace(/[^\d]/g, "")}`,
+    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "020 3951 5065",
+    phoneHref: `tel:${(process.env.NEXT_PUBLIC_CONTACT_PHONE || "020 3951 5065").replace(/[^\d]/g, "")}`,
     address: "71-75 Shelton Street, Covent Garden, London, WC2H 9JQ",
     addressLines: [
       "71-75 Shelton Street",

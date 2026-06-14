@@ -34,7 +34,7 @@ export default function AboutPage() {
         <PageHero
           eyebrow="About Estate Resolve"
           title="Inspired by Personal Experience"
-          description="Estate Secure was inspired by the founder's personal experience of administering the estate of a loved one and discovering the challenges involved in tracing lost or forgotten assets. Our service was created to help families, executors and solicitors navigate that process with greater confidence and clarity."
+          description="Estate Resolve was inspired by the founder's personal experience of administering the estate of a loved one and discovering the challenges involved in tracing lost or forgotten assets. Our service was created to help families, executors and solicitors navigate that process with greater confidence and clarity."
         />
 
         <section className="py-20">

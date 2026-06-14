@@ -5,6 +5,8 @@ import { PageHero } from "@/app/components/PageHero";
 import { config } from "@/app/lib/config";
 import { buildMetadata } from "@/app/lib/seo";
 
+const authorityFormHref = "/documents/estate-resolve-authority-to-act-form.pdf";
+
 export const metadata = buildMetadata({
   title: "Start a Case",
   description:
@@ -29,8 +31,8 @@ const preparationItems = [
   },
   {
     description:
-      "Download, complete, sign and upload the Estate Secure Authority to Act Form, authorising Estate Secure to make enquiries with banks, building societies, pension providers, insurers, investment managers and other relevant organisations on behalf of the estate.",
-    title: "Completed Estate Secure Authority to Act Form (required)",
+      "Download, complete, sign and upload the Estate Resolve Authority to Act Form, authorising Estate Resolve to make enquiries with banks, building societies, pension providers, insurers, investment managers and other relevant organisations on behalf of the estate.",
+    title: "Completed Estate Resolve Authority to Act Form (required)",
   },
   {
     description:
@@ -92,6 +94,22 @@ export default function StartCasePage() {
                 </li>
               ))}
             </ul>
+              <div className="mt-7 rounded-2xl border border-brand-border bg-white p-6">
+                <h3 className="text-[1rem] font-semibold text-brand-navy">
+                  Download the Authority to Act Form
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-brand-slate">
+                  Please download this form, complete it, sign it, and include
+                  it with your supporting documents when opening the case.
+                </p>
+                <a
+                  href={authorityFormHref}
+                  download
+                  className="mt-5 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+                >
+                  Download authority form
+                </a>
+              </div>
               <div className="mt-7 border-t border-brand-border pt-6">
                 <h3 className="text-[1rem] font-semibold text-brand-navy">
                   Security &amp; Confidentiality

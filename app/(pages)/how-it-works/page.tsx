@@ -4,6 +4,8 @@ import { PageHero } from "@/app/components/PageHero";
 import { ProcessSection } from "@/app/components/ProcessSection";
 import { buildMetadata } from "@/app/lib/seo";
 
+const authorityFormHref = "/documents/estate-resolve-authority-to-act-form.pdf";
+
 export const metadata = buildMetadata({
   title: "How It Works",
   description:
@@ -41,6 +43,13 @@ export default function HowItWorksPage() {
                 Please download and sign the Authority to Act form before
                 submitting your instructions.
               </h2>
+              <a
+                href={authorityFormHref}
+                download
+                className="mt-6 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+              >
+                Download authority form
+              </a>
               <p className="mt-6 max-w-2xl text-[1.03rem] leading-8 text-brand-slate">
                 Each instruction begins with an authority and scope review. Once
                 that is clear, we open the matter, contact relevant
@@ -74,6 +83,13 @@ export default function HowItWorksPage() {
               >
                 Prepare a Case
               </Link>
+              <a
+                href={authorityFormHref}
+                download
+                className="mt-4 inline-flex border border-brand-border px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy hover:border-brand-gold hover:text-brand-gold"
+              >
+                Download authority form
+              </a>
             </aside>
           </div>
         </section>
