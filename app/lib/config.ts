@@ -1,13 +1,22 @@
 export const config = {
   site: {
     name: "Estate Resolve",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://estate-resolve.com",
+    url:
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.estateresolve.co.uk",
     description:
       "Professional estate financial search services for families and executors across England, Wales and Scotland.",
   },
+  company: {
+    legalName: "AR Gravitas Ltd",
+    companyNumber: "16340531",
+    jurisdiction: "England and Wales",
+    tradingName: "Estate Resolve",
+    fullLegalName:
+      "AR Gravitas Ltd (Companies House No. 16340531), registered in England and Wales, trading as Estate Resolve",
+  },
   contact: {
     email:
-      process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@estate-resolve.com",
+      process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@estateresolve.co.uk",
     phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "02081542371",
     phoneHref: `tel:${(process.env.NEXT_PUBLIC_CONTACT_PHONE || "02081542371").replace(/[^\d]/g, "")}`,
     address: "71-75 Shelton Street, Covent Garden, London, WC2H 9JQ",

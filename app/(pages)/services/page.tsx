@@ -10,19 +10,19 @@ export const metadata = buildMetadata({
 
 const services = [
   {
-    title: "Bank and Savings Searches",
+    title: "Institution Search Coverage",
     description:
-      "Structured outreach to identify current accounts, savings accounts, and cash-based financial relationships relevant to the estate.",
+      "We conduct enquiries with over 140 financial institutions, covering banks, building societies, pension providers, insurers, investment managers, share registrars, and court registers representing more than 400 UK financial brands and trading names.",
   },
   {
-    title: "Investment and Policy Tracing",
+    title: "Tracing Across Financial Relationships",
     description:
-      "Search support aimed at uncovering Pensions, investment accounts, insurance-linked holdings, and similar products that may not be immediately visible.",
+      "Search support is aimed at uncovering current and savings accounts, investments, pensions, insurance products, NS&I holdings, and similar financial relationships that may not be immediately visible to the estate.",
   },
   {
-    title: "Reporting for Estate Administration",
+    title: "Probate-Ready Reporting",
     description:
-      "A formal report of findings, ideal for solicitors and executors, providing a clear audit trail to support probate preparation and next-step decisions.",
+      "You receive a consolidated report of findings suitable for executors, administrators, solicitors, and probate preparation, with a clear audit trail for next-step decisions.",
   },
 ] as const;
 
@@ -32,7 +32,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="A Focused Service for Estate Asset Discovery"
-        description="Providing Confidence That Every Estate Asset Has Been Accounted For."
+        description="Helping executors and advisers take reasonable steps to identify financial assets before an estate is distributed."
       />
 
       <section className="py-20">
