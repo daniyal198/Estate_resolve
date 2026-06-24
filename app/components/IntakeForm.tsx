@@ -192,9 +192,30 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
             <div>
               <label
                 className="mb-2 block text-sm font-semibold text-brand-navy"
-                htmlFor="dateOfDeath"
+                htmlFor="dateOfBirth"
               >
                 Date of birth
+              </label>
+              <input
+                id="dateOfBirth"
+                type="date"
+                max={todayDateInputValue}
+                className={inputClassName}
+                {...register("dateOfBirth")}
+              />
+              {errors.dateOfBirth ? (
+                <p className="mt-2 text-sm text-red-700">
+                  {errors.dateOfBirth.message}
+                </p>
+              ) : null}
+            </div>
+
+            <div>
+              <label
+                className="mb-2 block text-sm font-semibold text-brand-navy"
+                htmlFor="dateOfDeath"
+              >
+                Date of death
               </label>
               <input
                 id="dateOfDeath"
@@ -209,26 +230,26 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
                 </p>
               ) : null}
             </div>
+          </div>
 
-            <div>
-              <label
-                className="mb-2 block text-sm font-semibold text-brand-navy"
-                htmlFor="niNumber"
-              >
-                National Insurance number
-              </label>
-              <input
-                id="niNumber"
-                placeholder="Optional"
-                className={inputClassName}
-                {...register("niNumber")}
-              />
-              {errors.niNumber ? (
-                <p className="mt-2 text-sm text-red-700">
-                  {errors.niNumber.message}
-                </p>
-              ) : null}
-            </div>
+          <div>
+            <label
+              className="mb-2 block text-sm font-semibold text-brand-navy"
+              htmlFor="niNumber"
+            >
+              National Insurance number
+            </label>
+            <input
+              id="niNumber"
+              placeholder="Optional"
+              className={inputClassName}
+              {...register("niNumber")}
+            />
+            {errors.niNumber ? (
+              <p className="mt-2 text-sm text-red-700">
+                {errors.niNumber.message}
+              </p>
+            ) : null}
           </div>
         </div>
       </section>

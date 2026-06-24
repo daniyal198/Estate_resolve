@@ -1,7 +1,9 @@
+import { ReactNode } from "react";
+
 type PageHeroProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description: ReactNode;
   titleClassName?: string;
   descriptionClassName?: string;
 };
@@ -25,14 +27,14 @@ export function PageHero({
         >
           {title}
         </h1>
-        <p
+        <div
           className={
             descriptionClassName ||
             "mt-5 max-w-2xl text-lg leading-8 text-white/66"
           }
         >
           {description}
-        </p>
+        </div>
       </div>
     </section>
   );

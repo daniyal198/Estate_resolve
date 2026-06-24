@@ -72,7 +72,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      <StandardsSection />
+      <StandardsSection title="Giving Solicitors, Executors and Families Greater Confidence and Peace of Mind in the Probate Process." />
     </>
   );
 }

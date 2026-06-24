@@ -17,7 +17,7 @@ const iconMap = {
   users: UsersIcon,
 } as const;
 
-export function StandardsSection() {
+export function StandardsSection({ title }: { title?: string }) {
   return (
     <section className="py-24">
       <div className="site-container">
@@ -26,7 +26,7 @@ export function StandardsSection() {
             Why Use Estate Resolve
           </div>
           <h2 className="mt-5 font-serif text-[clamp(2.1rem,4vw,3rem)] leading-[1.18] font-semibold text-brand-navy">
-            Practical Value for Executors, Families, and Advisers
+            {title || "Practical Value for Executors, Families, and Advisers"}
           </h2>
         </div>
 

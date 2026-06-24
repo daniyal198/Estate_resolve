@@ -11,15 +11,11 @@ export const metadata = buildMetadata({
 const sampleReports = [
   {
     description:
-      "A sample of how potential asset matches, address history, and indicative values are presented.",
+      "See how Estate Resolve brings together financial institution enquiries, address history research and supporting findings into a clear, structured report designed to support probate and estate administration.",
+    disclaimer:
+      "Sample report shown for demonstration purposes only. Actual reports will vary and may contain different information, findings and supporting documentation depending on the circumstances of each estate.",
     href: "/reports/asset-discovery-report.html",
-    title: "Asset Discovery Report",
-  },
-  {
-    description:
-      "A sample showing enquiry volumes, response rates, and recent notification outcomes across institutions.",
-    href: "/reports/enquiries-notifications-report.html",
-    title: "Enquiries & Notifications Report",
+    title: "Illustrative Asset Discovery Report",
   },
 ] as const;
 
@@ -33,7 +29,7 @@ export default function SampleReportsPage() {
       />
 
       <section className="py-20">
-        <div className="site-container grid gap-6 md:grid-cols-2">
+        <div className="site-container max-w-2xl">
           {sampleReports.map((report) => (
             <article
               key={report.href}
@@ -45,6 +41,11 @@ export default function SampleReportsPage() {
               <p className="mt-4 text-sm leading-7 text-brand-slate">
                 {report.description}
               </p>
+              {"disclaimer" in report && report.disclaimer ? (
+                <p className="mt-3 text-sm leading-7 text-brand-slate">
+                  {report.disclaimer}
+                </p>
+              ) : null}
               <a
                 href={report.href}
                 target="_blank"

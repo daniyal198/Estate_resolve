@@ -34,7 +34,10 @@ export function IntroSection() {
         <div className="grid gap-px border border-brand-border bg-brand-border">
           <div className="grid gap-px bg-brand-border sm:grid-cols-2">
             <div className="bg-white px-8 py-9 text-center">
-              <p className="font-serif text-5xl font-semibold text-brand-navy">
+              <p className="text-xs text-brand-slate">
+                estimated
+              </p>
+              <p className="mt-1 font-serif text-5xl font-semibold text-brand-navy">
                 £<span className="text-brand-gold">50</span>bn
               </p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-slate">

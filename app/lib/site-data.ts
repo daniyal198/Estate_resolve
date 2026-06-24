@@ -77,7 +77,7 @@ export const processSteps = [
     number: "03",
     title: "Institution Search",
     description:
-      "Our team contacts relevant financial institutions and traces accounts, investments, and policies.",
+      "Our team contacts relevant financial institutions and traces accounts and investments.",
   },
   {
     number: "04",

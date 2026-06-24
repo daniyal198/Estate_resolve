@@ -9,7 +9,6 @@ import {
   ArrowRightIcon,
   CalendarIcon,
   CheckIcon,
-  ClockIcon,
   MailIcon,
   PhoneIcon,
   VideoIcon,
@@ -51,7 +50,6 @@ type ConsultationBookingProps = {
   initialDateOptions: BookingDateOption[];
   isCalendarReady: boolean;
   minimumNoticeHours: number;
-  slotDurationMinutes: number;
   timeZone: string;
 };
 
@@ -102,7 +100,6 @@ export function ConsultationBooking({
   initialDateOptions,
   isCalendarReady,
   minimumNoticeHours,
-  slotDurationMinutes,
   timeZone,
 }: ConsultationBookingProps) {
   const [selectedDate, setSelectedDate] = useState("");
@@ -290,13 +287,7 @@ export function ConsultationBooking({
           provided below.
         </p>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <BookingMetric
-            label="Consultation"
-            icon={<ClockIcon className="h-5 w-5" />}
-          >
-            {slotDurationMinutes} minutes
-          </BookingMetric>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
           <BookingMetric
             label="Hours"
             icon={<CalendarIcon className="h-5 w-5" />}
@@ -683,10 +674,6 @@ export function ConsultationBooking({
 
             <div className="rounded-[1.5rem] border border-brand-border bg-brand-ivory p-5">
               <div className="flex flex-wrap items-center gap-4">
-                <div className="flex items-center gap-3 text-sm font-semibold text-brand-navy">
-                  <ClockIcon className="h-4 w-4 text-brand-gold" />
-                  {slotDurationMinutes}-minute consultation
-                </div>
                 <div className="flex items-center gap-3 text-sm font-semibold text-brand-navy">
                   <PhoneIcon className="h-4 w-4 text-brand-gold" />
                   Minimum notice: {minimumNoticeHours} hours

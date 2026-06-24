@@ -40,6 +40,7 @@ export function buildCheckoutMetadata(submission: IntakeSubmissionData) {
   return {
     caseReference: submission.caseReference,
     deceasedName: normalizeMetadataValue(submission.deceasedFullName),
+    dateOfBirth: submission.dateOfBirth,
     dateOfDeath: submission.dateOfDeath,
     clientName: normalizeMetadataValue(submission.yourName),
     clientAddress: normalizeMetadataValue(submission.yourAddress),

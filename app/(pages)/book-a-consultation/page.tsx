@@ -92,7 +92,6 @@ export default function BookConsultationPage() {
             initialDateOptions={initialDateOptions}
             isCalendarReady={isCalendarReady}
             minimumNoticeHours={bookingSettings.minimumNoticeHours}
-            slotDurationMinutes={bookingSettings.slotDurationMinutes}
             timeZone={bookingSettings.timeZone}
           />
         </div>

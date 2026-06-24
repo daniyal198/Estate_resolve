@@ -81,6 +81,7 @@ export async function POST(request: Request) {
             clientName,
             clientPhone: metadata.clientPhone || "Not provided",
             clientPostalCode: metadata.clientPostalCode || "Not provided",
+            dateOfBirth: metadata.dateOfBirth || new Date().toISOString().slice(0, 10),
             dateOfDeath: metadata.dateOfDeath || new Date().toISOString().slice(0, 10),
             deceasedName: metadata.deceasedName || "Not provided",
             documentsFolder: metadata.documentsFolder || caseReference,

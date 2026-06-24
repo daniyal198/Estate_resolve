@@ -52,12 +52,19 @@ export const intakeFormSchema = z.object({
     .string()
     .trim()
     .min(2, "Please enter the deceased person's full name."),
-  dateOfDeath: z
+  dateOfBirth: z
     .string()
     .refine(isValidDateInput, "Please provide a valid date of birth.")
     .refine(
       (value) => !isFutureDateInput(value),
       "Date of birth cannot be in the future.",
+    ),
+  dateOfDeath: z
+    .string()
+    .refine(isValidDateInput, "Please provide a valid date of death.")
+    .refine(
+      (value) => !isFutureDateInput(value),
+      "Date of death cannot be in the future.",
     ),
   niNumber: z
     .string()

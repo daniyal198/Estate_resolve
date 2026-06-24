@@ -111,8 +111,17 @@ export default function SolicitorsPage() {
     <main id="main-content" className="flex-1">
       <PageHero
         eyebrow="For Solicitors"
-        title="One instruction. A financial marketplace of tens of thousands of products. One clearer path to identifying estate assets."
-        description="Source: Moneyfacts Group, whose research team monitors tens of thousands of UK banking, savings, pension, insurance and investment products."
+        title="One Instruction. One Comprehensive Estate Asset Search."
+        description={
+          <>
+            <p>
+              We help cut through a marketplace of thousands of financial products* to identify potential estate assets.
+            </p>
+            <p className="mt-4 text-sm opacity-75">
+              *Source: Moneyfacts Group research into the UK banking, savings, pension, insurance and investment marketplace.
+            </p>
+          </>
+        }
       />
 
       <section className="py-20">
