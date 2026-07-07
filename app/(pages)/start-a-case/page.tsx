@@ -57,10 +57,7 @@ function getInitialServicePackage(service: string | string[] | undefined) {
     return undefined;
   }
 
-  return requestedService as
-    | "standard_estate_search"
-    | "asset_liability_search"
-    | "international_estate_search";
+  return requestedService;
 }
 
 export default async function StartCasePage({
@@ -92,7 +89,10 @@ export default async function StartCasePage({
               identity and authority documents where available. Once the form is
               complete, you will be redirected to secure payment for the
               selected service option. Standard searches start from{" "}
-              {config.pricing.fixedFee}.
+              {config.pricing.fixedFee}
+              {config.pricing.testPaymentOptionEnabled
+                ? ". A temporary low-value verification option is currently enabled for payment testing."
+                : "."}
             </p>
             <div className="mt-8">
               <IntakeForm initialServicePackage={initialServicePackage} />

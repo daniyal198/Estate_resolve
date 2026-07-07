@@ -330,6 +330,12 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
               For high net worth or bespoke international matters, please use
               the professional enquiry route for an individually scoped quote.
             </p>
+            {config.pricing.testPaymentOptionEnabled ? (
+              <p className="mt-2 text-sm leading-7 text-brand-slate">
+                A temporary low-value payment verification option is enabled for
+                live checkout testing.
+              </p>
+            ) : null}
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">

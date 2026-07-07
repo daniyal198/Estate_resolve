@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { config } from "@/app/lib/config";
 
 export const uploadConstraints = {
   acceptedMimeTypes: ["application/pdf", "image/jpeg", "image/png"] as const,
@@ -41,12 +42,6 @@ function isValidIsoDateTime(value: string) {
 }
 
 const requiredTrueMessage = "This confirmation is required.";
-const servicePackageOptions = [
-  "standard_estate_search",
-  "asset_liability_search",
-  "international_estate_search",
-] as const;
-
 export const intakeFormSchema = z.object({
   deceasedFullName: z
     .string()
@@ -89,9 +84,14 @@ export const intakeFormSchema = z.object({
     .string()
     .trim()
     .min(7, "Please enter a valid contact number."),
-  servicePackage: z.enum(servicePackageOptions, {
-    message: "Please select a service option.",
-  }),
+  servicePackage: z
+    .string()
+    .trim()
+    .refine(
+      (value) =>
+        config.pricing.servicePackages.some((option) => option.value === value),
+      "Please select a service option.",
+    ),
   relationship: z
     .string()
     .trim()

@@ -1,3 +1,70 @@
+const baseServicePackages = [
+  {
+    description:
+      "Structured search across UK banks, building societies, insurers, pension providers, investment institutions, dormant assets and unclaimed court funds.",
+    label: "Standard Estate Search",
+    price: "£175",
+    pricePence: 17500,
+    value: "standard_estate_search",
+  },
+  {
+    description:
+      "Includes the standard estate search together with liability and due-diligence searches.",
+    label: "Asset & Liability Search",
+    price: "£210",
+    pricePence: 21000,
+    value: "asset_liability_search",
+  },
+  {
+    description:
+      "Includes the asset and liability search together with international enquiries for overseas assets and interests.",
+    label: "International Estate Search",
+    price: "£350",
+    pricePence: 35000,
+    value: "international_estate_search",
+  },
+] as const;
+
+function formatPenceAsGbp(pricePence: number) {
+  return new Intl.NumberFormat("en-GB", {
+    currency: "GBP",
+    style: "currency",
+  }).format(pricePence / 100);
+}
+
+function getOptionalTestPaymentOption() {
+  if (process.env.NEXT_PUBLIC_TEST_PAYMENT_OPTION_ENABLED !== "true") {
+    return null;
+  }
+
+  const parsedPricePence = Number.parseInt(
+    process.env.NEXT_PUBLIC_TEST_PAYMENT_OPTION_PRICE_PENCE || "",
+    10,
+  );
+
+  if (
+    !Number.isFinite(parsedPricePence) ||
+    parsedPricePence < 100 ||
+    parsedPricePence > 500
+  ) {
+    return null;
+  }
+
+  return {
+    description:
+      "Temporary low-value option for verifying the live Stripe payment flow.",
+    label: "Payment Verification",
+    price: formatPenceAsGbp(parsedPricePence),
+    pricePence: parsedPricePence,
+    value: "payment_verification",
+  } as const;
+}
+
+const testPaymentOption = getOptionalTestPaymentOption();
+const servicePackages = testPaymentOption
+  ? [...baseServicePackages, testPaymentOption]
+  : baseServicePackages;
+
 export const config = {
   site: {
     name: "Estate Resolve",
@@ -31,29 +98,8 @@ export const config = {
   },
   pricing: {
     fixedFee: "£175",
-    servicePackages: [
-      {
-        description: "Structured search across UK banks, building societies, insurers, pension providers, investment institutions, dormant assets and unclaimed court funds.",
-        label: "Standard Estate Search",
-        price: "£175",
-        pricePence: 17500,
-        value: "standard_estate_search",
-      },
-      {
-        description: "Includes the standard estate search together with liability and due-diligence searches.",
-        label: "Asset & Liability Search",
-        price: "£210",
-        pricePence: 21000,
-        value: "asset_liability_search",
-      },
-      {
-        description: "Includes the asset and liability search together with international enquiries for overseas assets and interests.",
-        label: "International Estate Search",
-        price: "£350",
-        pricePence: 35000,
-        value: "international_estate_search",
-      },
-    ],
+    servicePackages,
+    testPaymentOptionEnabled: Boolean(testPaymentOption),
   },
   timeline: {
     standardTurnaround: "30 working days",

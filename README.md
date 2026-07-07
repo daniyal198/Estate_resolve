@@ -68,6 +68,8 @@ ADMIN_EMAIL=operations@estateresolve.co.uk
 
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
+NEXT_PUBLIC_TEST_PAYMENT_OPTION_ENABLED=false
+NEXT_PUBLIC_TEST_PAYMENT_OPTION_PRICE_PENCE=100
 
 SENDGRID_API_KEY=SG...
 SENDGRID_FROM_NAME=Estate Resolve
@@ -99,6 +101,11 @@ GOOGLE_CALENDAR_CREATE_MEET_LINK=false
 4. The user completes payment on Stripe
 5. Stripe redirects back to `/success`
 6. Stripe webhook sends confirmation and admin notification emails
+
+To temporarily enable a low-value live payment verification option on the
+intake form, set `NEXT_PUBLIC_TEST_PAYMENT_OPTION_ENABLED=true` and choose an
+amount from `100` to `500` pence using
+`NEXT_PUBLIC_TEST_PAYMENT_OPTION_PRICE_PENCE`.
 
 ## API Routes
 
