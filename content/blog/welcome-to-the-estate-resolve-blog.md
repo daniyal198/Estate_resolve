@@ -12,8 +12,8 @@ This is the first article published through our new content management system. O
 
 ## What to expect
 
-- Plain-English explanations of the asset-search process
-- Guidance on the authority typically required before a search can begin
-- Notes on working with banks, building societies, pension providers, and insurers
+* Plain English explanations of the asset-search process
+* Guidance on the authority typically required before a search can begin
+* Notes on working with banks, building societies, pension providers, and insurers
 
 Check back regularly for new articles, or [get in touch](/contact) if there is a topic you would like us to cover.
