@@ -1,5 +1,5 @@
 ---
-title: Welcome to the Estate Resolve Blog
+title: again Welcome to the Estate Resolve Blog
 date: 2026-07-27T09:00:00.000Z
 excerpt: We're publishing practical guidance for executors, administrators, and
   solicitors on locating a deceased person's financial assets.
