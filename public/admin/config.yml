@@ -1,0 +1,88 @@
+backend:
+  name: github
+  repo: daniyal198/Estate_resolve
+  branch: main
+  base_url: https://www.estateresolve.co.uk
+  auth_endpoint: api/auth
+
+# When running on localhost, Decap CMS automatically talks to a local proxy
+# server instead of GitHub, so content can be created/edited without a real
+# GitHub login during development. Start it with `npm run cms:proxy`.
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "blog"
+    label: "Blog Articles"
+    folder: "content/blog"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Summary / Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "SEO Settings"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", required: false }
+          - { label: "Meta Description", name: "description", widget: "text", required: false }
+          - { label: "URL Slug", name: "slug", widget: "string", required: false }
+          - { label: "Canonical URL", name: "canonical", widget: "string", required: false }
+          - { label: "Social Sharing Image (OG)", name: "og_image", widget: "image", required: false }
+
+  # Evergreen reference content. One flexible collection covering every
+  # content type via the "category" field below, rather than a collection
+  # per type -- adding a new content type later (e.g. "Court Forms") only
+  # means adding one line to this options list, not a new collection, new
+  # folder, or a rebuild of the CMS/frontend routing.
+  - name: "resources"
+    label: "Resources & Knowledge Centre"
+    folder: "content/resources"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    sortable_fields: ["date", "title", "category"]
+    view_groups:
+      - label: "Category"
+        field: category
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Executor Guides"
+          - "Probate Information"
+          - "FAQs"
+          - "Checklists"
+          - "Bank & Financial Institution Information"
+          - "Pension & Insurance Guides"
+          - "Solicitor Resources"
+          - "Industry News"
+          - "General Help Articles"
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Summary / Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "SEO Settings"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", required: false }
+          - { label: "Meta Description", name: "description", widget: "text", required: false }
+          - { label: "URL Slug", name: "slug", widget: "string", required: false }
+          - { label: "Canonical URL", name: "canonical", widget: "string", required: false }
+          - { label: "Social Sharing Image (OG)", name: "og_image", widget: "image", required: false }

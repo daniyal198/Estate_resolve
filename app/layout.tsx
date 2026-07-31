@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { CookieConsent } from "@/app/components/CookieConsent";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
-import { Footer } from "@/app/components/Footer";
-import { Header } from "@/app/components/Header";
+import { SiteChrome } from "@/app/components/SiteChrome";
 import { config } from "@/app/lib/config";
 import "./globals.css";
 
@@ -38,11 +36,13 @@ export const metadata: Metadata = {
     url: config.site.url,
     locale: "en_GB",
     type: "website",
+    images: [{ url: "/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
     title: config.site.name,
     description: config.site.description,
+    images: ["/opengraph-image"],
   },
 };
 
@@ -63,12 +63,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <div className="flex min-h-full flex-col">
-          <Header />
-          {children}
-          <Footer />
-        </div>
-        <CookieConsent />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

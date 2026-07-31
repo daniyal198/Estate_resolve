@@ -1,0 +1,137 @@
+/*
+ * Best-effort brand pass for the Decap CMS admin UI.
+ * Decap ships as a prebuilt bundle with no first-class theming API, so this
+ * targets its emotion-generated class name fragments (e.g. "AppHeader",
+ * "LoginButton") via attribute selectors. Decap's own docs warn these class
+ * names aren't guaranteed across versions -- if an upgrade stops matching,
+ * re-check the fragments against node_modules/decap-cms-app/dist/*.js.
+ */
+
+:root {
+  --er-ivory: #f7f4ef;
+  --er-navy: #0f2545;
+  --er-navy-mid: #1a3a6e;
+  --er-gold: #b08d4e;
+  --er-gold-light: #d4af72;
+  --er-ink: #1a1a2e;
+  --er-border: #e2ddd5;
+}
+
+html,
+body,
+#nc-root {
+  background: var(--er-ivory) !important;
+  font-family:
+    var(--font-source-sans-3),
+    ui-sans-serif,
+    system-ui,
+    sans-serif !important;
+}
+
+/* Login screen */
+[class*="StyledAuthenticationPage"],
+[class*="AuthenticationPage"] {
+  background: var(--er-navy) !important;
+  background-image: radial-gradient(
+    circle at top,
+    rgba(212, 175, 114, 0.16),
+    transparent 60%
+  ) !important;
+}
+
+[class*="StyledAuthenticationPage"] h1,
+[class*="StyledAuthenticationPage"] p {
+  color: #fff !important;
+  font-family: var(--font-playfair-display), Georgia, serif !important;
+}
+
+/* Replace Decap's own pink/black wordmark with the Estate Resolve brand mark */
+[class*="IconWrapper-DecapLogoIcon"] {
+  display: none !important;
+}
+
+[class*="StyledAuthenticationPage"]::before {
+  content: "Estate Resolve";
+  font-family: var(--font-playfair-display), Georgia, serif !important;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+[class*="LoginButton"] {
+  background-color: var(--er-gold) !important;
+  border: 1px solid var(--er-gold) !important;
+  color: #fff !important;
+  border-radius: 2px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600 !important;
+}
+
+[class*="LoginButton"]:hover {
+  background-color: var(--er-gold-light) !important;
+  border-color: var(--er-gold-light) !important;
+}
+
+/* Top app header */
+[class*="AppHeader"]:not([class*="AppHeaderContent"]):not([class*="AppHeaderNavList"]):not([class*="AppHeaderNavLink"]):not([class*="AppHeaderButton"]):not([class*="AppHeaderLogo"]):not([class*="AppHeaderSiteLink"]):not([class*="AppHeaderQuickNewButton"]):not([class*="AppHeaderActions"]):not([class*="AppHeaderTestRepoIndicator"]) {
+  background: var(--er-navy) !important;
+  border-bottom: 1px solid rgba(176, 141, 78, 0.24) !important;
+}
+
+[class*="AppHeaderSiteLink"],
+[class*="AppHeaderLogo"] {
+  color: var(--er-gold-light) !important;
+  font-family: var(--font-playfair-display), Georgia, serif !important;
+}
+
+[class*="AppHeaderNavLink"] {
+  color: rgba(255, 255, 255, 0.72) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600 !important;
+}
+
+[class*="AppHeaderNavLink"]:hover {
+  color: var(--er-gold-light) !important;
+}
+
+[class*="AppHeaderQuickNewButton"],
+[class*="CollectionTopNewButton"] {
+  background-color: var(--er-gold) !important;
+  border-color: var(--er-gold) !important;
+}
+
+[class*="AppHeaderQuickNewButton"]:hover,
+[class*="CollectionTopNewButton"]:hover {
+  background-color: var(--er-gold-light) !important;
+  border-color: var(--er-gold-light) !important;
+}
+
+/*
+ * Decap's own dropdown menus (e.g. "Quick add") are hard-coded to a fixed
+ * 160px width with overflow:hidden, so any collection label longer than that
+ * (like "Resources & Knowledge Centre") gets silently clipped. Let it size to
+ * content instead.
+ */
+[class*="DropdownList"] {
+  width: auto !important;
+  min-width: 160px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+/* Editor toolbar (save/publish bar) */
+[class*="EditorToolbar"] {
+  background: var(--er-navy) !important;
+  border-bottom: 1px solid rgba(176, 141, 78, 0.24) !important;
+}
+
+/* Headings inside the workspace use the site's serif */
+[class*="CollectionTopContainer"] h1,
+[class*="CollectionTopContainer"] h2 {
+  font-family: var(--font-playfair-display), Georgia, serif !important;
+  color: var(--er-navy) !important;
+}
