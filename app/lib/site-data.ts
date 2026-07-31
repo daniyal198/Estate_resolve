@@ -5,6 +5,7 @@ export const navigationLinks = [
   { href: "/book-a-consultation", label: "Consultation" },
   { href: "/about", label: "About Us" },
   { href: "/faqs", label: "FAQs" },
+  { href: "/blog", label: "Blog" },
 ] as const;
 
 export const footerGroups = [
@@ -25,6 +26,7 @@ export const footerGroups = [
       { href: "/about", label: "About Us" },
       { href: "/contact", label: "Contact" },
       { href: "/faqs", label: "FAQs" },
+      { href: "/blog", label: "Blog" },
     ],
   },
   {

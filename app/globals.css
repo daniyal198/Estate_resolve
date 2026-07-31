@@ -192,3 +192,66 @@ button {
     opacity: 0.18;
   }
 }
+
+.article-content {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--estate-ink);
+}
+
+.article-content > * + * {
+  margin-top: 1.5em;
+}
+
+.article-content h2 {
+  font-family: var(--font-playfair-display), serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--estate-navy);
+}
+
+.article-content h3 {
+  font-family: var(--font-playfair-display), serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--estate-navy);
+}
+
+.article-content a {
+  color: var(--estate-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-content a:hover {
+  color: var(--estate-navy);
+}
+
+.article-content ul,
+.article-content ol {
+  padding-left: 1.25rem;
+}
+
+.article-content ul {
+  list-style: disc;
+}
+
+.article-content ol {
+  list-style: decimal;
+}
+
+.article-content li + li {
+  margin-top: 0.5em;
+}
+
+.article-content blockquote {
+  border-left: 2px solid var(--estate-gold);
+  padding-left: 1.25rem;
+  color: var(--estate-slate);
+  font-style: italic;
+}
+
+.article-content img {
+  width: 100%;
+  height: auto;
+}

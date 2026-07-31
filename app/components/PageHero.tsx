@@ -6,6 +6,8 @@ type PageHeroProps = {
   description: ReactNode;
   titleClassName?: string;
   descriptionClassName?: string;
+  /** Tighter top/bottom padding for shorter pages where the default gap reads as too much empty space. */
+  compact?: boolean;
 };
 
 export function PageHero({
@@ -14,10 +16,15 @@ export function PageHero({
   description,
   titleClassName,
   descriptionClassName,
+  compact = false,
 }: PageHeroProps) {
   return (
-    <section className="bg-brand-navy pt-[120px] text-white">
-      <div className="site-container py-16 md:py-20">
+    <section
+      className={`bg-brand-navy text-white ${compact ? "pt-[88px]" : "pt-[120px]"}`}
+    >
+      <div
+        className={`site-container ${compact ? "py-8 md:py-10" : "py-16 md:py-20"}`}
+      >
         <div className="section-label text-brand-gold-light">{eyebrow}</div>
         <h1
           className={
