@@ -10,7 +10,7 @@ deployments.
 Add these in Vercel for both `Production` and `Preview`:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://estateresolve.co.uk
+NEXT_PUBLIC_SITE_URL=https://www.estateresolve.co.uk
 NEXT_PUBLIC_CONTACT_EMAIL=contact@estateresolve.co.uk
 NEXT_PUBLIC_CONTACT_PHONE=020 3951 5065
 NEXT_PUBLIC_BOOKING_TIME_ZONE=Europe/London
@@ -59,7 +59,7 @@ npm run build
 1. Open Stripe Dashboard
 2. Go to `Developers` -> `Webhooks`
 3. Add endpoint:
-   `https://estateresolve.co.uk/api/webhook`
+   `https://www.estateresolve.co.uk/api/webhook`
 4. Subscribe to:
    `checkout.session.completed`
 5. Copy the signing secret into Vercel as `STRIPE_WEBHOOK_SECRET`
@@ -67,8 +67,8 @@ npm run build
 ## Domain
 
 1. Add the project to Vercel
-2. Connect `estateresolve.co.uk`
-3. Set `www.estateresolve.co.uk` to redirect to the apex domain
+2. Connect `www.estateresolve.co.uk`
+3. Set `estateresolve.co.uk` to redirect to the `www` domain
 4. Update DNS records in GoDaddy to point to Vercel
 
 ## Google Calendar Booking Setup

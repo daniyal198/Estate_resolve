@@ -65,11 +65,38 @@ const servicePackages = testPaymentOption
   ? [...baseServicePackages, testPaymentOption]
   : baseServicePackages;
 
+const productionSiteUrl = "https://www.estateresolve.co.uk";
+
+function resolveSiteUrl() {
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+  if (!configuredUrl) {
+    return productionSiteUrl;
+  }
+
+  try {
+    const parsedUrl = new URL(configuredUrl);
+    const hostname = parsedUrl.hostname.toLowerCase();
+
+    if (
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname === "estateresolve.co.uk" ||
+      hostname === "www.estateresolve.co.uk"
+    ) {
+      return parsedUrl.toString().replace(/\/$/, "");
+    }
+  } catch {
+    return productionSiteUrl;
+  }
+
+  return productionSiteUrl;
+}
+
 export const config = {
   site: {
     name: "Estate Resolve",
-    url:
-      process.env.NEXT_PUBLIC_SITE_URL || "https://www.estateresolve.co.uk",
+    url: resolveSiteUrl(),
     description:
       "Professional estate financial search services for families and executors across England, Wales and Scotland.",
   },

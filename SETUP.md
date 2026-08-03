@@ -45,8 +45,8 @@ cp .env.example .env.local
 Current example values:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://estate-resolve.com
-NEXT_PUBLIC_CONTACT_EMAIL=hello@estate-resolve.com
+NEXT_PUBLIC_SITE_URL=https://www.estateresolve.co.uk
+NEXT_PUBLIC_CONTACT_EMAIL=contact@estateresolve.co.uk
 NEXT_PUBLIC_CONTACT_PHONE=02081542371
 NEXT_PUBLIC_BOOKING_TIME_ZONE=Europe/London
 NEXT_PUBLIC_BOOKING_WINDOW_DAYS=21
@@ -54,9 +54,9 @@ NEXT_PUBLIC_BOOKING_SLOT_DURATION_MINUTES=30
 NEXT_PUBLIC_BOOKING_MIN_NOTICE_HOURS=24
 NEXT_PUBLIC_BOOKING_BUSINESS_HOURS_START=09:00
 NEXT_PUBLIC_BOOKING_BUSINESS_HOURS_END=17:30
-ADMIN_EMAIL=operations@estate-resolve.com
+ADMIN_EMAIL=operations@estateresolve.co.uk
 SENDGRID_API_KEY=your-sendgrid-api-key
-SENDGRID_FROM_EMAIL=noreply@estate-resolve.com
+SENDGRID_FROM_EMAIL=contact@estateresolve.co.uk
 CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/your-cloud-name/auto/upload
 CLOUDINARY_UPLOAD_PRESET=your_unsigned_upload_preset
 CLOUDINARY_UPLOAD_FOLDER=estate-resolve-documents
