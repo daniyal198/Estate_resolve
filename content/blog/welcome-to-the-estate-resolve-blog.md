@@ -1,8 +1,9 @@
 ---
 title: again Welcome to the Estate Resolve Blog
 date: 2026-07-27T09:00:00.000Z
-excerpt: We're publishing practical guidance for executors, administrators, and
-  solicitors on locating a deceased person's financial assets.
+excerpt: We're publishing practical guidance for families executors,
+  administrators, solicitors and bereaved families on locating a deceased
+  person's financial assets.
 seo:
   title: Welcome to the Estate Resolve Blog
   description: Practical guidance for executors, administrators, and solicitors on
