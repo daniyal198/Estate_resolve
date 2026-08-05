@@ -29,7 +29,7 @@ export function Header() {
           Estate<span className="text-brand-gold">Resolve</span>
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-5 xl:gap-7 lg:flex">
           {navigationLinks.map((link) => {
             const active = isActive(pathname, link.href);
 
@@ -37,7 +37,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-semibold tracking-[0.08em] uppercase ${
+                className={`text-xs font-semibold tracking-[0.08em] uppercase xl:text-sm ${
                   active
                     ? "text-brand-gold-light"
                     : "text-white/72 hover:text-brand-gold-light"

@@ -49,6 +49,64 @@ export default function ServicesPage() {
             </article>
           ))}
         </div>
+        <div className="site-container mt-8 border border-brand-border bg-white p-8 md:p-10">
+          <div className="section-label">Pricing</div>
+          <h2 className="mt-5 font-serif text-[clamp(2rem,4vw,2.7rem)] leading-[1.16] font-semibold text-brand-navy">
+            Clear and transparent pricing
+          </h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-slate">
+            Standard UK estate searches have a total fee of £175. The total fee
+            for an Asset &amp; Liability Search is £210, while the total fee for
+            an International Estate Search is £350.
+          </p>
+          <div className="mt-7 flex flex-col gap-4 sm:flex-row">
+            <Link
+              href="/pricing"
+              className="inline-flex w-fit border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+            >
+              View Pricing
+            </Link>
+            <Link
+              href="/start-a-case"
+              className="inline-flex w-fit border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy hover:bg-brand-gold hover:text-white"
+            >
+              Start a Case
+            </Link>
+          </div>
+        </div>
+        <div className="site-container mt-8 grid gap-px border border-brand-border bg-brand-border md:grid-cols-2">
+          <article className="bg-white p-8">
+            <h2 className="font-serif text-[1.45rem] font-semibold text-brand-navy">
+              Deceased Estate Asset Search
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-brand-slate">
+              Structured searches for executors, administrators, families and
+              solicitors dealing with deceased estates.
+            </p>
+            <Link
+              href="/pricing"
+              className="mt-6 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+            >
+              View estate search pricing
+            </Link>
+          </article>
+          <article className="bg-white p-8">
+            <h2 className="font-serif text-[1.45rem] font-semibold text-brand-navy">
+              Personal Asset Search
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-brand-slate">
+              Searches requested by living individuals for assets held in their
+              own name, or by a properly authorised representative acting for
+              them.
+            </p>
+            <Link
+              href="/personal-asset-search"
+              className="mt-6 inline-flex border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
+            >
+              Personal Asset Search
+            </Link>
+          </article>
+        </div>
         <div className="site-container mt-8 border border-brand-border bg-brand-ivory p-8">
           <h2 className="font-serif text-2xl font-semibold text-brand-navy">
             View Sample Reports

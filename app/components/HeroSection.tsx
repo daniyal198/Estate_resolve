@@ -21,10 +21,44 @@ export function HeroSection() {
             </em>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-white/68 md:text-[1.15rem]">
-          We combine discreet, professional enquiries with advanced technology and data-led analysis to trace bank accounts and investment assets.
+            We combine discreet, professional enquiries with advanced
+            technology and data-led analysis to trace bank accounts and
+            investment assets.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="mt-7 max-w-2xl border-l-2 border-brand-gold bg-white/6 px-5 py-5">
+            <p className="font-serif text-[1.55rem] font-semibold leading-8 text-white">
+              UK estate asset searches from £175 total fee
+            </p>
+            <p className="mt-2 max-w-xl text-sm leading-7 text-white/64">
+              Search hundreds of financial institutions and receive a clear,
+              probate-ready report. No commission is charged on assets located.
+            </p>
+            <Link
+              href="/pricing"
+              className="mt-5 inline-flex items-center gap-3 border border-brand-gold bg-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:bg-brand-gold-light hover:text-brand-navy"
+            >
+              View Services and Pricing
+              <ArrowRightIcon className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-2">
+            <Link
+              href="/pricing"
+              className="border border-white/18 bg-white/5 px-5 py-4 text-sm font-semibold text-white hover:border-brand-gold-light hover:text-brand-gold-light"
+            >
+              Deceased Estate Asset Search
+            </Link>
+            <Link
+              href="/personal-asset-search"
+              className="border border-white/18 bg-white/5 px-5 py-4 text-sm font-semibold text-white hover:border-brand-gold-light hover:text-brand-gold-light"
+            >
+              Personal Asset Search
+            </Link>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href="/start-a-case"
               className="inline-flex items-center justify-center gap-3 border border-brand-gold bg-brand-gold px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:-translate-y-0.5 hover:bg-brand-gold-light hover:text-brand-navy"
@@ -50,11 +84,11 @@ export function HeroSection() {
               </p>
             </div>
             <div>
-              <p className="font-serif text-3xl font-semibold text-white">
-                {config.pricing.fixedFee}
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/46">
+                Standard UK Estate Search
               </p>
-              <p className="mt-2 text-xs uppercase tracking-[0.16em] text-white/46">
-                Fixed Fee
+              <p className="mt-2 font-serif text-2xl font-semibold text-white">
+                {config.pricing.fixedFee} total fee
               </p>
             </div>
             <div>

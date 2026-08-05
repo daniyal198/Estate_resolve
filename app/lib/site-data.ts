@@ -1,7 +1,8 @@
 export const navigationLinks = [
   { href: "/services", label: "Services" },
-  { href: "/solicitors", label: "Solicitors" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/how-it-works", label: "The Process" },
+  { href: "/solicitors", label: "Solicitors" },
   { href: "/book-a-consultation", label: "Consultation" },
   { href: "/about", label: "About Us" },
   { href: "/faqs", label: "FAQs" },
@@ -14,6 +15,8 @@ export const footerGroups = [
     title: "Services",
     links: [
       { href: "/services", label: "Our Services" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/personal-asset-search", label: "Personal Asset Search" },
       { href: "/solicitors", label: "For Solicitors" },
       { href: "/how-it-works", label: "How It Works" },
       { href: "/sample-reports", label: "Sample Reports" },

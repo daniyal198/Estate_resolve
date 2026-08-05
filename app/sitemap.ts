@@ -12,6 +12,8 @@ const routes = [
   "/faqs",
   "/how-it-works",
   "/privacy",
+  "/pricing",
+  "/personal-asset-search",
   "/resources",
   "/sample-reports",
   "/services",

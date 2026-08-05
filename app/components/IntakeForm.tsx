@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DocumentUpload } from "@/app/components/DocumentUpload";
 import { config } from "@/app/lib/config";
@@ -58,6 +58,7 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
+    control,
     formState: { errors },
     handleSubmit,
     register,
@@ -69,6 +70,14 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
       : undefined,
     resolver: zodResolver(intakeFormSchema),
   });
+  const selectedServicePackage = useWatch({
+    control,
+    defaultValue: initialServicePackage,
+    name: "servicePackage",
+  });
+  const selectedServiceOption = servicePackageOptions.find(
+    (option) => option.value === selectedServicePackage,
+  );
 
   async function onSubmit(values: IntakeFormData) {
     setIsSubmitting(true);
@@ -317,7 +326,7 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
               </option>
               {servicePackageOptions.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {option.label} ({option.price})
+                  {option.label} &mdash; {option.priceLabel}
                 </option>
               ))}
             </select>
@@ -539,6 +548,30 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
           {submitStatus}
         </div>
       ) : null}
+
+      <section
+        className="border border-brand-border bg-white p-6"
+        aria-live="polite"
+      >
+        <h2 className="font-serif text-2xl font-semibold text-brand-navy">
+          Selected service and payment
+        </h2>
+        {selectedServiceOption ? (
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm font-semibold text-brand-navy">
+              {selectedServiceOption.label}
+            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-gold">
+              {selectedServiceOption.priceLabel}
+            </p>
+          </div>
+        ) : (
+          <p className="mt-4 text-sm leading-7 text-brand-slate">
+            Select a service option above to see the total fee before
+            continuing to secure payment.
+          </p>
+        )}
+      </section>
 
       <button
         type="submit"
