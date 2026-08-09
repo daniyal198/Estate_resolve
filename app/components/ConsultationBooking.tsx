@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { BookingDateOption, BookingSlot } from "@/app/lib/booking";
@@ -69,6 +69,22 @@ type AvailabilityState = {
 
 type BookingStep = "date" | "time";
 
+function getTodayDateValue(timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    timeZone,
+    year: "numeric",
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value]),
+  );
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
 function BookingMetric({
   children,
   icon,
@@ -103,6 +119,9 @@ export function ConsultationBooking({
   timeZone,
 }: ConsultationBookingProps) {
   const [selectedDate, setSelectedDate] = useState("");
+  const [todayDateValue, setTodayDateValue] = useState(() =>
+    getTodayDateValue(timeZone),
+  );
   const [selectedSlot, setSelectedSlot] = useState<BookingSlot | null>(null);
   const [currentStep, setCurrentStep] = useState<BookingStep>("date");
   const [availability, setAvailability] = useState<AvailabilityState>({
@@ -117,6 +136,17 @@ export function ConsultationBooking({
     null,
   );
   const timeStepRef = useRef<HTMLDivElement | null>(null);
+  const availableDateOptions = useMemo(
+    () =>
+      initialDateOptions.filter(
+        (dateOption) => dateOption.value >= todayDateValue,
+      ),
+    [initialDateOptions, todayDateValue],
+  );
+  const selectedDateOption = availableDateOptions.find(
+    (dateOption) => dateOption.value === selectedDate,
+  );
+  const activeSelectedDate = selectedDateOption ? selectedDate : "";
 
   const {
     formState: { errors },
@@ -139,9 +169,17 @@ export function ConsultationBooking({
   });
 
   useEffect(() => {
-    setValue("selectedDate", selectedDate, { shouldValidate: true });
+    const intervalId = window.setInterval(() => {
+      setTodayDateValue(getTodayDateValue(timeZone));
+    }, 60 * 60 * 1000);
 
-    if (!selectedDate || !isCalendarReady) {
+    return () => window.clearInterval(intervalId);
+  }, [timeZone]);
+
+  useEffect(() => {
+    setValue("selectedDate", activeSelectedDate, { shouldValidate: true });
+
+    if (!activeSelectedDate || !isCalendarReady) {
       return;
     }
 
@@ -159,7 +197,9 @@ export function ConsultationBooking({
 
       try {
         const response = await fetch(
-          `/api/booking/availability?date=${encodeURIComponent(selectedDate)}`,
+          `/api/booking/availability?date=${encodeURIComponent(
+            activeSelectedDate,
+          )}`,
           {
             cache: "no-store",
           },
@@ -205,7 +245,7 @@ export function ConsultationBooking({
     return () => {
       isCancelled = true;
     };
-  }, [isCalendarReady, selectedDate, setValue]);
+  }, [activeSelectedDate, isCalendarReady, setValue]);
 
   function goToTimeStep() {
     setCurrentStep("time");
@@ -327,8 +367,8 @@ export function ConsultationBooking({
           </div>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {initialDateOptions.map((dateOption) => {
-              const isActive = selectedDate === dateOption.value;
+            {availableDateOptions.map((dateOption) => {
+              const isActive = activeSelectedDate === dateOption.value;
 
               return (
                 <button
@@ -359,15 +399,22 @@ export function ConsultationBooking({
             })}
           </div>
 
-          {selectedDate ? (
+          {availableDateOptions.length === 0 ? (
+            <div className="mt-5 rounded-3xl border border-brand-border bg-white px-5 py-5 text-sm leading-7 text-brand-slate">
+              No consultation dates are currently available. Please check back
+              shortly or contact the team.
+            </div>
+          ) : null}
+
+          {activeSelectedDate ? (
             <div className="mt-6 flex flex-col gap-4 rounded-[1.5rem] border border-brand-border bg-white px-5 py-5 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-brand-gold">
                   Selected day
                 </p>
                 <p className="mt-2 text-[1rem] leading-7 text-brand-navy">
-                  {initialDateOptions.find((option) => option.value === selectedDate)
-                    ?.description || availability.selectedDateLabel}
+                  {selectedDateOption?.description ||
+                    availability.selectedDateLabel}
                 </p>
               </div>
               <button

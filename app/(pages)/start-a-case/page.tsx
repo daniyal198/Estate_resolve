@@ -86,9 +86,11 @@ export default async function StartCasePage({
             <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-slate">
               This intake form is designed to gather the core estate facts so
               we can assess the instruction properly. Please include the key
-              identity and authority documents where available. Once the form is
-              complete, you will be redirected to secure payment for the
-              selected service option. Standard searches start from{" "}
+              identity and authority documents where available. You may open
+              your case now and provide any supporting documents that are not
+              immediately available afterwards. Once the form is complete, you
+              will be redirected to secure payment for the selected service
+              option. Standard searches start from{" "}
               {config.pricing.fixedFee}
               {config.pricing.testPaymentOptionEnabled
                 ? ". A temporary low-value verification option is currently enabled for payment testing."
@@ -105,9 +107,10 @@ export default async function StartCasePage({
                 Documents to Upload
               </h2>
               <p className="mt-4 text-sm leading-7 text-brand-slate">
-                Please provide copies of the following documents to help us
-                process your enquiry and verify authority to act on behalf of
-                the estate:
+                Please provide copies of the following documents where
+                available to help us process your enquiry and verify authority
+                to act on behalf of the estate. Missing documents can be
+                supplied afterwards.
               </p>
             <ul className="mt-7 space-y-5">
               {preparationItems.map((item) => (
@@ -130,7 +133,8 @@ export default async function StartCasePage({
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-brand-slate">
                   Please download this form, complete it, sign it, and include
-                  it with your supporting documents when opening the case.
+                  it with your supporting documents if available when opening
+                  the case. It can also be supplied afterwards.
                 </p>
                 <a
                   href={authorityFormHref}
@@ -190,8 +194,8 @@ export default async function StartCasePage({
                 What happens next?
               </h2>
               <p className="mt-4 text-sm leading-7 text-brand-slate">
-                After payment is confirmed, we issue the case reference by
-                email, begin the financial search process
+                After payment is confirmed, we will issue your case reference
+                by email and begin the financial search process.
               </p>
               <Link
                 href="/contact"

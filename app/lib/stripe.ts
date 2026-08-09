@@ -55,7 +55,7 @@ export function buildCheckoutMetadata(submission: IntakeSubmissionData) {
     knownInstitutions: normalizeMetadataValue(
       submission.knownInstitutions || "Not provided",
     ),
-    caseSummary: normalizeMetadataValue(submission.caseSummary),
+    caseSummary: normalizeMetadataValue(submission.caseSummary || "Not provided"),
     uploadedFileCount: String(submission.uploadedFiles.length),
     documentsFolder: getCloudinaryCaseFolder(submission.caseReference),
   } satisfies Record<string, string>;

@@ -53,10 +53,6 @@ export function Footer() {
         <div className="site-container flex flex-col gap-3 py-6 text-sm text-white/36 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} Estate Resolve. All rights reserved.
-            {" · "}
-            <Link href="/admin" className="hover:text-brand-gold-light">
-              Admin Portal
-            </Link>
           </p>
           <p>
             {config.contact.serviceArea} · {config.contact.address} ·{" "}

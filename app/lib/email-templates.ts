@@ -78,7 +78,7 @@ export function buildCaseAdminEmail(
     <p><strong>Phone:</strong> ${escapeHtml(submission.yourPhone)}</p>
     <p><strong>Relationship:</strong> ${escapeHtml(submission.relationship)}</p>
     <p><strong>Known institutions:</strong> ${escapeHtml(submission.knownInstitutions || "Not provided")}</p>
-    <p><strong>Summary:</strong><br />${escapeHtml(submission.caseSummary).replaceAll("\n", "<br />")}</p>
+    <p><strong>Summary:</strong><br />${escapeHtml(submission.caseSummary || "Not provided").replaceAll("\n", "<br />")}</p>
     ${renderUploadedFiles(submission.uploadedFiles)}
   `;
 }

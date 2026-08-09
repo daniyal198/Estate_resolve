@@ -22,6 +22,9 @@ export const metadata = buildMetadata({
   path: "/book-a-consultation",
 });
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 function getPageBookingSettings() {
   if (isGoogleCalendarConfigured()) {
     return getBookingPublicSettings();

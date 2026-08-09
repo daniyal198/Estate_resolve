@@ -102,11 +102,12 @@ export function DocumentUpload({
       <div className="flex items-start justify-between gap-6">
         <div>
           <h2 className="font-serif text-2xl font-semibold text-brand-navy">
-            Required supporting documents
+            Supporting documents
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-7 text-brand-slate">
-            Please upload copies of the documents below so we can verify the
-            estate instruction and your authority to act.
+            Upload any available documents now. You may open your case now and
+            provide any supporting documents that are not immediately available
+            afterwards.
           </p>
         </div>
         <div className="hidden rounded-full border border-brand-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-slate md:block">
@@ -154,7 +155,8 @@ export function DocumentUpload({
         </p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-brand-slate">
           Drag files here or select them manually. Accepted file types: PDF,
-          JPG, and PNG. Maximum size is 10MB per file.
+          JPG, and PNG. Maximum size is 10MB per file. You can continue without
+          uploading files.
         </p>
 
         <input

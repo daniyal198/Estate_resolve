@@ -46,8 +46,8 @@ export default function PersonalAssetSearchPage() {
               any next steps that may be required to make a claim.
             </p>
             <p className="mt-4 text-sm leading-8 text-brand-slate">
-              The total fee for the Personal Asset Search will be agreed before
-              publishing its price or starting the search.
+              The total fee will be confirmed with you in writing before the
+              search begins.
             </p>
             <Link
               href="/contact"

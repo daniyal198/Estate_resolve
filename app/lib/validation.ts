@@ -105,8 +105,9 @@ export const intakeFormSchema = z.object({
   caseSummary: z
     .string()
     .trim()
-    .min(20, "Please provide a short summary so we can assess the matter.")
-    .max(2000, "Please keep the case summary under 2000 characters."),
+    .max(2000, "Please keep the case summary under 2000 characters.")
+    .optional()
+    .or(z.literal("")),
   hasAuthority: z.boolean().refine((value) => value, requiredTrueMessage),
   consentToProcess: z.boolean().refine((value) => value, requiredTrueMessage),
 });

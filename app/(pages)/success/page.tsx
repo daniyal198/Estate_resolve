@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PaidCaseConversion } from "@/app/components/PaidCaseConversion";
 import { PageHero } from "@/app/components/PageHero";
 import { buildMetadata } from "@/app/lib/seo";
 
@@ -36,6 +37,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
   return (
     <main id="main-content" className="flex-1">
+      <PaidCaseConversion caseReference={caseReference} sessionId={sessionId} />
       <PageHero
         eyebrow="Payment Confirmed"
         title="Your Case Has Been Opened"
