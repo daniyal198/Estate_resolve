@@ -478,7 +478,7 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
             <textarea
               id="caseSummary"
               rows={6}
-              placeholder="Tell us what is known so far and what you need clarified before the estate can move forward."
+              placeholder="Please provide a short summary so we can assess the matter."
               className={inputClassName}
               {...register("caseSummary")}
             />
