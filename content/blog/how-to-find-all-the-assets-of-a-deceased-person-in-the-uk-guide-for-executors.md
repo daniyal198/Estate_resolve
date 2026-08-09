@@ -111,3 +111,5 @@ Whether you are administering a straightforward estate or a more complex case in
 **Need help with an estate search?**
 
 If you would like to discuss your situation or obtain a quotation, contact Estate Resolve today to learn how we may be able to assist.
+
+**Disclaimer:** This article is provided for general information only and does not constitute legal, financial or tax advice. Every estate is different, and you should seek professional advice where appropriate. Estate Resolve provides asset search services and does not offer legal representation
