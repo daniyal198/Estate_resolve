@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleTag } from "@/app/components/GoogleTag";
 import { SiteChrome } from "@/app/components/SiteChrome";
 import { config } from "@/app/lib/config";
 import "./globals.css";
@@ -66,6 +67,7 @@ export default function RootLayout({
         </a>
         <SiteChrome>{children}</SiteChrome>
         <Analytics />
+        <GoogleTag />
       </body>
     </html>
   );

@@ -10,6 +10,11 @@ import {
   type IntakeFormData,
 } from "@/app/lib/validation";
 import { createCaseReference } from "@/app/lib/email-templates";
+import {
+  getGoogleAdsSendTo,
+  googleConversionLabels,
+  trackGoogleEvent,
+} from "@/app/lib/google-events";
 
 const inputClassName =
   "w-full border border-brand-border bg-white px-4 py-3 text-[1rem] text-brand-ink outline-none transition focus:border-brand-gold";
@@ -150,6 +155,14 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
       }
 
       setSubmitStatus("Redirecting to secure payment...");
+      trackGoogleEvent("begin_checkout", {
+        case_reference: pendingCaseReference,
+        currency: "GBP",
+        send_to: getGoogleAdsSendTo(googleConversionLabels.startCase),
+        value: selectedServiceOption
+          ? selectedServiceOption.pricePence / 100
+          : undefined,
+      });
       window.location.assign(checkoutPayload.url);
     } catch (error) {
       setSubmitStatus(null);

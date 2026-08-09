@@ -7,6 +7,11 @@ import {
   solicitorEnquiryFormSchema,
   type SolicitorEnquiryFormData,
 } from "@/app/lib/validation";
+import {
+  getGoogleAdsSendTo,
+  googleConversionLabels,
+  trackGoogleEvent,
+} from "@/app/lib/google-events";
 
 const inputClassName =
   "w-full border border-brand-border bg-white px-4 py-3 text-[1rem] text-brand-ink outline-none transition focus:border-brand-gold";
@@ -62,6 +67,11 @@ export function SolicitorEnquiryForm() {
 
       reset();
       setIsSubmitted(true);
+      trackGoogleEvent("generate_lead", {
+        event_category: "engagement",
+        form_name: "solicitor_enquiry",
+        send_to: getGoogleAdsSendTo(googleConversionLabels.solicitor),
+      });
     } catch (error) {
       setErrorMessage(
         error instanceof Error

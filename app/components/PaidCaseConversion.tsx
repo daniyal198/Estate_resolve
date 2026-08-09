@@ -2,6 +2,11 @@
 
 import { useEffect } from "react";
 import { track } from "@vercel/analytics/react";
+import {
+  getGoogleAdsSendTo,
+  googleConversionLabels,
+  trackGoogleEvent,
+} from "@/app/lib/google-events";
 
 type PaidCaseConversionProps = {
   caseReference: string | null;
@@ -17,9 +22,22 @@ export function PaidCaseConversion({
       return;
     }
 
+    const conversionKey = `paid-case-conversion:${sessionId || caseReference}`;
+
+    if (window.sessionStorage.getItem(conversionKey)) {
+      return;
+    }
+
+    window.sessionStorage.setItem(conversionKey, "true");
+
     track("Paid Case Conversion", {
       caseReference,
       sessionId,
+    });
+    trackGoogleEvent("purchase", {
+      case_reference: caseReference,
+      send_to: getGoogleAdsSendTo(googleConversionLabels.paidCase),
+      transaction_id: sessionId || caseReference,
     });
   }, [caseReference, sessionId]);
 
