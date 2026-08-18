@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { BookingDateOption, BookingSlot } from "@/app/lib/booking";
@@ -11,7 +12,6 @@ import {
   CheckIcon,
   MailIcon,
   PhoneIcon,
-  VideoIcon,
 } from "@/app/components/Icons";
 
 const inputClassName =
@@ -53,12 +53,6 @@ type ConsultationBookingProps = {
   timeZone: string;
 };
 
-type BookingConfirmation = {
-  calendarEventUrl: string | null;
-  consultationDateLabel: string;
-  consultationTimeLabel: string;
-  meetLink: string | null;
-};
 
 type AvailabilityState = {
   error: string | null;
@@ -130,11 +124,9 @@ export function ConsultationBooking({
     selectedDateLabel: null,
     slots: [],
   });
+  const router = useRouter();
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(
-    null,
-  );
   const timeStepRef = useRef<HTMLDivElement | null>(null);
   const availableDateOptions = useMemo(
     () =>
@@ -278,12 +270,25 @@ export function ConsultationBooking({
         );
       }
 
-      setConfirmation({
-        calendarEventUrl: payload.booking.htmlLink,
-        consultationDateLabel: payload.consultationDateLabel || "",
-        consultationTimeLabel: payload.consultationTimeLabel || "",
-        meetLink: payload.booking.meetLink,
-      });
+      const thankYouParams = new URLSearchParams();
+
+      if (payload.consultationDateLabel) {
+        thankYouParams.set("date", payload.consultationDateLabel);
+      }
+
+      if (payload.consultationTimeLabel) {
+        thankYouParams.set("time", payload.consultationTimeLabel);
+      }
+
+      if (payload.booking.htmlLink) {
+        thankYouParams.set("calendar", payload.booking.htmlLink);
+      }
+
+      if (payload.booking.meetLink) {
+        thankYouParams.set("meet", payload.booking.meetLink);
+      }
+
+      router.push(`/thank-you/consultation?${thankYouParams.toString()}`);
       reset({
         consultationReason: "",
         email: "",
@@ -533,55 +538,6 @@ export function ConsultationBooking({
       </section>
 
       <section className="rounded-[2rem] border border-brand-border bg-white p-6 md:p-8">
-        {confirmation ? (
-          <div className="rounded-[1.5rem] border border-emerald-200 bg-emerald-50 p-6">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-white">
-              <CheckIcon className="h-5 w-5" />
-            </div>
-            <h2 className="mt-5 font-serif text-3xl font-semibold text-brand-navy">
-              Consultation booked
-            </h2>
-            <p className="mt-4 text-[1rem] leading-7 text-brand-slate">
-              Your appointment is reserved for {confirmation.consultationDateLabel}{" "}
-              at {confirmation.consultationTimeLabel}. A Google Calendar invite
-              is on its way to your inbox.
-            </p>
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {confirmation.meetLink ? (
-                <a
-                  href={confirmation.meetLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-3 rounded-2xl bg-brand-navy px-5 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-navy-mid"
-                >
-                  <VideoIcon className="h-4 w-4" />
-                  Open Meet link
-                </a>
-              ) : null}
-
-              {confirmation.calendarEventUrl ? (
-                <a
-                  href={confirmation.calendarEventUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-3 rounded-2xl border border-brand-gold bg-brand-gold px-5 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy"
-                >
-                  <CalendarIcon className="h-4 w-4" />
-                  View calendar event
-                </a>
-              ) : null}
-            </div>
-
-            <button
-              type="button"
-              className="mt-6 text-sm font-semibold text-brand-navy underline underline-offset-4"
-              onClick={() => setConfirmation(null)}
-            >
-              Book another consultation
-            </button>
-          </div>
-        ) : (
           <form
             className="space-y-6"
             noValidate
@@ -747,7 +703,6 @@ export function ConsultationBooking({
               {isSubmitting ? "Booking consultation..." : "Book consultation"}
             </button>
           </form>
-        )}
       </section>
     </div>
   );

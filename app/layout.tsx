@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleTag } from "@/app/components/GoogleTag";
+import { GoogleTagManager } from "@/app/components/GoogleTagManager";
 import { SiteChrome } from "@/app/components/SiteChrome";
 import { config } from "@/app/lib/config";
 import "./globals.css";
@@ -59,6 +60,7 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${sourceSans3.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
+        <GoogleTagManager />
         <a
           href="#main-content"
           className="skip-link"

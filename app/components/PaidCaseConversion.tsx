@@ -5,6 +5,7 @@ import { track } from "@vercel/analytics/react";
 import {
   getGoogleAdsSendTo,
   googleConversionLabels,
+  pushToDataLayer,
   trackGoogleEvent,
 } from "@/app/lib/google-events";
 
@@ -33,6 +34,10 @@ export function PaidCaseConversion({
     track("Paid Case Conversion", {
       caseReference,
       sessionId,
+    });
+    pushToDataLayer("purchase_completed", {
+      case_reference: caseReference,
+      transaction_id: sessionId || caseReference,
     });
     trackGoogleEvent("purchase", {
       case_reference: caseReference,

@@ -1,25 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   contactFormSchema,
   type ContactFormData,
 } from "@/app/lib/validation";
-import {
-  getGoogleAdsSendTo,
-  googleConversionLabels,
-  trackGoogleEvent,
-} from "@/app/lib/google-events";
 
 const inputClassName =
   "w-full border border-brand-border bg-white px-4 py-3 text-[1rem] text-brand-ink outline-none transition focus:border-brand-gold";
 
 export function ContactForm() {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
     formState: { errors },
@@ -33,7 +29,6 @@ export function ContactForm() {
   async function onSubmit(values: ContactFormData) {
     setIsSubmitting(true);
     setErrorMessage(null);
-    setIsSubmitted(false);
 
     try {
       const response = await fetch("/api/send-contact-form", {
@@ -57,12 +52,7 @@ export function ContactForm() {
       }
 
       reset();
-      setIsSubmitted(true);
-      trackGoogleEvent("generate_lead", {
-        event_category: "engagement",
-        form_name: "contact",
-        send_to: getGoogleAdsSendTo(googleConversionLabels.contact),
-      });
+      router.push("/thank-you/contact");
     } catch (error) {
       setErrorMessage(
         error instanceof Error
@@ -132,13 +122,6 @@ export function ContactForm() {
       {errorMessage ? (
         <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {errorMessage}
-        </div>
-      ) : null}
-
-      {isSubmitted ? (
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-          Thank you. Your message has been sent and a confirmation email is on
-          its way.
         </div>
       ) : null}
 
