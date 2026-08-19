@@ -1,15 +1,16 @@
 ---
-title: What Are an Executor's Responsibilities When Dealing With a Deceased Estate?
-date: 2026-08-16T14:34:00.000+02:00
+title: What Are an Executor's Responsibilities When Dealing With a Deceased's Estate?
+date: 2026-08-19T12:16:00.000+02:00
+image: ""
 excerpt: Learn the main responsibilities of an executor, from identifying assets
-  and debts to probate, paying liabilities and distributing a deceased estate.
+  and debts to probate, paying liabilities and distributing a deceased's estate.
 seo:
   description: Learn the main responsibilities of an executor, from identifying
     assets and debts to probate, paying liabilities and distributing a deceased
     estate.
   slug: executor-responsibilities-deceased-estate
   title: Executor Responsibilities When Someone Dies | Estate Resolve
-  og_image: /uploads/chatgpt-image-aug-17-2026-10_03_12-am.png
+  og_image: ""
 ---
 Being named as an executor of a will can feel like an honour, but it also brings important responsibilities. An executor is responsible for administering the deceased person's estate, dealing with their assets and liabilities and ultimately distributing the estate to the people entitled to inherit.
 
@@ -130,24 +131,8 @@ Our UK estate searches start from **£175**.
 
 **Start an Estate Search →**<https://www.estateresolve.co.uk/start-a-case>
 
-```
-
-```
-
 ![]()
 
-
-
-```
-
-```
-
-
-
 ### Disclaimer
-
-```
-
-```
 
 This article is provided for general information only and does not constitute legal, financial or tax advice. Every estate is different and professional advice should be obtained where appropriate. Estate Resolve provides asset-search services and does not provide legal representation.
