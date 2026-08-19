@@ -1,6 +1,6 @@
 ---
 title: What Are an Executor's Responsibilities When Dealing With a Deceased's Estate?
-date: 2026-08-19T12:16:00.000+02:00
+date: 2026-08-19T12:20:00.000+02:00
 image: ""
 excerpt: Learn the main responsibilities of an executor, from identifying assets
   and debts to probate, paying liabilities and distributing a deceased's estate.
