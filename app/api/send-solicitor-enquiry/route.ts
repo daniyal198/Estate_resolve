@@ -3,7 +3,7 @@ import {
   buildSolicitorEnquiryAdminEmail,
   buildSolicitorEnquiryConfirmationEmail,
 } from "@/app/lib/email-templates";
-import { getAdminAddress, sendEmail } from "@/app/lib/sendgrid";
+import { getAdminAddress, sendEmail } from "@/app/lib/email";
 import { solicitorEnquiryFormSchema } from "@/app/lib/validation";
 
 export async function POST(request: Request) {
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
       }),
       sendEmail({
         html: buildSolicitorEnquiryAdminEmail(submission),
+        replyTo: submission.email,
         subject: `New solicitor enquiry - ${submission.company}`,
         to: getAdminAddress(),
       }),

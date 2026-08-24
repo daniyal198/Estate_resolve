@@ -4,7 +4,7 @@ import {
   buildCaseConfirmationEmail,
   createCaseReference,
 } from "@/app/lib/email-templates";
-import { getAdminAddress, sendEmail } from "@/app/lib/sendgrid";
+import { getAdminAddress, sendEmail } from "@/app/lib/email";
 import { intakeSubmissionSchema } from "@/app/lib/validation";
 
 export async function POST(request: Request) {
@@ -33,6 +33,7 @@ export async function POST(request: Request) {
       }),
       sendEmail({
         html: buildCaseAdminEmail(submission, caseReference),
+        replyTo: submission.yourEmail,
         subject: `New Estate Resolve Case - ${caseReference}`,
         to: getAdminAddress(),
       }),

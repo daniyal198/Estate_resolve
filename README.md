@@ -2,7 +2,7 @@
 
 Estate Resolve is a Next.js 16 application for a professional estate financial
 search service. The current codebase includes the marketing site, secure case
-intake flow, Cloudinary document uploads, SendGrid transactional emails,
+intake flow, Cloudinary document uploads, SMTP transactional emails,
 Stripe checkout, and payment confirmation handling via webhook.
 
 ## Pages
@@ -28,7 +28,7 @@ Stripe checkout, and payment confirmation handling via webhook.
 - TypeScript
 - Stripe
 - Cloudinary
-- SendGrid
+- Brevo (SMTP transactional email)
 - Google Calendar
 - Vercel Analytics
 
@@ -79,20 +79,14 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 NEXT_PUBLIC_TEST_PAYMENT_OPTION_ENABLED=false
 NEXT_PUBLIC_TEST_PAYMENT_OPTION_PRICE_PENCE=100
 
-SENDGRID_API_KEY=SG...
-SENDGRID_FROM_NAME=Estate Resolve
-SENDGRID_FROM_EMAIL=contact@estateresolve.co.uk
-EMAIL_PROVIDER=sendgrid
-
-# Zoho / SMTP alternative:
-# EMAIL_PROVIDER=smtp
-# SMTP_HOST=smtp.zoho.eu
-# SMTP_PORT=465
-# SMTP_SECURE=true
-# SMTP_USER=contact@estateresolve.co.uk
-# SMTP_PASS=<zoho-app-password>
-# SMTP_FROM_NAME=Estate Resolve
-# SMTP_FROM_EMAIL=contact@estateresolve.co.uk
+EMAIL_PROVIDER=smtp
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=<brevo-smtp-login>
+SMTP_PASS=<brevo-smtp-key>
+SMTP_SECURE=false
+SMTP_FROM_NAME=Estate Resolve
+SMTP_FROM_EMAIL=contact@estateresolve.co.uk
 
 CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/<cloud-name>/auto/upload
 CLOUDINARY_UPLOAD_PRESET=<unsigned-upload-preset>
@@ -149,7 +143,7 @@ amount from `100` to `500` pence using
 
 - Stripe webhook delivery is required for payment confirmation emails.
 - `NEXT_PUBLIC_SITE_URL` should match the live production domain on Vercel.
-- The case intake flow depends on valid Stripe, SendGrid, and Cloudinary
+- The case intake flow depends on valid Stripe, SMTP, and Cloudinary
   configuration.
 - The booking flow depends on a Google Calendar that is shared with the
   configured service account.

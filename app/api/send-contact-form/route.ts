@@ -4,7 +4,7 @@ import {
   buildContactConfirmationEmail,
 } from "@/app/lib/email-templates";
 import { contactFormSchema } from "@/app/lib/validation";
-import { getAdminAddress, sendEmail } from "@/app/lib/sendgrid";
+import { getAdminAddress, sendEmail } from "@/app/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
       }),
       sendEmail({
         html: buildContactAdminEmail(submission),
+        replyTo: submission.email,
         subject: "New Estate Resolve Contact Enquiry",
         to: getAdminAddress(),
       }),

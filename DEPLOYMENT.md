@@ -33,20 +33,14 @@ ADMIN_EMAIL=operations@estateresolve.co.uk
 STRIPE_SECRET_KEY=sk_live_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 
-SENDGRID_API_KEY=SG...
-SENDGRID_FROM_NAME=Estate Resolve
-SENDGRID_FROM_EMAIL=contact@estateresolve.co.uk
-EMAIL_PROVIDER=sendgrid
-
-# Zoho / SMTP alternative:
-# EMAIL_PROVIDER=smtp
-# SMTP_HOST=smtp.zoho.eu
-# SMTP_PORT=465
-# SMTP_SECURE=true
-# SMTP_USER=contact@estateresolve.co.uk
-# SMTP_PASS=<zoho-app-password>
-# SMTP_FROM_NAME=Estate Resolve
-# SMTP_FROM_EMAIL=contact@estateresolve.co.uk
+EMAIL_PROVIDER=smtp
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=<brevo-smtp-login>
+SMTP_PASS=<brevo-smtp-key>
+SMTP_FROM_NAME=Estate Resolve
+SMTP_FROM_EMAIL=contact@estateresolve.co.uk
 
 CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/<cloud-name>/auto/upload
 CLOUDINARY_UPLOAD_PRESET=<unsigned-upload-preset>

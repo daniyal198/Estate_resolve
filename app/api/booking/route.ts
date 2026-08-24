@@ -12,7 +12,7 @@ import {
   getBookingPublicSettings,
   isGoogleCalendarConfigured,
 } from "@/app/lib/google-calendar";
-import { getAdminAddress, sendEmail } from "@/app/lib/sendgrid";
+import { getAdminAddress, sendEmail } from "@/app/lib/email";
 import { bookingFormSchema } from "@/app/lib/validation";
 
 export const runtime = "nodejs";
@@ -74,6 +74,7 @@ export async function POST(request: Request) {
           submission: parsed.data,
           timeZone: settings.timeZone,
         }),
+        replyTo: parsed.data.email,
         subject: `New consultation booking - ${parsed.data.fullName}`,
         to: getAdminAddress(),
       }),

@@ -63,18 +63,14 @@ NEXT_PUBLIC_GOOGLE_ADS_SOLICITOR_CONVERSION_LABEL=<solicitor-conversion-label>
 NEXT_PUBLIC_GOOGLE_ADS_START_CASE_CONVERSION_LABEL=<start-case-conversion-label>
 NEXT_PUBLIC_GOOGLE_ADS_PAID_CASE_CONVERSION_LABEL=<paid-case-conversion-label>
 ADMIN_EMAIL=operations@estateresolve.co.uk
-SENDGRID_API_KEY=your-sendgrid-api-key
-SENDGRID_FROM_EMAIL=contact@estateresolve.co.uk
-EMAIL_PROVIDER=sendgrid
-# Zoho / SMTP alternative:
-# EMAIL_PROVIDER=smtp
-# SMTP_HOST=smtp.zoho.eu
-# SMTP_PORT=465
-# SMTP_SECURE=true
-# SMTP_USER=contact@estateresolve.co.uk
-# SMTP_PASS=your-zoho-app-password
-# SMTP_FROM_NAME=Estate Resolve
-# SMTP_FROM_EMAIL=contact@estateresolve.co.uk
+EMAIL_PROVIDER=smtp
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-brevo-smtp-login
+SMTP_PASS=your-brevo-smtp-key
+SMTP_FROM_NAME=Estate Resolve
+SMTP_FROM_EMAIL=contact@estateresolve.co.uk
 CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/your-cloud-name/auto/upload
 CLOUDINARY_UPLOAD_PRESET=your_unsigned_upload_preset
 CLOUDINARY_UPLOAD_FOLDER=estate-resolve-documents
@@ -100,15 +96,42 @@ This milestone adds:
 
 - secure intake form submission
 - Cloudinary document uploads
-- SendGrid confirmation emails
-- SendGrid admin notification emails
+- confirmation emails to the enquirer
+- admin notification emails
 
 Before testing the forms, configure:
 
-1. A SendGrid API key and verified sender address
+1. SMTP credentials and a verified sender address (see Email Setup below)
 2. A Cloudinary unsigned upload preset and upload URL
 3. An admin email address for internal notifications
 4. A Google Calendar API service account and a shared booking calendar
+
+## Email Setup
+
+Outgoing mail is sent through Brevo's SMTP relay. Each enquiry sends two
+emails - one to the enquirer, one to `ADMIN_EMAIL` - so the free tier's
+300 emails/day covers roughly 150 enquiries a day.
+
+1. Create an account at https://www.brevo.com.
+2. Under **Senders, Domains & Dedicated IPs -> Domains**, add
+   `estateresolve.co.uk` and publish the DKIM/Brevo-code DNS records it lists.
+   Sending works without this, but the domain publishes `DMARC p=quarantine`,
+   so unauthenticated mail will be quarantined rather than delivered.
+3. Under **Senders**, verify `contact@estateresolve.co.uk` so it can be used
+   as the From address.
+4. Generate an SMTP key at https://app.brevo.com/settings/keys/smtp and put the
+   login and key into `SMTP_USER` / `SMTP_PASS`. Keep them in `.env.local`
+   locally and in Vercel's environment variables in production - never in git.
+5. Verify the configuration before deploying:
+
+   ```bash
+   npm run email:test                    # connect and authenticate only
+   npm run email:test -- you@example.com # also send a test message
+   ```
+
+Admin notification emails set `Reply-To` to the enquirer's address, so replying
+from the `ADMIN_EMAIL` mailbox reaches the enquirer directly. Incoming mail is
+handled by the existing mailbox provider and is unaffected by this setup.
 
 ## Google Calendar Booking Setup
 

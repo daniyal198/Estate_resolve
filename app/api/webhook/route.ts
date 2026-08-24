@@ -5,7 +5,7 @@ import {
   buildPaymentConfirmationEmail,
   createCaseReference,
 } from "@/app/lib/email-templates";
-import { getAdminAddress, sendEmail } from "@/app/lib/sendgrid";
+import { getAdminAddress, sendEmail } from "@/app/lib/email";
 import { config } from "@/app/lib/config";
 import { getStripeClient } from "@/app/lib/stripe";
 
@@ -94,6 +94,7 @@ export async function POST(request: Request) {
             sessionId: session.id,
             uploadedFileCount: metadata.uploadedFileCount || "0",
           }),
+          replyTo: clientEmail || undefined,
           subject: `Payment Received - ${caseReference}`,
           to: getAdminAddress(),
         }),
