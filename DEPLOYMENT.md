@@ -77,6 +77,12 @@ npm run build
    `checkout.session.completed`
 5. Copy the signing secret into Vercel as `STRIPE_WEBHOOK_SECRET`
 
+The `www` is required. The apex domain `estateresolve.co.uk` answers with a 307
+redirect to `www`, and Stripe does not follow redirects -- it records the 3xx as
+a failed delivery. An endpoint registered against the apex domain fails 100% of
+deliveries with `307 ERR` while the handler itself is healthy, so no
+confirmation or admin email is ever sent even though the payment succeeded.
+
 ## Domain
 
 1. Add the project to Vercel
