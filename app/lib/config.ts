@@ -56,7 +56,7 @@ function getOptionalTestPaymentOption() {
   return {
     description:
       "Temporary low-value option for verifying the live Stripe payment flow.",
-    label: "Payment Verification",
+    label: "System Verification – Do Not Purchase",
     price: formatPenceAsGbp(parsedPricePence),
     priceLabel: `${formatPenceAsGbp(parsedPricePence)} total fee`,
     pricePence: parsedPricePence,
