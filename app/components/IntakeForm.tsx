@@ -339,7 +339,13 @@ export function IntakeForm({ initialServicePackage }: IntakeFormProps) {
               </option>
               {servicePackageOptions.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {option.label} &mdash; {option.priceLabel}
+                  {option.hideFeeInOptionList ? (
+                    option.label
+                  ) : (
+                    <>
+                      {option.label} &mdash; {option.priceLabel}
+                    </>
+                  )}
                 </option>
               ))}
             </select>
