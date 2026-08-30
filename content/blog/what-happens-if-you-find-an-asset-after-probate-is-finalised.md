@@ -1,6 +1,6 @@
 ---
 title: What Happens If You Find an Asset After Probate is finalised?
-date: 2026-08-30T16:14:00.000+02:00
+date: 2026-08-30T17:16:00.000+02:00
 image: ""
 excerpt: A forgotten asset can sometimes appear after an estate has been
   distributed. Learn what may happen next, whether the existing Grant can be
