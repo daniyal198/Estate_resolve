@@ -2,6 +2,7 @@
 title: "How to Find All the Assets of a Deceased Person in the UK: Guide for
   Executors"
 date: 2026-08-09T15:21:00.000+02:00
+image: ""
 excerpt: Discover how executors can identify bank accounts, pensions,
   investments and other assets after a death. This practical UK guide explains
   where to start, common mistakes to avoid and when a professional asset search
