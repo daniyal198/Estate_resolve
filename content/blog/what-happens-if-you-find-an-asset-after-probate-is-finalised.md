@@ -1,7 +1,7 @@
 ---
 title: What Happens If You Find an Asset After Probate is finalised?
 date: 2026-08-30T16:14:00.000+02:00
-image: /uploads/chatgpt-image-aug-30-2026-04_20_36-pm.png
+image: ""
 excerpt: A forgotten asset can sometimes appear after an estate has been
   distributed. Learn what may happen next, whether the existing Grant can be
   used and why further asset checks may be sensible.
@@ -11,7 +11,7 @@ seo:
     discovered asset may be collected, taxed and distributed to beneficiaries.
   slug: asset-found-after-probate
   canonical: asset found after probate
-  og_image: /uploads/chatgpt-image-aug-30-2026-04_20_36-pm.png
+  og_image: ""
 ---
 **What Happens If You Find an Asset After Probate is finalised?**
 
@@ -49,7 +49,7 @@ No search can guarantee that every possible asset will be identified, but system
 
 Estate Resolve helps executors and administrators search for assets and liabilities that might otherwise be overlooked. Our UK estate searches start from £175.
 
-**Start an Estate Search →**
+**Start an Estate Search →**https://www.estateresolve.co.uk/blog/find-assets-deceased-person
 
 **Disclaimer**
 
