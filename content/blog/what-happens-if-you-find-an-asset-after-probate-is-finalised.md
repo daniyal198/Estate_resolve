@@ -1,7 +1,7 @@
 ---
 title: What Happens If You Find an Asset After Probate is finalised?
 date: 2026-08-30T16:14:00.000+02:00
-image: ""
+image: /uploads/chatgpt-image-aug-30-2026-04_20_36-pm.png
 excerpt: A forgotten asset can sometimes appear after an estate has been
   distributed. Learn what may happen next, whether the existing Grant can be
   used and why further asset checks may be sensible.
@@ -11,6 +11,7 @@ seo:
     discovered asset may be collected, taxed and distributed to beneficiaries.
   slug: asset-found-after-probate
   canonical: asset found after probate
+  og_image: /uploads/chatgpt-image-aug-30-2026-04_20_36-pm.png
 ---
 **What Happens If You Find an Asset After Probate is finalised?**
 
