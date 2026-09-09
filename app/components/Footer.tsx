@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookiePreferencesButton } from "@/app/components/CookiePreferencesButton";
 import { config } from "@/app/lib/config";
 import { footerGroups } from "@/app/lib/site-data";
 
@@ -58,6 +59,7 @@ export function Footer() {
             {config.contact.serviceArea} · {config.contact.address} ·{" "}
             {config.contact.email} · {config.contact.phone}
           </p>
+          <CookiePreferencesButton className="text-left underline decoration-brand-gold/70 underline-offset-4 hover:text-brand-gold-light md:text-right" />
         </div>
       </div>
     </footer>

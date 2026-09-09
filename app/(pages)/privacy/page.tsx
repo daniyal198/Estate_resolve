@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookiePreferencesButton } from "@/app/components/CookiePreferencesButton";
 import { PageHero } from "@/app/components/PageHero";
 import { config } from "@/app/lib/config";
 import { buildMetadata } from "@/app/lib/seo";
@@ -115,7 +116,10 @@ const sections = [
   {
     title: "10. Cookies",
     paragraphs: [
-      "This website uses only essential cookies necessary for its operation and does not use tracking or advertising cookies.",
+      "We use essential browser storage to remember your cookie choice. This is necessary to respect your preference and expires after six months, when we will ask you again.",
+      "Only if you enable the relevant optional category do we load analytics or advertising services. Analytics uses Google Analytics and Vercel Analytics to understand website use. Advertising uses Google Ads and related conversion tracking to measure enquiries, completed purchases, and advertising performance. Google Tag Manager is loaded only when at least one optional category is enabled and receives the matching consent state.",
+      "Google services may set analytics or advertising cookies such as _ga, _gid, _gat, and _gcl cookies. Their duration is controlled by Google and may vary. Vercel Analytics is also held back until consent even though its service is designed to operate without identifying cookies.",
+      "If you reject, these analytics and advertising services are not loaded and conversion events are not sent. You can change your choice at any time using Cookie preferences. Withdrawing consent stops future optional tracking, removes accessible analytics cookies where possible, and reloads the page to remove previously loaded tracking code.",
     ],
   },
   {
@@ -148,7 +152,7 @@ export default function PrivacyPage() {
               Effective date
             </p>
             <p className="mt-2 font-serif text-2xl font-semibold text-brand-navy">
-              1 January 2026
+              9 September 2026
             </p>
             <p className="mt-3 text-[1rem] leading-8 text-brand-slate">
               Website: estateresolve.co.uk
@@ -194,6 +198,9 @@ export default function PrivacyPage() {
                     </li>
                   ))}
                 </ul>
+              ) : null}
+              {section.title === "10. Cookies" ? (
+                <CookiePreferencesButton className="mt-5 inline-flex items-center justify-center border border-brand-gold bg-brand-gold px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white hover:bg-brand-gold-light hover:text-brand-navy" />
               ) : null}
               {section.title === "12. Contact" ? (
                 <div className="mt-4 space-y-2 text-[1rem] leading-8 text-brand-slate">

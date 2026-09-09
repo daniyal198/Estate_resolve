@@ -1,18 +1,12 @@
 "use client";
 
+import {
+  hasAdvertisingConsent,
+  hasAnyOptionalConsent,
+} from "@/app/lib/cookie-consent";
+
 type GoogleEventValue = string | number | boolean | null | undefined;
 type GoogleEventParams = Record<string, GoogleEventValue>;
-
-declare global {
-  interface Window {
-    dataLayer?: Record<string, GoogleEventValue>[];
-    gtag?: (
-      command: "config" | "event" | "js",
-      target: string | Date,
-      params?: GoogleEventParams,
-    ) => void;
-  }
-}
 
 const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
@@ -42,7 +36,11 @@ export function trackGoogleEvent(
   eventName: string,
   params: GoogleEventParams = {},
 ) {
-  if (typeof window === "undefined" || !window.gtag) {
+  if (
+    typeof window === "undefined" ||
+    !hasAdvertisingConsent() ||
+    !window.gtag
+  ) {
     return;
   }
 
@@ -57,7 +55,7 @@ export function pushToDataLayer(
   event: string,
   params: GoogleEventParams = {},
 ) {
-  if (typeof window === "undefined") {
+  if (typeof window === "undefined" || !hasAnyOptionalConsent()) {
     return;
   }
 

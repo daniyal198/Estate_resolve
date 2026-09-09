@@ -1,14 +1,23 @@
 import Script from "next/script";
 
-const googleTagIds = [
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_ID,
-].filter(
-  (tagId, index, tagIds): tagId is string =>
-    Boolean(tagId) && tagIds.indexOf(tagId) === index,
-);
+type GoogleTagProps = {
+  advertisingEnabled: boolean;
+  analyticsEnabled: boolean;
+};
 
-export function GoogleTag() {
+export function GoogleTag({
+  advertisingEnabled,
+  analyticsEnabled,
+}: GoogleTagProps) {
+  const googleTagIds = [
+    analyticsEnabled
+      ? process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+      : undefined,
+    advertisingEnabled ? process.env.NEXT_PUBLIC_GOOGLE_ADS_ID : undefined,
+  ].filter(
+    (tagId, index, tagIds): tagId is string =>
+      Boolean(tagId) && tagIds.indexOf(tagId) === index,
+  );
   const primaryTagId = googleTagIds[0];
 
   if (!primaryTagId) {
@@ -17,9 +26,9 @@ export function GoogleTag() {
 
   const configScript = [
     "window.dataLayer = window.dataLayer || [];",
-    "function gtag(){dataLayer.push(arguments);}",
-    "gtag('js', new Date());",
-    ...googleTagIds.map((tagId) => `gtag('config', '${tagId}');`),
+    "window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};",
+    "window.gtag('js', new Date());",
+    ...googleTagIds.map((tagId) => `window.gtag('config', '${tagId}');`),
   ].join("\n");
 
   return (

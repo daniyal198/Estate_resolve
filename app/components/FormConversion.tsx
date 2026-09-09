@@ -3,6 +3,13 @@
 import { useEffect } from "react";
 import { track } from "@vercel/analytics/react";
 import {
+  CONSENT_TRACKING_READY_EVENT,
+  hasAdvertisingConsent,
+  hasAnalyticsConsent,
+  hasAnyOptionalConsent,
+  isConsentTrackingReady,
+} from "@/app/lib/cookie-consent";
+import {
   getGoogleAdsSendTo,
   googleConversionLabels,
   pushToDataLayer,
@@ -34,19 +41,45 @@ export function FormConversion({
   useEffect(() => {
     const conversionKey = `form-conversion:${formName}:${dedupeToken || "default"}`;
 
-    if (window.sessionStorage.getItem(conversionKey)) {
-      return;
+    function sendConversion() {
+      if (
+        !hasAnyOptionalConsent() ||
+        !isConsentTrackingReady() ||
+        window.sessionStorage.getItem(conversionKey)
+      ) {
+        return;
+      }
+
+      if (
+        hasAnalyticsConsent() &&
+        !window.sessionStorage.getItem(conversionKey + ":analytics")
+      ) {
+        track(vercelEventName);
+        window.sessionStorage.setItem(conversionKey + ":analytics", "true");
+      }
+      if (!window.sessionStorage.getItem(conversionKey + ":data-layer")) {
+        pushToDataLayer(dataLayerEvent, { form_name: formName });
+        window.sessionStorage.setItem(conversionKey + ":data-layer", "true");
+      }
+      if (
+        hasAdvertisingConsent() &&
+        !window.sessionStorage.getItem(conversionKey + ":advertising")
+      ) {
+        trackGoogleEvent("generate_lead", {
+          event_category: "engagement",
+          form_name: formName,
+          send_to: getGoogleAdsSendTo(googleConversionLabels[conversion]),
+        });
+        window.sessionStorage.setItem(conversionKey + ":advertising", "true");
+      }
     }
 
-    window.sessionStorage.setItem(conversionKey, "true");
+    sendConversion();
+    window.addEventListener(CONSENT_TRACKING_READY_EVENT, sendConversion);
 
-    track(vercelEventName);
-    pushToDataLayer(dataLayerEvent, { form_name: formName });
-    trackGoogleEvent("generate_lead", {
-      event_category: "engagement",
-      form_name: formName,
-      send_to: getGoogleAdsSendTo(googleConversionLabels[conversion]),
-    });
+    return () => {
+      window.removeEventListener(CONSENT_TRACKING_READY_EVENT, sendConversion);
+    };
   }, [conversion, dataLayerEvent, dedupeToken, formName, vercelEventName]);
 
   return null;

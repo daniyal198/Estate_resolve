@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { GoogleTag } from "@/app/components/GoogleTag";
-import { GoogleTagManager } from "@/app/components/GoogleTagManager";
+import { ConsentControlledTracking } from "@/app/components/ConsentControlledTracking";
+import { ConsentModeDefaults } from "@/app/components/ConsentModeDefaults";
 import { SiteChrome } from "@/app/components/SiteChrome";
 import { config } from "@/app/lib/config";
 import "./globals.css";
@@ -59,8 +58,10 @@ export default function RootLayout({
       lang="en"
       className={`${playfairDisplay.variable} ${sourceSans3.variable} h-full scroll-smooth antialiased`}
     >
+      <head>
+        <ConsentModeDefaults />
+      </head>
       <body className="min-h-full bg-background text-foreground">
-        <GoogleTagManager />
         <a
           href="#main-content"
           className="skip-link"
@@ -68,8 +69,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteChrome>{children}</SiteChrome>
-        <Analytics />
-        <GoogleTag />
+        <ConsentControlledTracking />
       </body>
     </html>
   );

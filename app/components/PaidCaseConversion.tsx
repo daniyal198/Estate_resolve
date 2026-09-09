@@ -3,6 +3,13 @@
 import { useEffect } from "react";
 import { track } from "@vercel/analytics/react";
 import {
+  CONSENT_TRACKING_READY_EVENT,
+  hasAdvertisingConsent,
+  hasAnalyticsConsent,
+  hasAnyOptionalConsent,
+  isConsentTrackingReady,
+} from "@/app/lib/cookie-consent";
+import {
   getGoogleAdsSendTo,
   googleConversionLabels,
   pushToDataLayer,
@@ -25,25 +32,48 @@ export function PaidCaseConversion({
 
     const conversionKey = `paid-case-conversion:${sessionId || caseReference}`;
 
-    if (window.sessionStorage.getItem(conversionKey)) {
-      return;
+    function sendConversion() {
+      if (
+        !hasAnyOptionalConsent() ||
+        !isConsentTrackingReady() ||
+        window.sessionStorage.getItem(conversionKey)
+      ) {
+        return;
+      }
+
+      if (
+        hasAnalyticsConsent() &&
+        !window.sessionStorage.getItem(conversionKey + ":analytics")
+      ) {
+        track("Paid Case Conversion", { caseReference, sessionId });
+        window.sessionStorage.setItem(conversionKey + ":analytics", "true");
+      }
+      if (!window.sessionStorage.getItem(conversionKey + ":data-layer")) {
+        pushToDataLayer("purchase_completed", {
+          case_reference: caseReference,
+          transaction_id: sessionId || caseReference,
+        });
+        window.sessionStorage.setItem(conversionKey + ":data-layer", "true");
+      }
+      if (
+        hasAdvertisingConsent() &&
+        !window.sessionStorage.getItem(conversionKey + ":advertising")
+      ) {
+        trackGoogleEvent("purchase", {
+          case_reference: caseReference,
+          send_to: getGoogleAdsSendTo(googleConversionLabels.paidCase),
+          transaction_id: sessionId || caseReference,
+        });
+        window.sessionStorage.setItem(conversionKey + ":advertising", "true");
+      }
     }
 
-    window.sessionStorage.setItem(conversionKey, "true");
+    sendConversion();
+    window.addEventListener(CONSENT_TRACKING_READY_EVENT, sendConversion);
 
-    track("Paid Case Conversion", {
-      caseReference,
-      sessionId,
-    });
-    pushToDataLayer("purchase_completed", {
-      case_reference: caseReference,
-      transaction_id: sessionId || caseReference,
-    });
-    trackGoogleEvent("purchase", {
-      case_reference: caseReference,
-      send_to: getGoogleAdsSendTo(googleConversionLabels.paidCase),
-      transaction_id: sessionId || caseReference,
-    });
+    return () => {
+      window.removeEventListener(CONSENT_TRACKING_READY_EVENT, sendConversion);
+    };
   }, [caseReference, sessionId]);
 
   return null;
