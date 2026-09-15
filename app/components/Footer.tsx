@@ -25,6 +25,9 @@ export function Footer() {
           <p className="mt-5 text-sm leading-7 text-white/56">
             {config.company.fullLegalName}
           </p>
+          <p className="mt-5 text-sm leading-7 text-white/56">
+            ICO Data Protection Registration no. ZC240351
+          </p>
         </div>
 
         <div className="grid gap-10 sm:grid-cols-3">
