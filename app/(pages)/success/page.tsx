@@ -123,7 +123,9 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
     <main id="main-content" className="flex-1">
       <PaidCaseConversion
         caseReference={caseReference}
+        currency={paidSession.currency}
         sessionId={paidSession.sessionId}
+        value={paidSession.amountValue}
       />
       <PageHero
         eyebrow="Payment Confirmed"

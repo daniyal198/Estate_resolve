@@ -63,8 +63,12 @@ export function buildCheckoutMetadata(submission: IntakeSubmissionData) {
 
 export type VerifiedCheckoutSession = {
   amountPaid: string | null;
+  /** Amount paid in major units (pounds, not pence), e.g. 175 for £175.00. */
+  amountValue: number | null;
   caseReference: string | null;
   clientEmail: string | null;
+  /** ISO 4217 currency code in upper case, e.g. "GBP". */
+  currency: string | null;
   serviceLabel: string | null;
   sessionId: string;
 };
@@ -92,18 +96,26 @@ export async function verifyPaidCheckoutSession(
     }
 
     const metadata = session.metadata || {};
+    const currency = (session.currency || "gbp").toUpperCase();
+    // Stripe reports amounts in the smallest unit (pence), so 17500 is £175.00.
+    const amountValue =
+      typeof session.amount_total === "number"
+        ? session.amount_total / 100
+        : null;
 
     return {
       amountPaid:
-        typeof session.amount_total === "number"
+        amountValue !== null
           ? new Intl.NumberFormat("en-GB", {
-              currency: (session.currency || "gbp").toUpperCase(),
+              currency,
               style: "currency",
-            }).format(session.amount_total / 100)
+            }).format(amountValue)
           : null,
+      amountValue,
       caseReference: session.client_reference_id || metadata.caseReference || null,
       clientEmail:
         session.customer_details?.email || session.customer_email || null,
+      currency,
       serviceLabel: metadata.servicePackageLabel || null,
       sessionId: session.id,
     };

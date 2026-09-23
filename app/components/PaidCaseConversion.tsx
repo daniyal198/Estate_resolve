@@ -18,12 +18,16 @@ import {
 
 type PaidCaseConversionProps = {
   caseReference: string | null;
+  currency: string | null;
   sessionId: string | null;
+  value: number | null;
 };
 
 export function PaidCaseConversion({
   caseReference,
+  currency,
   sessionId,
+  value,
 }: PaidCaseConversionProps) {
   useEffect(() => {
     if (!caseReference && !sessionId) {
@@ -51,7 +55,9 @@ export function PaidCaseConversion({
       if (!window.sessionStorage.getItem(conversionKey + ":data-layer")) {
         pushToDataLayer("purchase_completed", {
           case_reference: caseReference,
+          currency,
           transaction_id: sessionId || caseReference,
+          value,
         });
         window.sessionStorage.setItem(conversionKey + ":data-layer", "true");
       }
@@ -61,8 +67,10 @@ export function PaidCaseConversion({
       ) {
         trackGoogleEvent("purchase", {
           case_reference: caseReference,
+          currency,
           send_to: getGoogleAdsSendTo(googleConversionLabels.paidCase),
           transaction_id: sessionId || caseReference,
+          value,
         });
         window.sessionStorage.setItem(conversionKey + ":advertising", "true");
       }
@@ -74,7 +82,7 @@ export function PaidCaseConversion({
     return () => {
       window.removeEventListener(CONSENT_TRACKING_READY_EVENT, sendConversion);
     };
-  }, [caseReference, sessionId]);
+  }, [caseReference, currency, sessionId, value]);
 
   return null;
 }
